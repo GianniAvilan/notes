@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=1em, indent=12pt]{parskip}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\begin{document}
+\setcounter{section}{3}
+\section{Chapter 4: Delay} 
+\setcounter{subsection}{2}
+\subsection{RC Delay Model}
+The RC model uses a switch in series with a resistor to model a MOS transistor, with effective resistance \(R\). The equivalent resistances and capacitances will naturally affect the delay parameters of the given network.
+
+Using the RC model, estimate the delay of a fanout-of-1 inverter (two inverters in series). Recall that the width of the pMOS will be twice that of the nMOS transistor. Using the RC model, we can approximate the fanout-of-1 inverter's delay by modeling the nMOS and pMOS transisors has having the same resistance \(R\), but the pMOS will have twice the capacitance of the nMOS, \(2C\). Diffusion capacitance exists in both nMOS and pMOS transistors. At any given state for the inverter, account for which capacitors are shorted out; I think this implies that an inverter would have a different delay based on whether it's pulling up or down? 
+
+Compared the Shockley model (ideal), SPICE (simulated), and the simplified RC model, where the RC model ends up being more conservative.
+
+Moving on to a three-input NAND gate, if we want to achieve rise and fall resistances equal to a unit inverter, the nMOS transistors' (in series) widths will need to be three times wider than normal to achieve a resistance of \(\frac{1}{3}R\) for each one, summing to a total series resistance of \(R\). In the pull-up network, the widths stay at their normal value (two times that of a "normal" nMOS) since these transistors are in parallel. The widened nMOS transistors will now carry a capacitance of \(3C\) each, since they are 3 times wider.
+
+Practice showing RC-equivalent circuits for different standard logic gates (OR-AND/AND-OR invert compound gates?)
+
+Elmore delay simplifies delay into a resistor ladder, where \[
+	t_{pd} = \sum_{\mathrm{nodes} i} R_{is}C_{i}.
+\]
+
+Fanout is a term that describes how many \textit{other} gates are being driven by the gate being analyzed, a condition which will affect the delay parameters.
+
+Using Elmore delay, we estimate the worst-case rising and falling delay of a 3-input NAND gate driving h identical gates. For rising delay, we construct an RC-equivalent circuit. \textbf{Review what an Elmore ladder is, derivation of Elmore delay approximation, etc}. \textit{Side note, capacitance means that all the "capacitors" will need to discharge before you can pull something down to ground.} Then, using the Elmore delay for the rise time, \[
+	t_{pdr} = (9+5h) ... \mathrm{\textit{continue}}
+\]
+Get familiar with using Elmore delay approximations to find the delay of a gate given fanout of \(h\) identical gates (or other types of gates?) Two components of delay -- parasitic delay and effort delay (define these). Depending on the input, best-case (contamination delay) could be substantially less than the propagation delay (goes back to parallel resistances in the pull-up network of a three-input NAND). 
+
+Research timing arc a little better. Delay varies with direction and input, lots of interesting details here to dig into. How many rows would a timing arc table need based on the effect of inputs/outputs on delay? (Try this with multiple different types of gates). Capacitance is also dependent on layout. Shared diffusion nodes reduce total capacitance. (Practice estimating shared diffusion effect on capacitance). Stick diagrams are even harder to think about now, awesome. Means layout will affect delay.
+
+\end{document}
