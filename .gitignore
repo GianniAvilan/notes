@@ -1,0 +1,14 @@
+**/aux_files/
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdp_latexmk
+*.synctex.gz*
+.DS_Store
+*.swp
+*.swo
+*Zone*
+
+.git/

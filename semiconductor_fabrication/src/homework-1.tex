@@ -1,0 +1,87 @@
+\documentclass{article}
+\title{ECE 496 -- Homework 1}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 496}
+\fancyhead[R]{Homework 1}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\setlist[enumerate, 1]{label=\thesection.\arabic*}
+\setcounter{section}{1}
+\begin{document}
+\begin{enumerate}
+	\setcounter{enumi}{1}
+	\item
+	\begin{enumerate}[label=\alph*)]
+		\item 
+			\begin{tabular}{|c|c|}
+				\hline
+				Diameter (mm) & Area (cm\(^2\)) \\
+				\hline
+				25 & 4.91 \\
+				\hline 
+				50 & 19.64\\
+				\hline
+				75 & 44.18\\
+				\hline
+				100 & 78.54 \\
+				\hline
+				125  & 122.72\\
+				\hline
+				150 & 176.71\\
+				\hline
+				200 & 314.16\\
+				\hline
+				300 & 706.86\\
+				\hline
+				450 & 1590.43\\
+				\hline
+			\end{tabular} 
+     \\
+	 \item Dividing wafer area by die area, approximately 159,043 \(1\text{mm} \times 1\text{mm}\) dice.
+		 \\
+	 \item Dividing wafer area by die area, \[
+			 \frac{159,043.13\text{mm}^2}{625\text{mm}^2} = 254.47,
+	 \] 
+	 so approximately 254 dice.
+	\end{enumerate}
+	\setcounter{enumi}{4}
+\item Substituting \(Y = 2020\) into the given formula, \[
+		N(2020) = 1027 \times 10^{0.1505(2020-1970)} = 3.44 \times 10^{10},
+\]
+around 34 billion transistors per microprocessor.
+\setcounter{enumi}{6}
+		\begin{enumerate}[label=\alph*)]
+\item Using the given formula, \[
+		N(Y) = 2N(Y) \Rightarrow Y = \frac{\log_{10}(2)}{0.1505} = 2.002, 
+\] 
+and thus the transistor count on a microprocessor would be expected to double about every two years. 
+\item Using the same formula, \[
+		Y = \frac{\log_{10}(10)}{0.1505} = 6.6445,
+\] and thus the transistor count on a microprocessor would be expected to increase by a factor of 10 roughly every six and half years.
+\end{enumerate}
+\setcounter{enumi}{11}
+\item
+\begin{enumerate}[label=\alph*)]
+	\item Using Fig 1.1(b), we may assume that approximately 175 \(10 \times 10\text{mm}\) dice are on a \(150\text{mm}\) wafer. Assuming 35\% of the dice are good, this leaves us with \(175*0.35 = 61.25\), so approximately 61 good dice. Assuming a cost per wafer of \$1,000, the cost per die is approximately \[
+	 \frac{\$1000}{61} = \$16.39.
+	\] 
+\item Again using Fig 1.1(b), we may assume that approximately 314 \(10 \times 10\text{mm}\) dice are on a \(200\text{mm}\) wafer. Using the same perecentage of good dice as above, this leaves \(314*0.35 = 109.90\), or approximately 109 good dice. Then, approximate cost per wafer is \[
+  \frac{\$1000}{109} = \$9.17.
+\] 
+\end{enumerate}
+\setcounter{enumi}{13}
+\item See below for included flowchart:
+	\includepdf{homework-1_cover-page.pdf}
+\end{enumerate}
+\end{document}

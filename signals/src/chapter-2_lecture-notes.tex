@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=1em, indent=12pt]{parskip}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\begin{document}
+\setcounter{section}{1}
+\section{Chapter 2: Time-Domain Analysis of Continuous Time Systems} 
+The majority of linear systems that we will deal with here may be defined by a linear differential equation of the form 
+\begin{align*}
+	&\frac{d^Ny(t)}{dt^N} + a_1 \frac{d^{N-1}y(t)}{dt^{N-1}} + \ ... \ + a_{N-1}\frac{dy(t)}{dt} + a_Ny(t) = \\
+	&b_{N-M}\frac{d^Mx(t)}{dt^M} + b_{N-M+1}\frac{d^{M-1}x(t)}{dt^{M-1}} + \ .. \ + b_{N-1}\frac{dx(t)}{dt}+b_Nx(t).
+\end{align*} 
+In other words, the input and output of a linear system are often described by N-th and M-th order linear differential equations, with \(M \leq N\) in most cases. A \textit{linear} differential equation is simply one in which each derivative is multiplied by a unique coefficient \(a_N\) or \(b_N\).
+
+The above can be simplified by using \(\frac{d^N}{dt^N} = D^N\), which then reduces to
+\begin{align*}
+	&(D^N + a_1D^{N-1} + \ ... \ + a_{N-1}D + a_N)y(t) = \\
+	&(b_{N-M}D^M + b_{N-M+1}D^{M-1} + \ ... \ b_{N-1}D+b_N)x(t).
+\end{align*}
+
+\subsection{Zero-Input Response}
+Based on the previous discussion (Chapter 1) on the superposition principle, we can separate the output of a linear differential equation into two separate components, the zero-input response, and the zero-state response. Obeying the superposition principle, this means the total output may be found by summing the two corresponding inputs. 
+
+The first of these that we will solve for is the zero-input response, that is, the output \(y_1(t)\) when \(x_1(t) = 0\). In most systems, this is an important component in the system's input, corresponding to the initial state of the system at \(t=0\) \textit{prior} to any real-time or future input. 
+
+By reducing the input to \(0\), then the associated linear differential equation reduces to \[
+  (D^N + a_1D^{N-1} + \ ... \ + a_{N-1}D + a_N)y_0(t) = Q(D)y_0(t) = 0,
+\] 
+with \(y_0(t)\) representing the zero-input response. 
+
+Solving for \(y(t)\), for all possible values of \(t\), the left-hand side of the equation can only resolve to zero if \(y_0(t)\) and all its derivatives are of the same form. The exponential function, \(e^{\lambda t}\) meets this criteria, since \(\frac{d}{dt}e^{\lambda t} = ae^{\lambda t}\). Setting each resulting coefficient \(a\) to Using \(y_0(t) = e^{\lambda t},\) the equation now reduces to
+  \[
+		c_1e^{\lambda_1t} + c_2e^{\lambda_2t} + c_Ne^{\lambda_Nt} = 0.
+  \]
+	Now solving for \(Q(\lambda)=0\) (we'll save the constants \(c_N\) for the next step), \[
+	  Q(\lambda) = (\lambda - \lambda_1)(\lambda - \lambda_2) \ ... \ (\lambda - \lambda_N) = 0,
+	\]
+	where the values of \(\lambda\) are the characteristic roots, eigenvalues, or natural frequencies of the system.
+
+	Finally, the \(N\) coefficients may be solved for using \(N\) initial conditions, \(y_1(0), \frac{d}{dt}y_1(0), \ ... \ \frac{d^N}{dt^N}y_1(0).\)
+
+\end{document}
+

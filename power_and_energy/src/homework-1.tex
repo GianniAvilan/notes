@@ -1,0 +1,173 @@
+\documentclass{article}
+\title{ECE 311 -- Homework 1}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 311}
+\fancyhead[R]{Homework 1}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\setcounter{section}{1}
+\begin{document}
+\includepdf[pages=-]{homework-1_cover-page.pdf}
+\begin{enumerate}
+	\item
+		\begin{enumerate}[label=\alph*)]
+			\item AC voltage and current waveforms may be expressed mathematically as \(v = V_{max}sin\omega t\) or \(i = I_{max}sin\omega t\), while the RMS (root mean square) value of a sinusoidal voltage or current may be expressed as \[
+					V_{rms} = \frac{V_{max}}{\sqrt{2}}.
+			\] 
+			Therefore, the rms value of \(v = 340sin(628.318t + 0.5236)\text{V}\) is \[
+				V_{rms} = \frac{V_{max}}{\sqrt{2}} = \frac{340\text{V}}{\sqrt{2}} = 240.4163\text{V}
+			\]
+		  \item Using the AC voltage/current formula given above, the angular frequency \(\omega\) is identified as the coefficient of the independent variable \(t\). \(\omega\) is given in radians per second, and is connected to the frequency \(f\) in Hertz (cycles per second) by \(\omega = 2\pi f\).
+				
+				Therefore, the frequency of the given current is \[
+					\frac{\omega}{2\pi} = \frac{628.318}{2\pi} \approx 100\text{Hz}.
+				\]
+			\item The phase shift of a signal is incorporated into the basic formula for AC signals (using voltage as an example) as \(v=V_{max}sin(\omega t \pm \theta)\), where \(theta\) refers to the signal's phase shift in radians. Positive phase angles shift the resultant waveform to the left along the time axis, while negative phase angles shift the resultant waveform to the right along the time axis. 
+
+				For the given voltage, converting to degrees, \(\theta_V = 30\degree\), and for the given current, \(\theta_I = 50\degree\).
+
+				Therefore, the difference between the current and voltage phases is \[\theta_{VI} = \theta_{V} - \theta_{I} = 30\degree -50\degree = -20\degree.\]
+				
+			\item The average value of a periodic signal, such as an AC voltage or current, may be found by averaging its value over a single period \(T\) of the signal. Averaging voltage over a single period \(T = \frac{1}{f} = \frac{1}{100\text{Hz}} = 10\text{ms}\), \[
+					V_{ave} = \frac{1}{T}\int_{0}^{T}Asin(\omega t - \theta_{v})dt.
+				\]
+			  Since the sine and cosine functions are symmetric over each period, this integral formula will always evaluate to 0 regardless of the values of \(A, \omega\), or \(\theta\).
+
+				Therefore, \[V_{ave} = 0\text{V}.\]
+
+				This is the reason rms values are more commonly used as a measure of the average value of an AC voltage or current.	
+			\item Load impedance \(Z\) is given by the sum of the real and imaginary components of impedance, resistance, \(R\), and reactance, \(X\), \[Z = R + jX,\] and can be derived by expressing both voltage and current as phasors (assuming they have the same angular frequency \(\omega\) and using the Ohm's Law relationship \[
+			Z = \frac{V}{I} = \frac{340\angle{30\degree\text{V}}}{100\angle{50\degree}\text{A}} = 3.4\angle{-20}\degree\text{\ohm}.
+			\]
+			The negative phase angle of the impedance implies a capacitive load.
+		\end{enumerate}
+		\item
+			\begin{enumerate}[label=\alph*)]
+				\item The power factor of a given load is given by the ratio between apparent and real power, \[
+						P.F. = \frac{P_{real}}{P_{apparent}},
+				\]
+				where real and apparent power are given by 
+				\begin{align}
+					&P_{apparent} = V_{rms}I_{rms} \\
+					&P_{real} = V_{rms}I_{rms}cos(\theta_{VI}).
+				\end{align}
+				To find the phase angle of the current, we may convert the complex impedance to phasor form, \[
+					Z = 4 - j2 \ohm = \sqrt{20}\angle{-26.5651\degree} 
+				\]
+				and use Ohm's Law in the form \[
+					I = \frac{V}{Z} = \frac{120\angle{0\degree}\text{V}}{\sqrt{20}\angle{-26.5651\degree}\ohm} = 26.8328\angle{26.5651\degree}\text{A}.
+				\]
+				Thus, the phase angle is \[
+					\theta_{VI} = -26.5651\degree.
+				\]
+				Finally, finding apparent power \[
+					V_{rms}I_{rms} = 120\text{V} * 26.8328\text{A} = 3.22\text{kVA} 
+				\]
+				and real power \[
+					P_{real} = P_{apparent}cos(\theta_{VI}) = 3.22\text{kVA}*0.8944 = 2.88\text{kW}.
+				\]
+				Therefore, the power factor of the given load is \[
+					P.F. = \frac{P_{real}}{P_{apparent}} = \frac{2.88}{3.22} = 0.8944.
+				\]
+			\item Source current in phasor form was found in part (a). We cannot convert to the time domain since we are not given the angular frequency \(\omega\); thus, the source current is \[
+					I = 26.8328\angle{26.5651\degree}\text{A}
+			\]
+			\item Real power was found in part (a), \[
+					P_{real} = 2.88\text{kW}
+			\]
+		  \item Reactive power \(P_{reactive}\) is given by \[
+					P_{reactive} = P_{apparent}sin(\theta_{VI}) = 3.22\text{kVA} * -0.4472 = -1.44\text{kVAR}.
+		  \]
+			In addition, reactive power \(Q < 0\) implies a capacitive load.
+			\end{enumerate}
+		\item
+			\begin{enumerate}[label=\alph*)]
+				\item Source frequency affects the reactance of both inductors and capacitors, defined as \begin{align}
+					&X_{L} = 2\pi fL \\
+					&X_{C} = \frac{1}{2\pi fC}.
+				\end{align}
+				Finding the reactance of the load inductor given, \[
+					X_{L} = 31.4034 \ohm.
+				\]
+				Therefore, complex impedance in phasor form is given as \[
+					Z = 3.5 + j31.4034 \ohm = 31.5978\angle{83.6405\degree}\ohm
+				\]
+				 and load current is found as \[ 
+				 I = \frac{V}{Z} = \frac{120\angle{30\degree}\text{V}}{31.5978\angle{83.6405\degree}\ohm} = 3.7977\angle{-53.6405\degree}\text{A} 
+			 	 \]
+			   \item Collecting needed values, \begin{align*}
+					 &P_{apparent} = {V}_{\mathrm{rms}}{I}_{\mathrm{rms}} = 120\text{V}*3.7977\text{A} = 455.7240\text{VA} \\
+					 &\theta_{VI} = \theta_{V} - \theta_{I} = 30\degree+53.6405\degree = 83.6405\degree \\
+					 &P_{real} = P_{apparent}cos(\theta_{VI}) = 455.7240\text{VA}*0.1108 = 50.4789\text{W},
+			   \end{align*}
+				 and the load power factor is \[
+					 P.F. = \frac{P_{real}}{P_{apparent}} = \frac{50.4789}{455.7240} = 0.1108.
+				 \]
+			 \item Real power was found in part (b), \[
+					 P_{real} = 50.4789\text{W}.
+			 \]
+		   \item Reactive power is \[
+					 P_{reactive} = P_{apparent}sin(\theta_{IV}) = 452.9196\text{VAR}.
+		   \]
+	   \end{enumerate}
+		 \item
+			 \begin{enumerate}[label=\alph*)]
+		 	\item In this case, with a source frequency of \(50\text{Hz}\), the reactance of the inductor will change to be \[
+					X_{L} = 26.1695\ohm.
+		 	\]
+			Recalculating the circuit's complex impedance and finding the load current, \[
+				I = \frac{V}{Z} = \frac{120\angle{30\degree}\text{V}}{26.4025\angle{82.3823\degree}\ohm} = 4.5450\angle{-52.3823\degree}\text{A}.
+			\]
+			\item
+				The load power factor is then found by recalculating the real and apparent power and finding the ratio between them, \[
+					P.F. = \frac{P_{real}}{P_{apparent}} = \frac{72.2966\text{W}}{545.4\text{VA}} = 0.1326
+				\]
+			  \item Real power is given in part (b) as \[
+						P_{real} = 79.2966\text{W}.
+			  \]
+			  \item Reactive power is \[
+						P_{reactive} = P_{apparent}sin(\theta_{IV}) = 540.5836\text{VAR}.
+			  \] 
+	  \end{enumerate}
+	\item First, the total current in phasor form is found using the apparent power, \(R + jQ\), as \[
+		I^{*} = \frac{R+jQ}{V} = \frac{3605.6\angle{33.6901\degree}}{120\angle{0\degree}} = 30.0467\angle{33.6901\degree}\text{A}. 
+	\]
+	This gives a total current, in phasor form, of \(I_{total} = 30.0467\angle{-33.6901\degree}\text{A}\). By Kirchhoff's current law, we can assume that \(I_{total} = I_{1} + I_{2}\), where \(I_{1} = \frac{V}{Z_{1}} = \frac{120\angle{0\degree}}{5\angle{53.1301\degree}} = 24\angle{-53.1301\degree}\text{A}\). Therefore, \[
+		I_{2} = I_{total} - I_{1} = 10.6004 + j2.5331 = 10.8989\angle{13.4395\degree}\text{A}.
+	\]
+	Then, \[
+		Z_{2} = \frac{V}{I_{2}} = \frac{120\angle{0\degree}}{10.8989\angle{13.4395}} = 11.0103\angle{-13.4395\degree}\ohm.
+	\]
+	In rectangular coordinates, \[
+		Z_{2} = 10.7088 - j2.5590\ohm,
+	\]
+	which implies that the second load is capacitive, though the overall load remains inductive.
+  \item 
+    \begin{enumerate}[label=\alph*)]
+			\item First, the inductive reactance \(X_{L}\) is found as \(X_{L} = 2\pi fL = 0.3770 \ohm\), so the total impedance \(Z = 1 + j0.3770 \ohm\).
+
+		To find the power factor, we first find the phase angle difference between voltage and current, \[
+			\theta_{VI} = atan(\frac{0.377}{1}) = 20.6564\degree.
+		\]
+		Then, the power factor is found as \[
+			P.F. = cos(\theta_{VI}) = 0.9357.
+		\]
+	  \item Since the capacitor will be connected in parallel, it's most convenient to use susceptance, \(B\), rather than reactance, \(X\).	To achieve a unity power factor \(P.F. = 1\), the inductive and capacitive susceptances in parallel must be equal; that is, \(B_L = B_C\). Finding the inductive susceptance, \[
+				B_L = \text{Im}(Y_L) = \text{Im}(\frac{1}{1+j0.3770}) = 0.3301 \mho,
+	  \]then setting the capacitive susceptance equal, \[
+		0.3301\mho = B_C = 2\pi f C \Rightarrow C = \frac{B_L}{2\pi f} = 875.62\micro F.
+	  \]
+	  \end{enumerate}
+  \end{enumerate}
+\end{document}

@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\begin{document}
+\section{Week 1: Single-Phase AC Analysis}
+\subsection{Sinusoidal Alternating Current}
+Single-phase alternating current (often sinusoidal) is represented mathematically by \(Acos(\omega t)\), where \(A\) represents the wave's amplitude/maximum value, \(omega\) represents the angular frequency of the sinusoid, given in radians per second. Radians per second can be converted to the more familiar quantity of Hertz (cycles per second) by means of \(\omega(2\pi) = f\), where \(f\) is frequency in Hertz. (Note that we may also use \(sin(\omega t)\), keeping in mind the phase difference of \(90\degree\) between the two). 
+
+Since sinusoidal quantities are time-dependent but periodic, we may (and often do) express them in terms of their \textit{root mean square} quantity. For perfectly sinusoidal quantities, the root mean square value is given by \(\frac{2}{\sqrt{2}}A = A(0.707)\). For more complex waves, we may generalize the root mean square of any periodic function \(x(t)\)as \[
+	x(t)_{rms} =\sqrt{\frac{1}{\tau}\int_{0}^{\tau}x(t)^{2}dt},
+\] 
+where \(\tau\) is equal to the function's period.
+
+Sinusoidal functions may also be advanced or delayed in time by a phase angle \(\theta\), represented as \(cos(\omega t \pm \theta)\). In power analysis, we are mainly concerned with the difference between the phase angles of the voltage and current waveforms \(\theta_{vi}\), which depends on the characteristics of the applied load, with \(\theta_{vi} = \theta_{v} - \theta_{i}\).  The load itself may be resistive, inductive, or capacitive. A purely resistive load will induce no phase difference (\(\theta_{v} = \theta_{i}\)), while a purely inductive load will cause current to lag voltage (\(\theta_{i} = \theta_{v} - 90\degree\)), and a purely capacitive load will cause voltage to lag current (\(\theta_{v} = \theta_{i} - 90\degree\)), both by \(90\degree\) or \(\frac{\pi}{2}\) radians.
+
+\subsection{Complex Impedance and Admittance}
+
+Accounting for loads that are neither purely inductive nor capacitive, we may define the inductive or capacitive \textbf{reactance} of a load as \[
+  X_L = \omega L \space ; \space X_C = \frac{1}{\omega C} = \frac{-\omega}{C},
+\] 
+respectively, where \(L\) and \(C\) refer to the inductance in henrys and capacitance in farads. The total reactance of the load is then given by \(X = X_L + X_C\). This reactive portion of the load may then be associated with its resistance in ohms, giving the load's total \textbf{impedance}, \(Z = R + jX\) (complex valued). 
+
+Expressing this complex value \(Z\) in polar form yields \(Z = R + jX = \sqrt{R^2 + X^2}(cos(\theta) + jsin(\theta)) = r e^{j \theta}\), where \(\theta = tan^{-1}(\frac{X}{R}).\) This value may then be expressed compactly in \textbf{phasor} form as \(Z = r\angle{\theta}\). Similarly, sinusoidal voltage and current values, assuming their angular frequencies are equal (often the case) may be reduced to a phasor form \(Acos(\omega t \pm \theta) = A\angle{\theta}\), greatly simplyfing calculations. Now, Ohm's Law can be applied just as it is in DC circuits, as \(V = IZ\).
+
+As a final note, at times the \textbf{admittance} of a load is easier to work with than its impedance, with admittance given by \(Y = \frac{1}{Z}\), and conductance \(G\) and susceptance \(B\) (the inverses of resistance and reactance) given by \(G = \frac{1}{R} \space ; \space B = \frac{1}{X}.\) This is particularly useful when dealing with parallel rather than series reactive loads.
+\section{Week 2}
+\end{document}
