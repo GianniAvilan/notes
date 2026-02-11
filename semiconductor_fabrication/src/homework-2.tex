@@ -1,0 +1,81 @@
+\documentclass{article}
+\title{ECE 496 -- Homework 2}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 496}
+\fancyhead[R]{Homework 2}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\begin{document}
+\setcounter{section}{3}
+\setcounter{subsection}{1}
+\begin{enumerate}[label=\thesubsection]
+	\item To keep units consistent, start by converting to micrometers, \(x=100\mathrm{nm} = 0.1\micro\mathrm{m}\). 
+
+		First, calculating values of \(D\) for wet and dry oxygen processes, assuming 100 Si and \(1000\degree\mathrm{C} = 1273.15\degree\mathrm{K}\), using \(D = D_0e^{\frac{-E_A}{kT}}\)
+		\begin{align*}
+			&D_{\mathrm{wet}} = (9.7 \times 10^7)e^{\frac{2.05}{0.1097}} = 0.7430 \ \mathrm{(linear)} = \frac{B}{A} \\
+			&D_{\mathrm{wet}} = 386e^{\frac{0.78}{0.1097}} = 0.3152 \ \mathrm{(parabolic)} = B \\
+			&D_{\mathrm{dry}} = (3.71 \times 10^6)e^{\frac{2.00}{0.1097}} = 0.0448 \ \mathrm{(linear)} = \frac{B}{A} \\
+			&D_{\mathrm{dry}} = 772e^{\frac{1.23}{0.1097}} = 0.0104 \ \mathrm{(parabolic)} = B \\
+	  \end{align*}
+		For wet \(\mathrm{O_2}\), we assume an initial oxide layer thickness \(X_i = 0 \ \mathrm{nm}\), so that \(\tau = 0\). Solving for a final thickness of \(0.1\micro\mathrm{m}\),
+		\begin{align*}
+			&0.1 = 0.2121[\{1+\frac{1.2608}{0.1799}(t)\}^{\frac{1}{2}}-1] \\
+			&t = ([\frac{0.1}{0.2121} + 1]^2 - 1)(\frac{0.1799}{1.2608}) = 0.1663 \ \mathrm{hrs} = 9.98 \ \mathrm{mins}.
+		\end{align*}
+		For dry \(\mathrm{O_2}\), we assume an initial oxide layer thickness \(X_i = 25 \ \mathrm{nm}\), so that \(\tau = \frac{0.025^2}{0.0104} + \frac{0.025}{0.0448} = 0.6181\). Solving again for a final thickness of \(0.1 \micro\mathrm{m}\), 
+		\begin{align*}
+			&t = ([\frac{0.1}{0.1161} + 1]^2 - 1)(\frac{0.0539}{0.0416}) - 0.6181 = 3.58 \ \mathrm{hrs}. 
+		\end{align*} 
+		
+		In conclusion, at \(T = 1000 \degree\mathrm{C}\), wet oxidation is preferable for the much faster growth rate up to 100nm.
+		\setcounter{subsection}{3}
+	\item Given the differential equation \[
+	  \frac{dX_o}{dt} = \frac{J}{M},
+	\] where \(J\) is the oxidizing flux, given as \(J = \frac{DN_0}{(X_o + \frac{D}{k_s})}\), and \(M\) is the number of molecules of the oxidizing species incorporated into a unit volume of the resulting oxide, then \[
+	  \frac{dX_o}{dt} = \frac{DN_0/M}{(X_o + D/k_s)}.
+	\]
+	As shown in the textbook, \(A = \frac{2D}{k_s}\) and \(B = \frac{2DN_0}{M}\), and so the equation can be reduced to \[
+	 \frac{dX_o}{dt} = \frac{\frac{B}{2}}{X_o+\frac{A}{2}} 
+	\].
+	Using separation of variables, \[
+	  \frac{B}{2}dt = (X_o + \frac{A}{2})dX_o.
+	\] 
+	Integrating both sides,
+	\begin{align*}
+	  &\int \frac{B}{2}dt = \int(X_o + \frac{A}{2})dX_o \\
+		&= \frac{Bt}{2} = \frac{1}{2}X_o^2 + \frac{AX_o}{2}.
+	\end{align*}
+	Solving for \(t\), 	
+	\[
+	  t = \frac{X_o^2}{B} + \frac{X_o}{\frac{B}{A}}.
+	\]
+	\setcounter{subsection}{6}
+	\item
+		\begin{enumerate}[label=(\alph*)]
+			\item Estimating the growth time using Fig. 3.6, \(t \approx 7 \ \mathrm{hrs}\).
+			\item First finding \(B\) and \(\frac{B}{A}\) for \(1150\degree\mathrm{C}\), 
+				\begin{align*}
+					&D_{\mathrm{wet}} = (9.7\times10^7)e^{\frac{2.05}{0.1226}} = 5.3316 \ \mathrm{(linear)} = \frac{B}{A}\\
+					&D_{mathrm{wet}} = 386e^{\frac{0.78}{0.1226}} = 0.6661 \ \mathrm{(parabolic)} = B.
+				\end{align*}
+
+				Using Eq. 3.8, \[
+					t = \frac{4}{0.6661} + \frac{2}{5.3316} = 6.38 \ \mathrm{hrs}.
+			\]
+		\end{enumerate}
+		\setcounter{subsection}{13}
+	\item 
+\end{enumerate}
+\end{document}
