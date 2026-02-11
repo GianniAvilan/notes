@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\begin{document}
+\section{Chapter 4: Electrostatics}
+\setcounter{subsection}{8}
+\subsection{Capacitance}
+
+He did an example with a coaxial cable at the start but I was running late, just caught the end of it. 
+
+Image theory: If a continous charge is present in some region containing an infinite plane of perfectly conductive material, the electric field \(\vec{E}\) in the region above the plane may be found by reflecting the source of charge across the conductive plane and flipping it to the opposite polarity, then summing the influence of the two charges in the region above the conductive plane. (This is easier to visualize than explain). 
+
+\subsection{Review}
+
+Using Gauss's Law to find electric field:
+
+Example: Two infinitely long coaxial cylindrical surfaces, \(r = a\) and \(r=b\), \((b<a)\), carry surface charge densities of \(\rho_{sa}\) and \(\rho_{sb}\), respectively.
+
+\begin{enumerate}[label=\alph*)]
+	\item Determine \(\vec{E}\) everywhere.
+
+	Use a cylindrical Gaussian surface to find \(\vec{E}\) in \(r<a\) first. Using Gauss's law, \[
+		\int_{S}\vec{E}\cdot d \vec{s} = \frac{Q_{\mathrm{total}}}{\varepsilon_0}.
+	\]
+	For this region, \(Q_{\mathrm{total}} = 0\), and so there is no electric field \(\vec{E}\) in this region.
+
+	In the region \(a < r < b\), we first find \(\vec{E} \cdot d \vec{s} = \vec{E} \cdot 2 \pi rL\), and then \(Q_{\mathrm{total}} = \frac{\rho_{sa} \cdot 2 \pi aL}{\varepsilon_0}\). Simplifying, \[
+		\vec{E} = \hat{\alpha_r}\frac{\rho_{sa}\cdot a}{r \cdot \varepsilon_0} \ \mathrm{\frac{V}{m}}.
+	\] 
+
+	In the region \(r > b\), we sum the two surface charges, so \[
+		\vec{E}=\hat{\alpha_r}\frac{\rho_{sb} \cdot a + \rho_{sb}\cdot b}{r\cdot \varepsilon_0} \ \mathrm{\frac{V}{m}}.
+	\]
+	Probably a good idea to memorize the area and volume of cylinders and spheres to quickly calculate total charges as a function of surface/volume charge densities.
+\end{enumerate}
+
+Finding electric field and electric flux density using boundary conditions:
+
+Example: Two lossless dielectric regions with \(\varepsilon_{r1} = 2\) and \(\varepsilon_{r2} = 3\) are separated by the charge free boundary shown below. Find \(\vec{E}\) and \(\vec{D}\) in both regions given that \(\vec{E}_1 = 2 \hat{\alpha_x} - 3 \hat{\alpha_y} + 5 \hat{\alpha_z}.\) (Charge free boundary is along the x-y plane.) 
+
+Using boundary conditions, first identify tangential and normal components of the \(\vec{E}\) field. In the region defined by \(\varepsilon_{r1}\), \(\vec{E}_{1t} = 2 \hat{\alpha_x}+3 \hat{\alpha_y}\) and \(\vec{E}_{1n} = 5 \hat{\alpha}_z\). Doing the same for the electric flux, \(\vec{D}_1 = \varepsilon_1 \vec{E_1} = \varepsilon_0 2 (2 \hat{\alpha_x} - 3 \hat{\alpha_y} + 5 \hat{\alpha_z}).\)
+
+Applying boundary conditions, 
+\begin{align*}
+	& E_{1t} = E_{t2} = 2 \hat{\alpha_x} - 3 \hat{\alpha_y} \\
+	& D_{1n} - D_{2n} = \rho_s = 0 
+\end{align*} 
+Solving for \(D_{2n}\), \(D_{2n} = 10\varepsilon_0 \hat{\alpha_z}\).
+Then, \(E_{2n = \frac{D_{2n}}{\varepsilon_2}} = \frac{10}{3}\hat{\alpha_z}\).
+
+Last homework will involve a question about boundary conditions on a spherical surface.
+
+Reviewed HW 1, question 2 (some people had questions apparently). 
+\end{document}
