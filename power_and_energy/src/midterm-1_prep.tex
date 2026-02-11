@@ -1,0 +1,133 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+\section{Test Prep: Midterm 1}
+\subsection{} A voltage source \(\vec{V} = 380\angle{25\degree} \mathrm{V}\) at 60 Hz is connected across a system consisting of a \(12\ohm\) resistor in series with a 200 mH inductor. Compute:
+\begin{enumerate}[label=\alph*)]
+	\item The load current.
+		
+		Finding the reactance of the inductor, \(X_L = 2\pi \times 60 \time 200 \times 10^{-3} = 75.40 \ohm\). Therefore, the total impedance in the circuit \(\vec{Z}_{\mathrm{total}} = 12 + j75.40 = 76.35 \angle{80.96 \degree}\ohm\). Then, load current is equal to \[
+			\vec{I} = \frac{\vec{V}}{\vec{Z}} = \frac{380\angle{25 \degree}}{76.35\angle{80.96\degree}} = 4.98\angle{-55.96\degree} \ \mathrm{A}.
+		\]
+	\item The load power factor.
+		\[
+			\mathrm{P.F.} = \cos{\theta_{VI}} = \cos{(80.96\degree)} = 0.1571 \ \mathrm{(lagging)}
+		\]
+	\item The real power consumed by the load.
+		\[
+			P = |V||I|\cos{\theta_{VI}} = 380 \times 4.98 \times 0.1571 = 297.30 \ \mathrm{W}.
+		\]
+	\item The reactive power consumed by the load.
+		\[
+			Q = |V||I|\sin{\theta_{VI}} = 380 \times 4.98 \times 0.9876 = 1.869 \ \mathrm{kVAr}.
+		\]
+\end{enumerate}
+\subsection{} An inductive load consists of \(R_1 = 3\ohm\) in series with \(X_{L1} = 4\ohm.\) The load is connected parallel with another load of unknown impedance. The voltage source of the system is 120 V. The total real and reactive powers delivered by the source are 3 kW and 0 kVAr, respectively.
+\begin{enumerate}[label=\alph*)]
+	\item Compute \(\vec{I_1}\).
+
+		First, converting the impedance of the known load to phasor form, 
+		\[
+			\vec{Z}_1 = \sqrt{3^2+4^2} \angle{(\tan^{-1}{\frac{4}{3}}}) = 5\angle{53.13 \degree \ohm}.
+		\]
+		Since the voltage is the same across both reactive loads, 
+		\[
+			\vec{I}_1 = \frac{\vec{V}}{\vec{Z}_1} = \frac{120 \angle{0\degree}}{5\angle{53.13 \degree}} = 24\angle{-53.13 \degree} \ \mathrm{A}.
+		\]
+	\item Compute the impedance of the unknown load.
+
+		Using KCL, we know that \(\vec{I}_1 + \vec{I}_2 = \vec{I}_{\mathrm{total}} \Rightarrow \vec{I}_2 = \vec{I}_{\mathrm{total}} - \vec{I}_1\), and given the formula for complex power, \(\vec{S} = 3\times10^3\angle{0\degree}=\vec{V}\vec{I}_{\mathrm{total}}^* \Rightarrow \vec{I}_{\mathrm{total}}^* = \frac{\vec{S}}{\vec{V}}.\) (For phasors, the complex conjugate of a value is taken by changing the sign of the phase angle; magnitude is not affected).
+
+		Using the above, \[
+	\vec{I}_{2} = \vec{I}_{\mathrm{total}} - \vec{I}_1 = \frac{\vec{S}}{\vec{V}} - \vec{I_1} = \frac{3\times10^3\angle{0\degree}}{120\angle{0\degree}} - 24\angle{-53.13\degree} = 25\angle{0\degree} - 24\angle{-53.13\degree}.
+		\]
+
+		Converting both phasors to complex form to make subtraction easier, \[
+			[25-j0] - [14.4 - j19.20] = (25-14.4) + j(0-19.20) = 10.6 + j19.20 \ \mathrm{A} = \vec{I}_2. 
+		\]
+
+		Finally, converting \(\vec{I}_2\) back to phasor form and finding impedance \(\vec{Z}_2\), 
+\[
+			\frac{\vec{V}}{\vec{I}_2} = \frac{120\angle{0\degree}}{\sqrt{10.6^2 - 19.20^2}\angle(\tan^{-1}{\frac{-19.20}{10.6}})} = \frac{120\angle{0\degree}}{21.93\angle{-61.10\degree}} = 5.47\angle{-61.10\degree} \ohm.
+\]
+\end{enumerate}
+\subsection{} The current and voltage of a Y-connected load are: \begin{align*}
+	&V_{bn} = 380 \angle{-90\degree} \ \mathrm{V}\\
+	&I_{c} = 100 \angle{150\degree} \ \mathrm{A}
+\end{align*}
+\begin{enumerate}[label=\alph*)]
+	\item Compute \(I_a\), \(V_{ab}\), and \(Z\) (the load impedance).
+   
+  For a y-connected load, 
+	\begin{align*}
+		&I_{a} = |I|\angle({\theta_{I_{a}}}) \\
+		&I_{b} = |I|\angle({\theta_{I_{a}} - 120\degree}) \\
+		&I_{c} = |I|\angle({\theta_{I_{a}} + 120\degree}), 
+	\end{align*} so \(I_{a} = |I_{c}|\angle{\theta_{I_c}} = 100\angle{(150\degree - 120\degree)} = 100\angle{30\degree} \ \mathrm{A}.\)
+
+	Similarly, 
+	\begin{align*}
+	  &V_{ab} = |V|\angle{(\theta_{V_{ab}}}) \\ 
+	  &V_{bc} = |V|\angle{(\theta_{V_{ab}} - 120\degree}) \\ 
+	  &V_{ca} = |V|\angle{(\theta_{V_{ab}} + 120\degree}), 
+	\end{align*} and 
+	\begin{align*}
+	 &V_{ab} = |V_{an}|\sqrt{3}\angle{(\theta_{V_{an}}+30\degree)} \\
+	 &V_{bc} = |V_{bn}|\sqrt{3}\angle{(\theta_{V_{bn}}+30\degree)} \\
+	 &V_{ca} = |V_{cn}|\sqrt{3}\angle{(\theta_{V_{cn}}+30\degree)} \\
+	\end{align*} so \(V_{bc} = |V_{bn}|\sqrt{3}\angle{(\theta_{bn}+30\degree) = 658.18\angle{-60\degree}} \ \mathrm{V}\) and \(V_{ab} = |V_{bc}|\angle{(\theta_{bc}}+120\degree) = 658.18\angle{60\degree} \ \mathrm{V}.\)
+
+	Finally, \(Z\) in a y-connected load is equal to 
+	\[
+		\vec{Z}_a = \frac{\vec{V}_{an}}{\vec{I_{a}}} = \frac{380\angle{30\degree}}{100\angle{30\degree}} = 3.8\angle{0\degree\ohm},
+	\]
+	and all impedances are equal, \(\vec{Z}_a = \vec{Z}_b = \vec{Z}_c\), in a balanced three-phase load.
+	\item Compute the power factor and the three-phase real and reactive power of the load.
+
+		Since the phase angle of the impedance is \(0\degree\), this implies that voltage and current are in phase due to purely resistive load, so \[
+		  P.F. = 0,
+		\]
+		neither leading nor lagging.
+
+		Then, assuming a phase angle difference of \(0\degree\), real power is given by \[
+			P = 3 \times |V_{an}||I_{a}| = 3 \times 380 \times 100 = 114 \ \mathrm{kW}
+		\]
+		and reactive power is \[
+			Q = 0 \ \mathrm{VAr}.
+		\]
+\end{enumerate}
+\subsection{} A three-phase Y-connected source with \(480\angle{0\degree} \ \mathrm{V}\) (line-to-line) is energizing a three-phase, balanced, Delta-connected load with impedance \(4 + j3\) per phase.  Determine:
+\begin{enumerate}[label=\alph*)]
+	\item The load power factor.
+
+		Finding the phase angle of the impedance, \(\theta_{Z} = \tan^{-1}{(\frac{3}{4})}\) = 36.87\degree, then power factor is given by \[
+			P.F = cos(\theta_{Z}) = 0.8 \ \mathrm{(lagging)}.
+		\]
+	\item The transmission line current \(I_a\).
+
+		Transmission line current can be related to load current as \[
+			\vec{I}_a = \sqrt{3}|I_{ab}|\angle{(\theta_{I_{ab}}-30\degree}),
+		\]
+		and \[
+			\vec{I_{ab}} = \frac{V_{ab}}{Z} = \frac{480\angle{0\degree}}{5\angle{36.87\degree}} = 96\angle{-36.87\degree} \ \mathrm{A}.
+		\]
+		Therefore, \[
+			\vec{I}_a = (\sqrt{3} \times 96) \angle{(-36.87\degree - 30\degree)} = 166.28\angle{\-66.87\degree} \ \mathrm{A}.
+		\]
+	\item The three-phase real power consumed by the load.
+
+		Using the formula given previously, \[
+			P = 3 \times |I_{a}||V_{ab}|\cos{(\theta_{Z})} = 239.44 \times 10^3 \times \cos{(0.6435)} = 191.55 \ \mathrm{kW}.
+		\] 
+	\item The three-phase reactive power consumed by the load.
+
+		Using the same formula, but using the sine rather than the cosine of the phase angle difference, \[
+			Q = 239.44 \times 10^3 \times \sin{(0.6435)} = 143.66 \ \mathrm{kVAr}.
+		\]
+\end{enumerate}
+\end{document}
