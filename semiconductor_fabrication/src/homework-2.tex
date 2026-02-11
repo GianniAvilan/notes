@@ -7,6 +7,7 @@
 \usepackage{pdfpages}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage[margin=1in]{geometry}
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{Gianni Avilan-Losee}
@@ -29,6 +30,13 @@
 			&D_{\mathrm{dry}} = (3.71 \times 10^6)e^{\frac{2.00}{0.1097}} = 0.0448 \ \mathrm{(linear)} = \frac{B}{A} \\
 			&D_{\mathrm{dry}} = 772e^{\frac{1.23}{0.1097}} = 0.0104 \ \mathrm{(parabolic)} = B \\
 	  \end{align*}
+
+		Then, we will use the formula 
+		\[
+			X_o(t) = 0.5A[\{1+\frac{4B}{A^2}(t+\tau)\}^\frac{1}{2}-1]
+		\]
+		and solve for \(t\)
+
 		For wet \(\mathrm{O_2}\), we assume an initial oxide layer thickness \(X_i = 0 \ \mathrm{nm}\), so that \(\tau = 0\). Solving for a final thickness of \(0.1\micro\mathrm{m}\),
 		\begin{align*}
 			&0.1 = 0.2121[\{1+\frac{1.2608}{0.1799}(t)\}^{\frac{1}{2}}-1] \\
@@ -47,8 +55,8 @@
 	  \frac{dX_o}{dt} = \frac{DN_0/M}{(X_o + D/k_s)}.
 	\]
 	As shown in the textbook, \(A = \frac{2D}{k_s}\) and \(B = \frac{2DN_0}{M}\), and so the equation can be reduced to \[
-	 \frac{dX_o}{dt} = \frac{\frac{B}{2}}{X_o+\frac{A}{2}} 
-	\].
+	 \frac{dX_o}{dt} = \frac{\frac{B}{2}}{X_o+\frac{A}{2}}.
+	\]
 	Using separation of variables, \[
 	  \frac{B}{2}dt = (X_o + \frac{A}{2})dX_o.
 	\] 
@@ -68,7 +76,7 @@
 			\item First finding \(B\) and \(\frac{B}{A}\) for \(1150\degree\mathrm{C}\), 
 				\begin{align*}
 					&D_{\mathrm{wet}} = (9.7\times10^7)e^{\frac{2.05}{0.1226}} = 5.3316 \ \mathrm{(linear)} = \frac{B}{A}\\
-					&D_{mathrm{wet}} = 386e^{\frac{0.78}{0.1226}} = 0.6661 \ \mathrm{(parabolic)} = B.
+					&D_{\mathrm{wet}} = 386e^{\frac{0.78}{0.1226}} = 0.6661 \ \mathrm{(parabolic)} = B.
 				\end{align*}
 
 				Using Eq. 3.8, \[
@@ -76,6 +84,25 @@
 			\]
 		\end{enumerate}
 		\setcounter{subsection}{13}
-	\item 
+		\item
+		\begin{enumerate}[label=\alph*)]
+			\item Estimating the time to grow \(0.4\micro\mathrm{m}\), Fig. 3.6 shows \(\tau \approx 0.45 \ \mathrm{hrs}\) and total time to grow \(1.4\micro\mathrm{m}\) as \(t \approx 3.8 \mathrm{hrs}\), then \(t-\tau \approx 3.4 \mathrm{hrs}.\)
+	\item First, finding \(kT\) for \(1100\degree\mathrm{C}\), \(kT = 0.118\). Then, finding \(B\) and \(\frac{B}{A}\) for wet \(\mathrm{O_2}\), 
+	\begin{align*}
+		&\frac{B}{A} = (9.7\times10^7)e^{\frac{-2.05}{0.118}} = 2.7685 \\
+		&B = 386e^{\frac{-0.78}{0.118}} = 0.5198.
+	\end{align*}
+
+		Starting with an \(X_i = 0.4 \micro\mathrm{m}\) we may calculate \(\tau\) as \[
+			\tau = \frac{X_i^2}{B} + \frac{X_i}{\frac{B}{A}} =  \frac{0.4^2}{0.5198} + \frac{0.4}{2.7685} = 0.4523 \ \mathrm{hrs}.
+	\]
+	Then, finding time to grow an additional layer of \(X_o = 1 \micro\mathrm{m}\), 
+	\[
+		t = \frac{X_o^2}{B} + \frac{X_o}{\frac{B}{A}} - \tau = \frac{1.4^2}{0.5198} + \frac{1.4}{2.7685} - 0.4523 = 3.82 \ \mathrm{hrs}.
+	\]
+    \end{enumerate}
+		\setcounter{subsection}{14}
+	\item Using Table 3.2, a total film thickness of \(1.4\micro\mathrm{m}\) will show an orange hue under daylight flourescent lighting.
+	\item Using Fig. 3.10 to estimate, a thickness of \(70\mathrm{nm}\) is needed to mask a 4-hr boron diffusion at \(1150\degree\mathrm{C}\), and a thickness of \(380\mathrm{nm}\) is needed to mask a 1-hr phosphorus diffusion at \(1050 \degree \mathrm{C}\).
 \end{enumerate}
 \end{document}
