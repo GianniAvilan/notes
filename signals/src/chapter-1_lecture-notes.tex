@@ -1,55 +1,73 @@
 \documentclass{article}
+\usepackage[margin=1in]{geometry}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{microtype}
 \usepackage{textcomp, gensymb}
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\setlength{\parindent}{20pt}
+\usepackage[skip=10pt plus2pt, indent=20pt]{parskip}
 \begin{document}
-\section{Chapter 1: Signals and Signals} 
-In general, signals refer to sets of data that vary as a function of time (or some other independent variable), while systems process signals (for some given input, the systems returns a predictable output). 
+\section{Chapter 1: Signals and Systems} 
+In general, a signal is defined as a set of data that varies as a function of time (or some other independent variable), while systems are ways of processing signals. Specifically, for some input signal \(x(t)\), a systems will return an output signal \(y(t)\).  Systems are normally described by a mathematical equation relating the input to the output as \(y(t) = x(t)\). 
+
+Throughout the notes and textbook, \(x(t)\) will be used to represent input signals, and \(y(t)\) will be used to represent output signals.
+
 \subsection{Size of a Signal}
-It's often useful to characterize a signal, which can often be mathematically complex, into a more managable quantity, which we will refer to here as its size. Further, a signal's size can be expressed in terms of energy or power (don't confuse this with the more common definition of power as joules per second, or watts). 
+It's often useful to characterize a signal, which can range from mathematically trivial to incredibly complex, into a more managable single quantity, which we will refer to here as its \textbf{size}. Size as a quantity can then be subdivided into \textbf{energy} or \textbf{power} (don't confuse this with the more common definition of power as joules per second, or watts, which is specific to electrical systems). 
 
-We'll begin with energy. Mathematically, a signal \(x(t)\)'s energy is defined as \[
-  E_x = \int_{\infty}^{-\infty}|x(t)|^2dt
+We'll begin with energy. Mathematically, any signal \(x(t)\)'s energy may be defined as \[
+  E_x = \int_{\infty}^{-\infty}|x(t)|^2dt,
 \]
-and defines the signal's integral (area under the curve) over an infinite length of time. Obviously, the result is only significant if the signal's energy is \textit{finite}. For example, a 1-second unit impulse \(x(t) = (u(t) - u(t-1)\) would have a finite energy \(E_x = 1\) (its definite integral from \(-\infty\) to \(infty\)), while a sinusoidal function \(g(t) = sin(t)\) would have an infinite energy \(E_g = \infty\), due to its periodic nature.   
+and defines the signal's integral (area under the curve) over its entire domain; in this general case, the domain is any and all values of \(t\). infinite length of time. Obviously, the resultant quantity is only significant if the signal's energy is \textit{finite}. For example, integrating a 1-second square pulse \(x(t) = (u(t) - u(t-1))\) in this way would result in a finite energy \(E_x = 1\) since the improper integral defining its energy converges. On the other hand a sinusoidal function \(x(t) = \sin{(t)}\) would, when integrated in the same way, result an infinite energy \(E_x = \infty\) due to its periodic nature (note that though a pure sinusoid would normally equal zero when integrated from \(-\infty\) to \(\infty\), the absolute value function in the energy formula negates this effect).
 
-When a signal's energy is infinite, we can use power as a more useful measure of the signal's size. Power is defined mathematically as \[
+When a signal's energy is infinite, and therefore insignificant, we may use power as a more useful measure of the signal's size. Power is defined mathematically as \[
 	P_x = \lim_{T \to \infty} \frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}|x(t)|^2dt
 \]
-and defines the signal's average energy. On the other hand, power is not a useful way to measure the size of a signal with finite energy. For example, a sinusoidal function \(x(t) = sin(t)\) would have a power of \(P_x = \frac{1}{2}\), while the unit function given before, \(g(t) = u(t) - u(t-1)\), would have a power of \(P_g = \frac{1}{\infty} = 0\).
+and defines the signal's average energy over its period, using symmetrical bounds centered at \(t=0\). Note that in the general case shown above, the limit is taken as the period \(T\) approaches infinity. This is only useful for calculating the power of a non-periodic signal that has infinite energy, such as \(e^{-at}u(t)\), but a more useful formula can be derived that is limited to periodic signals where the period is known, 
+\[
+  P_x = \frac{1}{T}\int_{\frac{T}{2}}^{-\frac{T}{2}}|x(t)|^2dt.
+\]
 
-The above formulas can be used to define two types of signals: energy signals and power signals. Energy signals are those with finite energy, and power signals are those with finite \textbf{and} non-zero power.
+On the other hand, power is not a useful way to measure the size of a signal with finite energy. For example, the aforementioned sinusoidal function \(x(t) = \sin{(t)}\) would result in a finite power of \(P_x = \frac{1}{2}\), while the square pulse given before, \(x(t) = (u(t) - u(t-1))\), would result in a power of \(P_g = \lim_{T \to \infty}\frac{1}{T} = 0\).
+
+Signals themselves can, using the above formulas, be categorized as energy signals and power signals. Energy signals are those whose energy is finite, and power signals are those with finite \textbf{and} non-zero power. Note that signals may be neither an energy nor a power signal, but they may not be both.
+
+Finally, keep in mind that the absolute value function found in the formulas for both energy and power are not necessary when the signal is real-valued, but necessary if the signal is complex-valued (of the form \(x(t) = x_a(t) + jx_b(t)\).
 
 \subsection{Useful Signal Operations}
-Common signal operations include time shifting, scaling, and reversal. 
+Common signal operations include time shifting, time scaling, and reversal. 
 
-Time shifting refers to the displacement of a signal in time, without changing any of its other properties. The simplest way to accomplish this is by replacing all instance is \(t\) with \(t-T\), such that \(\phi(t) = x(t-T)\) (the sign of \(T\) determines whether the signal shifts to the right, delaying it, or to the left, advancing it.)
+Time shifting refers to the displacement of a signal in time, without changing any of its other properties (its "shape"). The simplest way to effect time shifting mathematically this is by replacing all instances of \(t\) in the signal's description with \(t-\tau\), where \(\tau\) is the size of the shift, such that \(\phi(t) = x(t\pm T)\). Note that this operation can be counterintuitive, since when looking at the signal's graph on the \(t-x(t)\) plane, \(t-\tau\) will shift the signal to the \textit{right} on the graph, while \(t+\tau\) will shift the signal to the \textit{left}. 
 
-Time scaling refers to the compression or expansion of a signal in time, and can be accomplished by replacing all instances of \(t\) with \(at\), where \(a\) represents the compression/expansion factor, such that \(\phi(t) = x(at)\) (the value of \(a\) will determine whether the signal is expanded or compressed in time.)
+Time scaling refers to the compression or expansion of a signal in time, thus forcing the same signal to take place in less time or more time, respectively. Time scaling can be done by replacing all instances of \(t\) with \(at\), where \(a\) represents the compression/expansion factor, such that \(\phi(t) = x(at)\). Similar to time shifting, when \(0 < a < 1\), the signal will expand in time, and when \(a > 1\), the signal will compress in time.
 
-Finally, time reversal "flips" the signal in time, and can be accomplished by replacing all instances of \(t\) with \(-t\), such that \(\phi(t) = x(-t)\).
+Finally, time reversal "flips" the signal in time, graphically equivalent to "spinning" the signal \(180\degree\) around the \(x(t)\) axis. Time reversal can be done by replacing all instances of \(t\) with \(-t\), such that \(\phi(t) = x(-t)\).
+
+Note that \(x(t\pm \tau)\) is different from \(x(t)\pm \tau\), \(x(at)\) is different from \(ax(t)\), and \(x(-t)\) is different from \(-x(t)\).
 
 \subsection{Classification of Signals}
 Signals can be classified by a number of their characteristics, as follows:  
 \begin{enumerate}
-	\item Continous versus discrete time signals: 
+	\item \textbf{Continuous-time versus discrete-time signals:}
 
-		Continuous time signals have a value \(x(t)\) for every t in the domain, while discrete time signals only have values \(x(t)\) for discrete values of \(t\) (usually given in equally spaced intervals, though not always). 
-	\item Analog versus digital signals:
+		Continuous time signals have a value \(x(t)\) for every \(t\) in the domain, while discrete time signals only have values \(x(t)\) for discrete values of \(t\) (usually \(t\) is given in equally spaced intervals or integer values, though not always). It's important to note that on some level, all signals represented in computers are fundamentally discrete, though it may be more convenient to model them as being continuous if the difference between successive intervals is sufficiently small). 
+
+	\item \textbf{Analog versus digital signals:}
 		
-		Analog signals may take on any value in \((-\infty, \infty\); that is, their range is infinite, while digital signals have a range limited to a finite range (the most familiar example is binary, where \(x(t)\) can take on one of two discrete values).  
-	\item Periodic versus aperiodic signals:
+		Analog signals may take on any value in the range \((-\infty, \infty\), while digital signals have a finite range. The most common type of digital signal is binary, where \(x(t)\) can take on one of two discrete values, 0 or 1. However, a signal is considered digital so long as its output is limited to finite set of values.  
 
-		Periodic signals take on the form \(x(t) = x(t\pm aT_0\), implying that over some range \(a\), the signal repeats itself. This is not the case with aperiodic signals, whose behavior is less predictable but not entirely unpredictable (more on that later).
-	\item Causal versus non-causal signals:
+	\item \textbf{Periodic versus aperiodic signals:}
 
-		Causal signals begin at \(t=0\), before which they are not defined, while non-causal signals are defined prior to \(t=0\) (and after). 
-		\item Deterministic versus probabilistic (random) signals:
+		Periodic signals meet the constraint \(x(t) = x(t\pm aT_0)\), where \(T_0\) is the period of the signal and \(a = 1, 2, 3, \ ...\).  This implies that over each period \(T_0\), the signal repeats itself exactly. This is not the case with aperiodic signals, whose behavior is less predictable over long timespans, but not entirely unpredictable in the short-term. Methods for analyzing aperiodic signals will follow in future discussions. 
+	\item \textbf{Causal versus non-causal signals:}
 
-			Deterministic signals are described for every point in their domain, usually by a mathematical function, while probabilistic or random signals are not defined specifically, and are only known in terms of other characteristics, such as their mean value, mean-squared value, et cetera.
+		Causal signals begin at \(t=0\), before which they are not defined, and may be considered equal to zero. The most convenient way to represent a causal signal mathematically is by multiplying it by the unit step function, \(\phi(t) = x(t)u(t)\). If a signal is defined prior to \(t=0\), it is considered non-causal. 
+	\item \textbf{Deterministic versus probabilistic (random) signals:}
+
+			Deterministic signals are described for every point in their domain, usually by a mathematical function, while probabilistic or random signals are not defined by a specific function, and are only known in terms of other properties, such as their mean value, mean-squared value, et cetera. Probabilistic signals will not be the main focus of this course, and are better explained in the context of probability theory.
 \end{enumerate}
-
 \subsection{Some Useful Signal Models}
 One of the most useful signal models is the unit step, defined by \[
   u(t) =
@@ -58,7 +76,9 @@ One of the most useful signal models is the unit step, defined by \[
 		0 & t\leq 0
 	\end{cases}
 .\]
-When describing piecewise functions, the unit step may be used to define each condition of the piecewise function. For example, when definining a triangular-shaped that is 2 seconds long and begins at \(t=0\), we may use a unit step function of width 1 \(u(t) - u(t-1)\) to define the first half of the triangle, and a second, right-shifted unit step function of width 1 \(u(t-1) - u(t-2)\) to define the second half. In mathematical terms, \[
+To expand on the use of the \textbf{unit step} (sometimes referred to as the Heaviside function) in defining causal signal, a more general use of the unit step is when describing piecewise functions. To demarcate one part of the function from another, the unit step may be used to define each condition as a function of \(t\). 
+
+For example, when definining a triangular-shaped pulse that is 2 seconds long and begins at \(t=0\), we may use a unit step function along with a second, time shifted unit step function, \[u(t) - u(t-1),\] to define the first half of the triangle, and a second pair of unit step functions, \[u(t-1) - u(t-2),\] to define the second half. Representing our result as a piecewise function and a function defined by the unit step, \[
   x(t) = 
 	\begin{cases}
 		t & 0 \leq t \leq 1 \\
@@ -66,30 +86,56 @@ When describing piecewise functions, the unit step may be used to define each co
 	\end{cases}
 	= [u(t) - u(t-1)]t + [u(t-1)-u(t-2)](-t+2).
 \]
-Next, the unit impulse (or delta dirac) function \(\delta(t)\) is defined mathematically in terms of its integral, such that \[
+
+Next, the \textbf{unit impulse} (or Dirac delta) function \(\delta(t)\) is defined mathematically in terms of its integral, such that \[
   \int_{-\infty}^{\infty}\delta(t)dt = 1; \space \delta(t) = 0, t \neq 0.
 \]
-The above implies that at \(t=0\), \(\delta(0) = \infty\), since it is zero-valued for all other values of \(t\) and yet has a definite integral of \(1\). 
-
-As a result, the unit impulse obeys the \textbf{sampling} or sifting property, whereby its integral picks out the value of an associated function at \(t=0\) (or wherever \(\delta(t)\) is time-shifted to). For example, consider a function \(phi(t) = 2t+1\). When integrated and multiplied by the delta function, it follows that \[
-  \int_{-\infty}^{\infty}\phi(t)\delta(t)dt=1 \int_{-\infty}^{\infty}\delta(t)dt = \phi(T) = 1.
+In other words, at \(t=0\), \(\delta(0) = \infty\), since it is zero-valued for all other values of \(t\) and yet has a definite integral of \(1\). We can visualize this beginning with a square pulse of width 1 and height 1, valued at zero everywhere else, \(x(t) = u(t) - u(t-1).\) The area under this function, above the t-axis, would be \(1\times1 = 1\), or, \[
+  \int_{-\infty}^{\infty}x(t) = 1.
+\]. However, the unit impulse function is defined \textit{only} at \(t=0\), and equals zero elsewhere. Therefore, if we imagine shrinking the width of our square pulse function by some factor, but continuing to meet the criteria of its area being 1, we would need to increase its height by the same factor. Taking this process to its logical limit, and shrinking the width of the pulse to an infinitesimal width \(dt\), defined only at the instant \(t=0\), its height must be infinite, and this is the case for \(\delta(t)\). Defining \(\delta(t)\) alone, \[
+  \begin{cases}
+		\delta(t) = \infty & t=0 \\
+		\delta(t) = 0 & \text{otherwise} \\
+	\end{cases}
 \]
-We can conclude based on the above that the delta function, when used in this way, will "sample" the value of \(\phi(t)\) at the point \(T\), given the delta function is shifted; e.g., \(\delta(t-T)\).
+Note that \(\delta(t)\), just like other functions, can be time-shifted so that its effect occurs at any other point \(t=\tau\) by defining it as \(\delta(t\pm\tau)\).
+
+As a result of the above properties, the unit impulse obeys what we call the \textbf{sampling} or sifting property, whereby its integral picks out the value of an associated function at \(t=0\) (or wherever \(\delta(t)\) is time-shifted to). For example, consider the function \(x(t)\). When multiplied by the delta function and integrated over all \(t\), it follows that \[
+  \int_{-\infty}^{\infty}x(t)\delta(t\pm T)dt=x(T)\int_{-\infty}^{\infty}\delta(t)dt = x(T).
+\]
+We can conclude based on the above that the delta function, when used in this way, will "sample" the value of \(x(t)\) at the point \(T\), given the delta function is time-shifted by a corresponding value of \(\pm T\).
 
 \subsection{Classification of Systems}
 
-Systems may be expressed mathematically as a function of the form \[
+As mentioned previously, systems may be expressed mathematically as a function of the form \[
   y(t) = x(t),
 \]
-where \(x(t)\) is the input to the system and \(y(t)\) represents the output of the system.
+where \(x(t)\) is the input signal to the system and \(y(t)\) represents the output signal from the system. Similarly to signals, systems may also be classified into certain categories based on their properties, as follows:
+\begin{enumerate}
+	\item \textbf{Linear vs non-linear systems:} 
+		
+	Though this class limits itself to the analysis of linear systems, it's important to be able to define what systems are linear, and which ones are not. The linearity or non-linearity of a system is defined by two separate mathematical properties: \textit{additivity} and \textit{homogeneity}. 
 
-Systems may be categorized as linear and non-linear, with this class limiting itself to the analysis of linear systems. Linearity is defined by two separate properties: \textit{additivity} and \textit{homogeneity}. The additivity property says that if some inputs \(x_1\) and \(x_2\) are applied to the system, resulting in outputs \(y_1\) and \(y_2\), respectively, then the sum of those inputs, \(x_1 + x_2\), when applied to the system, will result in an output \(y_1 + y_2\); that is, the sum of their respective outputs when applied independently. Homoegeneity, the second property of linear systems, says that if the input to a system \(x_1\) is increased by a factor of \(k\) so that the input is equal to \(kx_1\), the output will increase by the same factor, \(ky_1\).
+	The additivity property states that if any two inputs \(x_1\) and \(x_2\) are applied to the system separately, resulting in outputs \(y_1\) and \(y_2\), then the sum of those same two inputs, \(x_1 + x_2\), when applied to the system together, will result in a single output \(y_1 + y_2\); that is, the sum of the independent outputs found in the first step. Homoegeneity, the second property of linear systems, states that some input to a system \(x_1\) whose corresponding output is \(y_1\) is increased by a factor of \(k\), so that \(x_2 = kx_1\), the output will increase by the same factor, so that \(y_2 = ky_1\).
 
-In combination, the two properties yield in a linear system, one in which \(k_1x_1 + k_2x_2 = k_1y_1 = k_2y_2\), a property called \textit{superposition}.
+If and only if both properties are satisfied, a system \(y(t) = x(t) \) may be considered linear. Combining the two properties mathematically, \(k_1x_1 + k_2x_2 = k_1y_1 = k_2y_2\). Taken together, this property is called \textit{superposition}.
 
-Systems may further be categorized as time-invariant and time-variant systems. Put simply, a time-invariant system whose input is time-shifted by some arbitrary constant \(\tau_0\) will result in an equivalently time-shifted output \(\tau_0\), while a time-variant system's output \textit{will not} obey this relationship. Mathematically, given some input \(x_1(t)\) and the matching output \(y(t)\), if a time-shifted input \(x_2 = x_1(t\pm \tau_0)\) is applied to the system, the output should equal \(y_2(t) = y_1(t\pm\tau_0)\) in a time-invariant system. By applying a time shifted input to the system and comparing the corresponding, time shifted output, we can determine whether a system is time-invariant or time-variant.
+\item\textbf{Time-invariant vs time-variant systems:}
 
-Systmes may also be categorized as instantaneous (memoryless) or dynamic systems; the output of dynamic systems depends only on the input at the same instant, whereas dynamic systems may depend on inputs in the past or future. A subset of dynamic systems are those which are causal or non-causal; the output of causal systems depend only on inputs in the present or past, while noncausal systems' outputs depend on \textit{future} values of the input.
+A time-invariant system is one in which, if some input \(x_1(t)\) is time-shifted such that \(x_2(t) = x_1(t\pm\tau)\), the corresponding output will undergo an equal time-shift, so that \(y_2 = y_2(t\pm\tau)\). Obviously, a time-variant system's output \textit{will not} obey this relationship. By applying an input along with its time shifted counterpart to the system and comparing the corresponding, time shifted outputs, we can determine whether a system is time-invariant or time-variant.
 
-Finally, invertible and non-invertible systems are categorized on the basis of whether the exact input can be recovered by manipulating the output. For example, the system \(y=2x\) is considered invertible, since by reversing the operation, \(\frac{y}{2} = x\), the original input can be recovered. On the other hand, \(y = x^2\) is not an invertible system, since the inverse operation \(\sqrt{y} = x\) may yield a positive or negative value, the original input may not be recovered. 
+\item\textbf{Instantaneous (memoryless) vs dynamic systems:}
+
+Put simply, the output of an instantaeous system depends only on the input at that same instant \(t=\tau\), whereas dynamic systems may depend on inputs in the past or future. For example, an instantaneous system is \(y(t) = 2t\), whereas a dynamic system is \(y(t) = 2(t-2)\). 
+
+\item\textbf{Causal vs non-causal systems:}
+
+A subset of dynamic systems are those which are causal or non-causal; the output of causal systems depend only on inputs in the present or past, for example, \(y(t) = 2(t-2)\)while noncausal systems' outputs depend on \textit{future} values of the input, for example, \(y(t) = 2(t+2)\).
+
+\item\textbf{Invertible vs non-invertible systems:}
+
+Finally, invertible and non-invertible systems are categorized on the basis of whether the unique input \(t\) can be recovered by manipulating the output \(y(t)\). Recall that the mathematical definition of a function is one for which every ouput in the domain (input values) is associated with a unique value in the range (output values). Invertible functions have this same property in reverse, where each value in the range must be associated with a unique value in the domain (this is also known as a bijective or one-to-one function). 
+
+For example, the system \(y=2t\) is considered invertible, since by inverting the operation, \(\frac{y}{2} = t\), the original input can be recovered. On the other hand, \(y = t^2\) is not an invertible system, since the inverse operation \(\sqrt{y} = \pm t\) may yield a positive or negative value, and a unique input value \(t\) cannot be recovered. 
+\end{enumerate}
 \end{document}
