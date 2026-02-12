@@ -42,5 +42,42 @@ Solving for \(y(t)\), for all possible values of \(t\), the left-hand side of th
 
 	Finally, the \(N\) coefficients may be solved for using \(N\) initial conditions, \(y_1(0), \frac{d}{dt}y_1(0), \ ... \ \frac{d^N}{dt^N}y_1(0).\)
 
+\setcounter{subsection}{3}
+\subsection{Total Response}
+
+The total response of a system of is the sum of its zero-state and zero-input responses, given mathematically as \[
+	\sum_{k=1}^{N}c_ke^{\lambda_kt} + x(t) * h(t).
+\]
+In other words, the total response is the sum of the linear combination of the system's characteristic modes (ZIR) and the convolution of the input signal with the system's impulse response (ZSR).
+
+\subsection{System Stability}
+
+Any discussion of a system's overall stability must be based on its total response. 
+
+Equilibrium states are states in which a system can stay forever, and we may further subdivide equilibrium states into several sub-categories.Stable equilibrium refers to a system that can return to equilibrium after small disturbances, unstable equilibrium to a system that will move further and further from its equlibrium point in response to small disturbances, and netural equilibrium refers to a system that does neither in response to a small disturbance.
+
+Reviewing BIBO (bounded-input/bounded-output) stability, this defines a system in which a bounded external input will not result in an unbounded output (imagine infinite exponential growth \(e^t\) in response to some finite input).
+
+Proving a system is BIBO stable involves integrating its impulse response and defining the output, as 
+\[
+  \int_{-\infty}^{\infty}|h(\tau)|d\tau < \infty.
+\]
+
+(Review the proof for this later).
+
+Proving a system is BIBO \textit{unstable} would require just a single counterexample, or a mathematical proof. Proving \textit{stability}, on the other hand, requires a proof, since it must be proved for all possible inputs \(x(t)\).   
+
+*NOTE: Put a section at the beginning noting the methodology for proving/disproving system/signal properties.
+
+Moving on from BIBO stability, asymptotic (internal) stability defines a system whose output returns to zero over time if given no external inputs, and is defined by the behavior of the characteristic modes; e.g., a complex mode of the form \(e^{jt} = \cos{(t)} + j\sin{(t)}\), and oscillates forever.
+
+Characteristic roots \(\lambda_1, \lambda_2, \ ... \ \lambda_n\) can be complex, e.g., \(\lambda_n = \sigma + j\omega\). Defining all roots as complex, we can then define the system using the properties of \(\sigma\). If \(\sigma < 0\), the system will decay to zero; \(\sigma > 0\), the system will grow indefinitely; and \(\sigma = 0\), the system will neither grow nor decay. These properties can be quickly deduced using the \(\sigma-\omega\) plane. In the left half-plane, we find stability; in the right, instability.
+
+In short, judgements on asymptotic stability can be made most quickly and efficiently based on \textit{just} the roots \(\lambda\) of the system. IMPORTANT: internal stability implies BIBO stability. If the system is not asymptotically stable, it is BIBO unstable as well.
+
+If the characteristic roots are not provided (e.g., just \(h(t)\) is known) then the impulse response can be used to assess BIBO stability. Methods of finding the stability depend on the information provided. 
+
+NOTE: better express what a diff eq says about a system versus, say, its solution \(y(t) = x(t)\), or its impulse response \(h(t)\), etc.
+
 \end{document}
 
