@@ -33,4 +33,40 @@ Get familiar with using Elmore delay approximations to find the delay of a gate 
 
 Research timing arc a little better. Delay varies with direction and input, lots of interesting details here to dig into. How many rows would a timing arc table need based on the effect of inputs/outputs on delay? (Try this with multiple different types of gates). Capacitance is also dependent on layout. Shared diffusion nodes reduce total capacitance. (Practice estimating shared diffusion effect on capacitance). Stick diagrams are even harder to think about now, awesome. Means layout will affect delay.
 
+Not going to worry about DC transfer characteristics much from here on out. Instead of using Shockley model, we're simplifying nMOS and pMOS transistors into an RC-equivalent model. Then, we can use elementary circuit analysis techniques to estimate the delay based on the network's RC characteristics. 
+
+Transistor width becomes very important when dealing with delay, especially considering the substantial difference between charge carrier mobility in pMOS versus nMOS devices. Remember that in many networks, only some switches are on at any given input, so certain RC characteristics are considered or ignored based on the input to the network. Distinguish gate and diffusion capacitance (review what causes these capacitive effects). Elmore delay models the approximate delay of a network based on its fanout (how many other gates it's driving).
+
+Example: Estimate worst-case rising and falling delay of a 3-input NAND driving \(h\) identical gates. In a NAND gate, we look at gate (parasitic) and diffusion (fanout) capacitance. In rising delay, we don't care about the pull-down network, since rising delay implies the pull-up network is active and under consideration (will some nodes lag behind others in a parallel network? a series network? why?) For falling delay, we consider the time it takes for the diffusion capacitance of the three gates to discharge (not simultaneously, but in succession) and the gate capacitance \((9+5h)\)C. Rise and fall time will be different. There is an intrinsic built-in capacitance no matter what \(h\) equals, and then added capacitance based on fanout.
+
+Parasitic delay vs effort delay. Parasitic delay is independent of load, whereas effort delay is based on fanout. Best-case (minimum, contamination) delay can be substantially less than worst-case (maximum, propagation) delay. Useful to estimate the best-case worst-case range? Diffusion capacitance assumptions are based on layout. Layout can reduce delay below worst-case assumptions. 
+
+\subsection{Logical Effort}
+
+Sizing gates and designing gate networks is automated, so we're learning about the mathematical foundations of these systems by learning logical effort theory. Logic networks can be immensely complicated, and we'd like to make layout as efficient as possible mathematically. Example of the design of a decoder for a register file. 16-word register file, each word is 32 bits wide. Constraints: max fanout of 10. Each bit presents load of 3 unit-sized transistors. 
+
+Begin by expressing delay as process-independent (sizing) as \(d=\frac{d_{abs}}{\tau}\). Delay has the two components, effort \(f\) and logical \(g\), \(d = f+p\). \(f = gh\), where \(h = \frac{C_{out}}{C_in}\). None of this makes sense but hopefully it will later. Logical effort is defined as the ratio of input capacitance of a gate to the input capacitance of an inverter delivering the same output current. For a unit inverter, the logical effort \(g = \frac{3}{3} = 1\), since \(C_{in} = 3\). If, for example, the input capacitance of a gate was \(C_{in} = 4\), then \(g=\frac{4}{3}.\) You can measure this from delay vs fanout plots (NAND has a lower logical effort than NOR, and is preferred by logic designers for this reason). Parasitic delay and logical effort for common gates are good values to memorize probably? Delay plots show normalized delay \(d\) as a function of incremental electrical effort \(h = \frac{C_{out}}{C_{in}}.\) 
+
+What about NOR2? Upcoming homework problem.
+
+Example: Ring oscillator. N-stage ring oscillator, estimate the frequency oscillation. Logical effort of each inverter is \(g=1\), electrical effort is \(h=1\), parasitic delay is \(p=1\), stage delay \(d=1+1=2\), and frequency \(f_{osc} = \frac{1}{2Nd} = \frac{1}{4N}.\)
+
+FO4 inverters are used as a standard delay, and is one unit inverter driving four other inverters. Given values, \(g=1\), \(h=4\), \(p=1\), \(d=5\) (memorize this). 
+
+Logical effort generalizes to multistage networks, with path logical effort \(G = \Pi g_i\), etc (check slides for this). What about branching paths? This is confusing as hell, I need to review it 700 times. This leads to the concept of branching effort. Delay is smallest when each stage bears same effort, and minimum delay of \(N\) stage path is \(D = NF^{\frac{1}{N}} + P\). (Apparently this helps design fast circuits). Practice selecting gate sizes for least delay, given a logic network. Fanout/branching are sort of synonymous. Learn to convert delay to units of FO4.
+
+Paradoxically, more gates can sometimes reduce delay by using intermediate "amplifier" stages to drive more gates more efficiently (increasing transistor widths). Optimal number of stages is a consideration (non-integer inverter widths?) Mathematically optimal solution doesn't always match the parts that are avilable to us. Compare alternatives with a spreadsheet listing options + N,G,P,D values.
+
+Verilog register files are basically doing all this math under the hood.
+
+Logical effort has limitations. For example, we need the path to comput G, but don't know the number of stages without G. The delay model also neglects input rise time effects, interconnect effects (wire resistance and capacitance that increases with reductions in size), and does not account for constrained delay. 
+
+Xilinx delay reports? Timing analysis field.
+
+In summary, despite limitations, NANDs are faster than NORs, FO4 is the standard, fewer stages don't necessarily mean less delay, and it provides language for discussing fast circuits. 
+
+Cell catalog for a TSMC \(0.18\micro\mathrm{m}\). Looking at an AOI121. What information is provided? Comes in several sizes (physical size). Height is usually the same so we can align cells to VDD and GND, width changes based on transistor sizing/gate type (I assume). Power consumption is listed, and wider transistors consume more power. Capacitance is also proportional to transistor size, and delay is given in nanoseconds, while load adustment is given in \(\frac{\mathrm{ns}}{\mathrm{pF}}\), based on the amount of input capacitance to the next stage.
+
+Eddicient Verilog code, synthesis tools.
+
 \end{document}
