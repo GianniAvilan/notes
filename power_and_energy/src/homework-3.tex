@@ -1,0 +1,47 @@
+\documentclass{article}
+\title{ECE 311 -- Homework 3}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 311}
+\fancyhead[R]{Homework 3}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\setcounter{section}{1}
+\begin{document}
+\includepdf[pages=-]{homework-3_cover-page.pdf}
+\begin{enumerate}[label=\thesubsection]
+	\setcounter{section}{2}
+	\setcounter{subsection}{7}
+	\item Since high-voltage towers are constructed using galvanized steel, which is electrically conductive, non-conductive insulators are placed between the transmission lines and the tower's frame to prevent electrifying the tower itself and creating a line-to-ground fault, or harming anyone who comes in contact with the tower.
+	\setcounter{subsection}{8}
+	\item When analyzing the potential for current to "jump" from the transmission line to the tower, bypassing the insulating material, the relevant variable is the creepage distance, which is defined as the shortest direct path along the surface of the insulator. The use of disks whose surface is continous with the rest of the insulators surface greatly increases the creepage distance while minimizing the distance at which the transmission line is held from the tower. This approach maximizes the insulators ability to prevent flashover along with structural integrity.
+	\setcounter{subsection}{11}
+	\item Due to the substantially lower voltage on distribution transmission lines, the flashover distance between the line and ground is reduced, and the towers can thus be lower to the ground in distribution networks.
+	\setcounter{subsection}{16}
+\item The high electric field intesity induced by the high voltage on transmission lines can ionize the surrounding air. Essentially, this field accelerates free electrons in the air, generating current in the area immediately surrounding the tranmsission line, resulting in a number of undesireable effects. The associate leakage current is called \textbf{corona}, and it can be mitigated by increasing the diameter of the conductor, thus spreading its surface charge over a larger area. 
+	\setcounter{subsection}{17}
+  \item Rather than constructing a single transmission line with a large diameter, however, several lines are often bundled to create a larger diameter while retaining lower production costs.
+	\setcounter{subsection}{19}
+\item Lightning strikes can create undesireable electric surges if they impact transmission lines. To avoid this, shield wires are installed, which are conductive and connected to ground at every tower and substation. Since lightning will most often strike the highest point at the lowest potential, shield wires attract lightning strikes and safely conduct the resulting current to ground, protecting the transmission lines from unwanted overcurrent. 
+	\setcounter{subsection}{24}
+  \item CB, which stands for circuit breaker, is a device that is normally installed at electrical substations for the purpose of breaking the electrically conductive path between a high-voltage transmission network and the substation's transformer. This device can be operated manually, or it can activate automatically when pre-determined current limits along its path are exceed.
+	\setcounter{subsection}{25}
+  \item The tap setting of a CB determines the maximum current limits, in excess of which the CB will open and break the electrically conductive path over which current flows from the transmission network to the transformer. 
+	\setcounter{subsection}{26}
+	\item The time-dial setting of the CB determines the amount of time that the current must remain in excess of the limit before the CB will open, since some faults are transient and can be cleared quickly without undesireable consequences, negating the need for the CB to be triggered.
+	\setcounter{subsection}{34}
+	\item Surge arresters are also designed to mitigate the undesireable effects of lightning strikes and other sources of overcurrent by redirecting the overcurrent to ground. Surge arresters accomplish this by using a metal-oxide varistor, whose resistance varies as a function of the potential difference across it. At a normal, distribution level voltage, the varistor's high resistance acts as an open circuit, allowing for normal operation, but when the voltage increases substantially due to a lightning strike, for example, the resistance of the surge arrester will decrease, allowing excess current to safely flow through the short that now exists to ground.
+\end{enumerate}
+\end{document}
