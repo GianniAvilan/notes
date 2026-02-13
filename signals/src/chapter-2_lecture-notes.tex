@@ -8,12 +8,15 @@
 \begin{document}
 \setcounter{section}{1}
 \section{Chapter 2: Time-Domain Analysis of Continuous Time Systems} 
-The majority of linear systems that we will deal with here may be defined by a linear differential equation of the form 
+\setcounter{subsection}{0}
+\subsection{Introduction}
+The majority of linear, time-invariant, continuous (LTIC) systems that we will deal with here may be defined by a linear differential equation of the form 
 \begin{align*}
 	&\frac{d^Ny(t)}{dt^N} + a_1 \frac{d^{N-1}y(t)}{dt^{N-1}} + \ ... \ + a_{N-1}\frac{dy(t)}{dt} + a_Ny(t) = \\
 	&b_{N-M}\frac{d^Mx(t)}{dt^M} + b_{N-M+1}\frac{d^{M-1}x(t)}{dt^{M-1}} + \ .. \ + b_{N-1}\frac{dx(t)}{dt}+b_Nx(t).
 \end{align*} 
-In other words, the input and output of a linear system are often described by N-th and M-th order linear differential equations, with \(M \leq N\) in most cases. A \textit{linear} differential equation is simply one in which each derivative is multiplied by a unique coefficient \(a_N\) or \(b_N\).
+
+In other words, LTIC systems are often described in terms of N-th and M-th order differential equations, with \(M \leq N\) in most cases. A \textit{linear} differential equation is simply one in which each derivative is multiplied by a unique coefficient \(a_N\) or \(b_N\).
 
 The above can be simplified by using \(\frac{d^N}{dt^N} = D^N\), which then reduces to
 \begin{align*}
@@ -21,26 +24,57 @@ The above can be simplified by using \(\frac{d^N}{dt^N} = D^N\), which then redu
 	&(b_{N-M}D^M + b_{N-M+1}D^{M-1} + \ ... \ b_{N-1}D+b_N)x(t).
 \end{align*}
 
+Further reducing \(D^N + a-1D^{N-1} + \ ... \ + a_{N-1} + a_N\) to \(Q(D)\) and the corresponding coefficient for the right side as \(P(D)\), the most compact representation of an LTIC system in this form is \[
+  Q(D)y(t) = P(D)x(t).
+\]
+
+Note that this is not the same as the description of the system that we dealt with previously, which we represented as \(y(t) = x(t)\). Given a linear differential equation like the one shown above, its solution \(y(t)\), along with any relevant initial conditions, will correspond to the more familiar form of \(y(t) = x(t).\) The goal of any analysis, when given the differential equation describing an LTIC system, is to find that system's response to the input; in other words, solve the differential equation to find \(y(t).\)
+
+Turning our attention for a moment to physical systems that are differential in nature, such as electrical circuits involving multiple storage elements (capacitors and inductors), we can reasonably separate the output of a linear differential equation into two separate components, which we will call the zero-input response and the zero-state response. The zero-input response defines the initial conditions of the system, and corresponds to its output when the input \(x(t) = 0\). The zero-state response is the opposite: it represents the system's response to the given input \(x(t)\) regardless of its inital state when the input is applied. 
+
+Based on our previous discussion in Chapter 1 on the superposition principle, which is a property of LTIC systems, we can now conclude that any such system's total response to some input \(x(t)\) can be expressed as the sum of its zero-input response and its zero-state response. Rather than solving for the system's total response all at once, it's easier to find each component separately and sum the two together.
+\setcounter{subsection}{1}
 \subsection{Zero-Input Response}
-Based on the previous discussion (Chapter 1) on the superposition principle, we can separate the output of a linear differential equation into two separate components, the zero-input response, and the zero-state response. Obeying the superposition principle, this means the total output may be found by summing the two corresponding inputs. 
 
-The first of these that we will solve for is the zero-input response, that is, the output \(y_1(t)\) when \(x_1(t) = 0\). In most systems, this is an important component in the system's input, corresponding to the initial state of the system at \(t=0\) \textit{prior} to any real-time or future input. 
+First, we will look at methods to solve for the system's zero-input response (ZIR). Thankfully, this half of a system's response is fairly straightforward and there is a standard method to find the ZIR.
 
-By reducing the input to \(0\), then the associated linear differential equation reduces to \[
-  (D^N + a_1D^{N-1} + \ ... \ + a_{N-1}D + a_N)y_0(t) = Q(D)y_0(t) = 0,
+By reducing the input to \(x(t) = 0\), the system's associated linear differential equation reduces to \[
+  Q(D)y_0(t) = 0,
 \] 
-with \(y_0(t)\) representing the zero-input response. 
+and solving for \(y_0(t)\) will produce the ZIR that we're looking for. 
 
-Solving for \(y(t)\), for all possible values of \(t\), the left-hand side of the equation can only resolve to zero if \(y_0(t)\) and all its derivatives are of the same form. The exponential function, \(e^{\lambda t}\) meets this criteria, since \(\frac{d}{dt}e^{\lambda t} = ae^{\lambda t}\). Setting each resulting coefficient \(a\) to Using \(y_0(t) = e^{\lambda t},\) the equation now reduces to
+I'll take a brief detour to explain how the solution to this type of differential equation works, and why there is a general solution that we can easily plug in to all LTIC systems.
+
+Given the equation \(Q(D)y(t) = 0\), it may be a good idea to reference the introduction of this chapter to remind yourself that this represents the sum of \(y(t)\) and \(N\) of its derivatives, each multiplied by a unique coefficient \(a_N\). 
+
+To demonstrate a generalized solution fr \(y(t)\), we will test \(y(t) = e^{\lambda t}\) as a possible solution to the equation. Recall that derivatives of \(e\) follow a repeating pattern, that is, \(\frac{d}{dt}e^{\lambda t} = \lambda e^{\lambda t}\), \(\frac{d^2}{dt^2}e^{\lambda t} = \lambda^2 e^{\lambda t}\), and so on. Substiuting \(y(t) = e^{\lambda t}\) in our general ZIR equation \(Q(D)y(t) = 0\),
   \[
-		c_1e^{\lambda_1t} + c_2e^{\lambda_2t} + c_Ne^{\lambda_Nt} = 0.
+		\lambda^N e^{\lambda t} + a_1 \lambda ^{N-1} e^{\lambda t} + \ ... \  + a_{N-1} \lambda e^{\lambda t} + a_N e^{\lambda t} = 0.
   \]
-	Now solving for \(Q(\lambda)=0\) (we'll save the constants \(c_N\) for the next step), \[
-	  Q(\lambda) = (\lambda - \lambda_1)(\lambda - \lambda_2) \ ... \ (\lambda - \lambda_N) = 0,
+	Factoring \(e^{\lambda t}\) out of the equation, we are left with \[
+		e^{\lambda t}(\lambda ^N + a_1 \lambda^{N-1} + \ ... \ a_{N-1}\lambda + a_N) = 0,
 	\]
-	where the values of \(\lambda\) are the characteristic roots, eigenvalues, or natural frequencies of the system.
+	where \(Q(\lambda)\) is now a polynomial. Since \(e^{\lambda t}\) does not equal \(0\) for any combination of \(\lambda\) or \(t\), for the equation to balance, \(Q(\lambda)\) must equal zero. Since \(Q(\lambda)\) is a polynomial, this means finding the roots of the equation, \(\lambda_1, \lambda_2 \ ... \ \lambda_N\), that reduce it to zero (remember that in an actual differential equation, \(a_1, a_2, \ ... \ , a_N\) will be known constants.) \(Q(\lambda)\) is known as the \textbf{characteristic equation} of the system. We'll note here that, based on the above, \(y(t) = e^{\lambda t}\) is a \textit{valid} solution to any linear differential equation of this form, and thus the following process can be applied to find the ZIR of any LTIC system. 
 
-	Finally, the \(N\) coefficients may be solved for using \(N\) initial conditions, \(y_1(0), \frac{d}{dt}y_1(0), \ ... \ \frac{d^N}{dt^N}y_1(0).\)
+	(There are more interesting ways to prove this, and that this is the only valid solution for a linear differential equation of this form, using power series, but for now it's easiest to just substitute \(y(t) = e^{\lambda t}\) and show that it matches with the constraints imposed by \(Q(D)y(t) = 0\).)
+
+	Now, all that's left to solve the general equation for \(y(t)\) is to find the roots of the polynomial \(Q(\lambda)\). Remember that any of the roots could be a real or \textit{complex} number, so it may be helpful to review solutions to first- and second-order polynomials that involve complex variables (or just plug the polynomial into MATLAB or your calculator, which will solve it numerically and spit out the roots). Since any of the resulting values of \(\lambda\) represent a valid solution to the equation, we can then substitute each instance of \(\lambda\) and represent the complete solution as a linear combination of all possible solutions \[
+		y(t) = c_1e^{\lambda_1 t} + c_2 e^{\lambda_2 t} + \ ... \ c_N e^{\lambda_N t}.
+	\] 
+	Each of the terms \(e^{\lambda_n t}\) are known as the \textbf{characteristic modes} of the system, and the values \(\lambda_n\) as its \textbf{characteristic roots} or eigenvalues (there's some very interesting reasons why these are identical to the eigenvalues found in linear algebra, but those reasons don't become clear until we get into coupled dynamical systems and systems of linear differential equations, so I won't get it into it here, unfortunately.)
+
+	Finally, the last step is to solve for the constants \(c_1, c_2, \ ... \ , c_N\) by using \(N\) initial condiions for the system. These are normally either given or easily deduced from the system under consideration. For example, given a second-order linear differential equation \((D^2 + D + 1)y(t) = 0\) and its associated system, we'd require two initial conditions \(y(0) = a\) and \(\dot{y}(0) = b\). Then, replacing each \(t\) in our solved \(y(t)\) and its derivative \(\dot{y}(t)\) with \(0\) and setting them equal to the initial conditions \(a\) and \(b\), we should be able to easily solve for constants \(c_1\) and \(c_2\) in this case.
+
+	Finally, we have a fully solved \(y(t)\) for the ZIR, which we will refer to from here on out as \(y_0(t).\)
+
+	Summarizing, the following are the general steps for finding the ZIR of any LTIC system described by a linear differential equation of the form \(Q(D)y(t) = P(D)x(t)\):
+
+	\begin{enumerate}
+		\item Set \(x(t) = 0\), which leaves \(Q(D)y(t) = 0\).
+		\item Given \(Q(D) = (D^N + a_1D^{N-1} + \ ... \ + a_{N-1}D + a_N)\), find the system's characteristic roots, \(\lambda_1, \lambda_2, \ ... \ , \lambda_N,\) by solving \(Q(D) = 0\).
+		\item Express \(y_0(t)\) as a linear combination of the system's characteristic modes, so that \(y(t) = c_1e^{\lambda_1} + c_2e^{\lambda_2} + \ ... \ + c_Ne^{\lambda_N}.\)
+		\item Using \(N\) initial conditions, solve for constants \(c_1, c_2, \ ... \ , c_N\).
+	\end{enumerate}
 
 \setcounter{subsection}{3}
 \subsection{Total Response}
@@ -77,7 +111,6 @@ In short, judgements on asymptotic stability can be made most quickly and effici
 
 If the characteristic roots are not provided (e.g., just \(h(t)\) is known) then the impulse response can be used to assess BIBO stability. Methods of finding the stability depend on the information provided. 
 
-NOTE: better express what a diff eq says about a system versus, say, its solution \(y(t) = x(t)\), or its impulse response \(h(t)\), etc.
 
 \end{document}
 
