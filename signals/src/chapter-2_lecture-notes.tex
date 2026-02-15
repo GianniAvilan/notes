@@ -99,7 +99,7 @@ Thankfully, if we simply use the process outlined above, we can easily find the 
 
 	As a final note, it's possible that the solution of the characteristic equation of a system returns repeated roots, or complex roots. If this is the case, the form of the solution \(y_0(t)\) will be slightly different. The textbook references both these cases in detail.
 
-\setcounter{subsection}{3}
+\setcounter{subsection}{2}
 \subsection{The Unit Impulse Response \(\mathbf{h(t)}\)}
 
 Having found a simple way to solve for the ZIR of an LTIC system, we may now move on to the second half of the total response: the ZSR. As mentioned in the introduction, the \(ZSR\) refers to the system's output when the given signal \(x(t)\) is applied, \textit{ignoring} the system's initial state, since that information is already solved for in the ZIR.
@@ -206,24 +206,57 @@ Substituting this into our original equation for \(h(t)\),
 	h(t) = (-e^{-2t} + 2e^{-3t})u(t).
 \]
 
-Finally, this is the system's ZSR.
+Finally, this is the system's impulse response \(h(t)\).
 
-\subsection{Total Response}
+As promised, there is also a formulaic way to find \(h(t)\), and I'll briefly review it here. 
 
-The total response of a system of is the sum of its zero-state and zero-input responses, given mathematically as \[
-	\sum_{k=1}^{N}c_ke^{\lambda_kt} + x(t) * h(t).
+\begin{enumerate}
+	\item First, given the form \(Q(D)y(t) = P(D)x(t)\), assume \(h(t) = b_0\delta(t) + [P(D)y_n(t)]u(t)\). Since we are given \(P(D)\), we now just need to find \(b_0\) and \(y_n(t)\)
+	\item \(y_n(t)\) here stands for the familiar linear combination of the system's characteristic modes, \(c_1e^{\lambda_1 t} + \ ... \ + c_Ne^{\lambda_N t}\). Rather than painstakingly solving for initial conditions as before, though, we can simply assume that \(y_n^{N-1}(0) = 1\), and all other initial conditions are 0.
+	\item Finally, \(b_0\) will simply be the coefficient of the \(N\)th derivative of \(x(t)\) on the right hand side. If \(M < N\), \(b_0 = 0\), and so no \(\delta(t)\) term is needed.
+	\item Putting the above pieces together, we have solved for the system's impulse response \(h(t)\).
+\end{enumerate}
+
+\setcounter{subsection}{3}
+\subsection{System Response to External Input: The Zero-State Response}
+
+The impulse response \(h(t)\) leads directly to the ZSR of the system, by using the aforementioned approach of modeling the input signal \(x(t)\) as a train of impulses. Once again revisiting linearity, the sum of the system's impulse response to that train will define its overall response to the input.
+
+Without laboring over the math (which you can find in the textbook), the most intuitive way to visualize the process is to reduce the value of \(x(t)\) at each instant \(\tau\) to a unit impulse function whose width approaches \(0\) and whose height approaches \(\infty\), multiplied by the value of \(x(\tau)\) at that point. Summing the impulse response to each of these terms will provide the system's total response to \(x(t)\) neglecting initial conditions covered in the ZIR, and will, as such, provide the systems ZSR.
+
+Mathematically, this ZSR looks like 
+\[
+  \int_{-\infty}^{\infty}x(\tau)h(t-\tau)\tau.
 \]
-In other words, the total response is the sum of the linear combination of the system's characteristic modes (ZIR) and the convolution of the input signal with the system's impulse response (ZSR).
+
+Thankfully, we have a tool built for this kind of problem: convolution. If you'll recall from previous classes convolution is defined as 
+\[
+  x_1(t) * x_2(t) = \int_{-\infty}^{\infty}x_1(\tau)x_2(t-\tau)d\tau,
+\]
+exactly the type of process we're looking for.
+
+Rather than rehashing graphical convolution along with the mathematical reasoning behind the process, it suffices to say that the ZSR can now readily be found by means of a convolution table and/or a transformation to the frequency domain.
+
+Now, we are finally ready to find our system's total response, and the answer is as simple as \[
+	y(t) = \mathrm{ZIR} + \mathrm{ZSR}.
+\]
+Expanding this further,
+\[
+	y(t) = \sum_{k=1}^{N}c_ke^{\lambda_kt} + x(t) * h(t).
+\]
+Put simply, the total response is the sum of the linear combination of the system's characteristic modes (ZIR) and the convolution of the input signal with the system's impulse response (ZSR).
 
 \subsection{System Stability}
 
-Any discussion of a system's overall stability must be based on its total response. 
+We'll now briefly return to stability considerations that were first discussed in Chapter 1. 
 
-Equilibrium states are states in which a system can stay forever, and we may further subdivide equilibrium states into several sub-categories.Stable equilibrium refers to a system that can return to equilibrium after small disturbances, unstable equilibrium to a system that will move further and further from its equlibrium point in response to small disturbances, and netural equilibrium refers to a system that does neither in response to a small disturbance.
+Rather than guessing at a system's stability using its description, it's simpler to begin any discussion of a system's overall stability based on its total response to any input \(x(t)\). 
 
-Reviewing BIBO (bounded-input/bounded-output) stability, this defines a system in which a bounded external input will not result in an unbounded output (imagine infinite exponential growth \(e^t\) in response to some finite input).
+We'll begin with bounded-input/bounded-output (BIBO) stability, which simply states that, for some system, as long as its input is bounded (not infinite), its output will remain bouned (not infinite).
 
-Proving a system is BIBO stable involves integrating its impulse response and defining the output, as 
+How does total repsonse factor into this? Equilibrium states are states in which a system can stay forever, and are related to its characteristic modes. We may further subdivide equilibrium states into several sub-categories: stable equilibrium refers to a system that can return to equilibrium after small disturbances, unstable equilibrium to a system that will move further and further from its equlibrium point in response to small disturbances, and netural equilibrium to a system that does neither in response to a small disturbance.
+
+Proving a system is BIBO stable can be accomplished by integrating its impulse response and defining the output, 
 \[
   \int_{-\infty}^{\infty}|h(\tau)|d\tau < \infty.
 \]
@@ -231,8 +264,6 @@ Proving a system is BIBO stable involves integrating its impulse response and de
 (Review the proof for this later).
 
 Proving a system is BIBO \textit{unstable} would require just a single counterexample, or a mathematical proof. Proving \textit{stability}, on the other hand, requires a proof, since it must be proved for all possible inputs \(x(t)\).   
-
-*NOTE: Put a section at the beginning noting the methodology for proving/disproving system/signal properties.
 
 Moving on from BIBO stability, asymptotic (internal) stability defines a system whose output returns to zero over time if given no external inputs, and is defined by the behavior of the characteristic modes; e.g., a complex mode of the form \(e^{jt} = \cos{(t)} + j\sin{(t)}\), and oscillates forever.
 
