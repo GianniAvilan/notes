@@ -10,15 +10,34 @@
 \section{Chapter 2: Time-Domain Analysis of Continuous Time Systems} 
 \setcounter{subsection}{0}
 \subsection{Introduction}
-The majority of linear, time-invariant, continuous (LTIC) systems that we will deal with here may be defined by a linear differential equation of the form 
+
+To begin, we'll revisit the properties of a linear system that we covered briefly in Chapter 1. If you recall, a linear system meets two mathematical criteria: \textbf{additivity} and \textbf{homogeneity}. In practice, this means that any linear combination of individual inputs to such a system will result in an equivalent, linear combination of the corresponding outputs. Together, the two properties are referred to as \textbf{superposition}, and may be expressed mathematically by saying that if \(x_1 \to y_1\) and \(x_2 \to y_2\), then for all inputs \(x_1\) and \(x_2\) and all constants \(k_1\) and \(k_2\), 
+\[
+  k_1x_1 + k_2x_2 \to k_1y_1 + k_2y_2.
+\]
+
+Thinking for a moment about the type of physical systems we're likely to encounter in the practice of engineering, such as complex electrical networks with multiple storage elements, their response (or output) to some input signal \(x(t)\) at \(t \geq 0\) (that is, for a causal system) is determined by two factors: the initial state of the system at \(t=0\) and its response to the input signal \(x(t)\), neglecting the initial state. Going forward, these two separate responses will be referred to as the system's zero-input response (ZIR) and its zero-state response (ZSR). Why is this detail important? Since we'll be dealing exclusively with linear, time-invariant, continous (LTIC) systems in this chapter, we can view the zero input condition and the zero state condition as two separate inputs to the system, \(x_1(t)\) and \(x_2(t)\), and their corresponding outputs as \(y_1(t)\) and \(y_2(t)\). Going back our earlier definition of a linear system, this means that if we can determine the system's individual responses to each condition, in other words, its ZIR and its ZSR, the sum of those two response will accurately represent the system's \textit{total response} to the sum of both inputs. 
+
+Put simply, total response = ZIR + ZSR.
+
+This correlate of the superposition property is known as the \textbf{decomposition property}. We'll come back to a few other natural and extremely useful consquences of superposition and decomposition momentarily, but first, we'll dive into a brief review of linear ordinary differential equations, their solutions, and their relationship to systems. 
+
+Though systems and their corresponding equations can become incredibly complex, there is a large class of systems whose response to inputs can be expressed using a linear, ordinary differential equation. First of all, what is a differential equation? In short, a differential equation defines some mathematical, input output relationship \(y(t) = x(t)\) where the input and output's rates of change (derivatives, mathematically) depend on their current state. Many systems that arise from physics naturally have these sorts of dynamics. For example, a simple RC circuit, which involves a capacitor and a resistor placed in series with a voltage source, can be modeled in terms the input voltage at the source \(v_s(t)\) and the "output" voltage across the capacitor \(v_c(t)\) as 
+\[
+  v_s = RC \frac{dv_c(t)}{dt} + v_c(t).
+\]
+
+The solution to this differential equation, \(v_c(t)\), represents the system's response to an input voltage \(v_s(t)\), and depends on the resistance, capacitance, and initial conditions (how charged the capacitor is) at \(t=0\).
+
+In the most general sense, the LTIC systems that we will deal with in this chapter may be defined by a linear differential equation of the form 
 \begin{align*}
 	&\frac{d^Ny(t)}{dt^N} + a_1 \frac{d^{N-1}y(t)}{dt^{N-1}} + \ ... \ + a_{N-1}\frac{dy(t)}{dt} + a_Ny(t) = \\
 	&b_{N-M}\frac{d^Mx(t)}{dt^M} + b_{N-M+1}\frac{d^{M-1}x(t)}{dt^{M-1}} + \ .. \ + b_{N-1}\frac{dx(t)}{dt}+b_Nx(t).
 \end{align*} 
 
-In other words, LTIC systems are often described in terms of N-th and M-th order differential equations, with \(M \leq N\) in most cases. A \textit{linear} differential equation is simply one in which each derivative is multiplied by a unique coefficient \(a_N\) or \(b_N\).
+In other words, LTIC systems are often described in terms of N-th and M-th order differential equations, with \(M \leq N\) in most cases. \(N\) simply refers to the highest-order derivative on the left-hand side, and \(M\) to the highest-order derivative on the right-hand side. A \textit{linear} differential equation is simply one in which each derivative on either side is multiplied by a unique, constant coefficient.
 
-The above can be simplified by using \(\frac{d^N}{dt^N} = D^N\), which then reduces to
+To make notation easier, the above can be simplified by using \(\frac{d^N}{dt^N} = D^N\), which then reduces the general case to
 \begin{align*}
 	&(D^N + a_1D^{N-1} + \ ... \ + a_{N-1}D + a_N)y(t) = \\
 	&(b_{N-M}D^M + b_{N-M+1}D^{M-1} + \ ... \ b_{N-1}D+b_N)x(t).
@@ -28,55 +47,167 @@ Further reducing \(D^N + a-1D^{N-1} + \ ... \ + a_{N-1} + a_N\) to \(Q(D)\) and 
   Q(D)y(t) = P(D)x(t).
 \]
 
-Note that this is not the same as the description of the system that we dealt with previously, which we represented as \(y(t) = x(t)\). Given a linear differential equation like the one shown above, its solution \(y(t)\), along with any relevant initial conditions, will correspond to the more familiar form of \(y(t) = x(t).\) The goal of any analysis, when given the differential equation describing an LTIC system, is to find that system's response to the input; in other words, solve the differential equation to find \(y(t).\)
+Note that this is not the same as the description of the system that we dealt with previously, which we represented as \(y(t) = x(t)\). Given a linear differential equation like the one shown above, its solution \(y(t)\), along with any relevant initial conditions, will correspond to the more familiar form of \(y(t) = x(t).\) The goal of any analysis, when given the differential equation describing an LTIC system, is to find that system's response to a specific input; in other words, solve the differential equation to find \(y(t)\) for a given \(x(t)\).
 
-Turning our attention for a moment to physical systems that are differential in nature, such as electrical circuits involving multiple storage elements (capacitors and inductors), we can reasonably separate the output of a linear differential equation into two separate components, which we will call the zero-input response and the zero-state response. The zero-input response defines the initial conditions of the system, and corresponds to its output when the input \(x(t) = 0\). The zero-state response is the opposite: it represents the system's response to the given input \(x(t)\) regardless of its inital state when the input is applied. 
+From here forward, to keep notation compact, we will use the dot notation standard for derivatives; that is, the first derivative of \(y(t)\), usually represented as \(\frac{dy(t)}{dt}\) or \(y'(t)\), is represented as \(\dot{y}(t)\), its second derivative as \(\ddot{y}(t)\), and so on.
 
-Based on our previous discussion in Chapter 1 on the superposition principle, which is a property of LTIC systems, we can now conclude that any such system's total response to some input \(x(t)\) can be expressed as the sum of its zero-input response and its zero-state response. Rather than solving for the system's total response all at once, it's easier to find each component separately and sum the two together.
-\setcounter{subsection}{1}
-\subsection{Zero-Input Response}
+Further analysis of LTIC systems can be made easier by first deriving the general solution to a linear differential equation of the form \(Q(D)y(t) = 0\) (the reason why will become clear in the next section). 
 
-First, we will look at methods to solve for the system's zero-input response (ZIR). Thankfully, this half of a system's response is fairly straightforward and there is a standard method to find the ZIR.
-
-By reducing the input to \(x(t) = 0\), the system's associated linear differential equation reduces to \[
-  Q(D)y_0(t) = 0,
-\] 
-and solving for \(y_0(t)\) will produce the ZIR that we're looking for. 
-
-I'll take a brief detour to explain how the solution to this type of differential equation works, and why there is a general solution that we can easily plug in to all LTIC systems.
-
-Given the equation \(Q(D)y(t) = 0\), it may be a good idea to reference the introduction of this chapter to remind yourself that this represents the sum of \(y(t)\) and \(N\) of its derivatives, each multiplied by a unique coefficient \(a_N\). 
-
-To demonstrate a generalized solution fr \(y(t)\), we will test \(y(t) = e^{\lambda t}\) as a possible solution to the equation. Recall that derivatives of \(e\) follow a repeating pattern, that is, \(\frac{d}{dt}e^{\lambda t} = \lambda e^{\lambda t}\), \(\frac{d^2}{dt^2}e^{\lambda t} = \lambda^2 e^{\lambda t}\), and so on. Substiuting \(y(t) = e^{\lambda t}\) in our general ZIR equation \(Q(D)y(t) = 0\),
+To demonstrate a generalized solution for \(y(t)\) in this case, we will test \(y(t) = e^{\lambda t}\) as a possible solution to the equation. Recall that derivatives of \(e^{\lambda t}\) follow a repeating pattern, that is, \(\frac{d}{dt}e^{\lambda t} = \lambda e^{\lambda t}\), \(\frac{d^2}{dt^2}e^{\lambda t} = \lambda^2 e^{\lambda t}\), and so on. Substiuting \(y(t) = e^{\lambda t}\) into \(Q(D)y(t) = 0\),
   \[
 		\lambda^N e^{\lambda t} + a_1 \lambda ^{N-1} e^{\lambda t} + \ ... \  + a_{N-1} \lambda e^{\lambda t} + a_N e^{\lambda t} = 0.
   \]
 	Factoring \(e^{\lambda t}\) out of the equation, we are left with \[
-		e^{\lambda t}(\lambda ^N + a_1 \lambda^{N-1} + \ ... \ a_{N-1}\lambda + a_N) = 0,
+		e^{\lambda t}(\lambda ^N + a_1 \lambda^{N-1} + \ ... \ a_{N-1}\lambda + a_N) = 0.
 	\]
-	where \(Q(\lambda)\) is now a polynomial. Since \(e^{\lambda t}\) does not equal \(0\) for any combination of \(\lambda\) or \(t\), for the equation to balance, \(Q(\lambda)\) must equal zero. Since \(Q(\lambda)\) is a polynomial, this means finding the roots of the equation, \(\lambda_1, \lambda_2 \ ... \ \lambda_N\), that reduce it to zero (remember that in an actual differential equation, \(a_1, a_2, \ ... \ , a_N\) will be known constants.) \(Q(\lambda)\) is known as the \textbf{characteristic equation} of the system. We'll note here that, based on the above, \(y(t) = e^{\lambda t}\) is a \textit{valid} solution to any linear differential equation of this form, and thus the following process can be applied to find the ZIR of any LTIC system. 
+	Since \(e^{\lambda t}\), for any value of \(\lambda\), never equals zero, the logical conclusion is that for the above equation to balance, \(\lambda^N + a_1\lambda^{N-1} + \ ... \ a_{N-1}\lambda + a_N = 0\). Recall that for any real differential equation that we will be dealing with here as the description of a system, the coefficents \(a_1\) to \(a_N\) will be given to you. With that in mind, the previous equation becomes a simple, \(N\)th order polynomial. Finding its roots \(\lambda_1\), \(\lambda_2, \ ... \ , \lambda_N\), we will have a solution that balances or original equation. This polynomial is often referred to as \(Q(\lambda)\), or the \textbf{characteristic equation}. When given a real differential equation, using the notation given before, it will often be provided in the form \((D^N + a_2D^{N-1} + \ ... \ + a_{N-1}D + a_N)y(t) = 0\). We can then easily solve the characteristic equation by replacing each \(D\) with \(\lambda\) and finding the roots of the resulting polynomial.
 
 	(There are more interesting ways to prove this, and that this is the only valid solution for a linear differential equation of this form, using power series, but for now it's easiest to just substitute \(y(t) = e^{\lambda t}\) and show that it matches with the constraints imposed by \(Q(D)y(t) = 0\).)
 
-	Now, all that's left to solve the general equation for \(y(t)\) is to find the roots of the polynomial \(Q(\lambda)\). Remember that any of the roots could be a real or \textit{complex} number, so it may be helpful to review solutions to first- and second-order polynomials that involve complex variables (or just plug the polynomial into MATLAB or your calculator, which will solve it numerically and spit out the roots). Since any of the resulting values of \(\lambda\) represent a valid solution to the equation, we can then substitute each instance of \(\lambda\) and represent the complete solution as a linear combination of all possible solutions \[
-		y(t) = c_1e^{\lambda_1 t} + c_2 e^{\lambda_2 t} + \ ... \ c_N e^{\lambda_N t}.
+	Once we have our \(N\) values of \(\lambda\), we can replace it in our original equation for \(y(t)\). Since all values of \(\lambda\) are valid solutions, the full solution for \(y(t)\) is given by a linear combination of what we will call the system's \textbf{characteristic modes}, as 
+	\[
+		y(t) = c_1e^{\lambda_1 t} + c_2e^{\lambda_2 t} + \ ... \ + c_Ne^{\lambda_N t}.
 	\] 
-	Each of the terms \(e^{\lambda_n t}\) are known as the \textbf{characteristic modes} of the system, and the values \(\lambda_n\) as its \textbf{characteristic roots} or eigenvalues (there's some very interesting reasons why these are identical to the eigenvalues found in linear algebra, but those reasons don't become clear until we get into coupled dynamical systems and systems of linear differential equations, so I won't get it into it here, unfortunately.)
 
-	Finally, the last step is to solve for the constants \(c_1, c_2, \ ... \ , c_N\) by using \(N\) initial condiions for the system. These are normally either given or easily deduced from the system under consideration. For example, given a second-order linear differential equation \((D^2 + D + 1)y(t) = 0\) and its associated system, we'd require two initial conditions \(y(0) = a\) and \(\dot{y}(0) = b\). Then, replacing each \(t\) in our solved \(y(t)\) and its derivative \(\dot{y}(t)\) with \(0\) and setting them equal to the initial conditions \(a\) and \(b\), we should be able to easily solve for constants \(c_1\) and \(c_2\) in this case.
+	The remaining constant terms \(c_1\) through \(c_N\) can be solved using initial conditions. For an \(N\)th order equation, \(N\) initial conditions will be needed, \(y(0)\) through \(\frac{d^Ny(0)}{dt^N}\). Assuming \(t=0\), \(e^0 = 1\), so we can then solve for our constants as 
+	\begin{align*}
+		& c_1 + c_2 + \ ... \ c_N = y(0) \\
+		& \lambda_1c_1 + \lambda_2c_2 + \ ... \ + \lambda_Nc_N = \dot{y}(0),
+	\end{align*}
+	and so on.
 
-	Finally, we have a fully solved \(y(t)\) for the ZIR, which we will refer to from here on out as \(y_0(t).\)
+\setcounter{subsection}{1}
+\subsection{Zero-Input Response}
+
+If we recall our earlier discussion on linearity, any LTIC system's total response to a causal signal \(x(t)\) can be solved for by finding its ZIR and ZSR separately, and then summing the two responses together. 
+
+We start by finding the system's ZIR, \(y_0(t)\). By reducing the input to \(x(t) = 0\), the system's associated linear differential equation reduces to \[
+  Q(D)y_0(t) = 0,
+\] 
+and solving for \(y_0(t)\) will produce the ZIR that we're looking for. 
+
+Thankfully, if we simply use the process outlined above, we can easily find the system's ZIR, the first piece of the puzzle.
 
 	Summarizing, the following are the general steps for finding the ZIR of any LTIC system described by a linear differential equation of the form \(Q(D)y(t) = P(D)x(t)\):
 
 	\begin{enumerate}
 		\item Set \(x(t) = 0\), which leaves \(Q(D)y(t) = 0\).
 		\item Given \(Q(D) = (D^N + a_1D^{N-1} + \ ... \ + a_{N-1}D + a_N)\), find the system's characteristic roots, \(\lambda_1, \lambda_2, \ ... \ , \lambda_N,\) by solving \(Q(D) = 0\).
-		\item Express \(y_0(t)\) as a linear combination of the system's characteristic modes, so that \(y(t) = c_1e^{\lambda_1} + c_2e^{\lambda_2} + \ ... \ + c_Ne^{\lambda_N}.\)
+		\item Express \(y_0(t)\) as a linear combination of the system's characteristic modes, so that \(y_0(t) = c_1e^{\lambda_1} + c_2e^{\lambda_2} + \ ... \ + c_Ne^{\lambda_N}.\)
 		\item Using \(N\) initial conditions, solve for constants \(c_1, c_2, \ ... \ , c_N\).
 	\end{enumerate}
 
+	As a final note, it's possible that the solution of the characteristic equation of a system returns repeated roots, or complex roots. If this is the case, the form of the solution \(y_0(t)\) will be slightly different. The textbook references both these cases in detail.
+
 \setcounter{subsection}{3}
+\subsection{The Unit Impulse Response \(\mathbf{h(t)}\)}
+
+Having found a simple way to solve for the ZIR of an LTIC system, we may now move on to the second half of the total response: the ZSR. As mentioned in the introduction, the \(ZSR\) refers to the system's output when the given signal \(x(t)\) is applied, \textit{ignoring} the system's initial state, since that information is already solved for in the ZIR.
+
+The ZSR is slightly more complicated to solve for than the ZIR, but may also be reduced to a simple formula. In Chapter 1, the Dirac delta function \(\delta(t)\) was defined in terms of its effect on other functions; we'll take full advantage of that so-called sampling property in finding an LTIC system's ZSR. Recall that the sampling property says that, given some function (in this case, our input signal \(x(t)\)), \[
+  \int_{-\infty}^{\infty}x(t)\delta(t\pm\tau)dt = x(\tau).
+\] 
+In other words, when the product of the signal and the Dirac delta function are integrated along the entire range of the function, the output consists solely of \(x(t)\)'s value at \(\tau\). Using this property, we can model an input signal \(x(t)\) as a train of infintesimal unit impulse functions, which, when integrated, combine to form the complete signal \(x(t).\)
+ 
+Therefore, simply by knowing the mathematical description of the input signal \(x(t)\) and the systems response to the unit impulse \(\delta(t)\), we can solve for the system's response to \(x(t)\) in its totality. We'll return to this idea of combining a train of unit impulse functions, but first we'll solve for the system's response to a single unit impulse \(\delta(t)\). We will refer to this as the system's \textbf{impulse response}, \(h(t).\)
+
+So how can we find \(h(t)\)? First, assuming a single unit impulse as the input to the system, we can then adjust our system \(Q(D)y(t) = P(D)y(t)\) to match these new constraints, as \[
+	Q(D)h(t) = P(D)\delta(t).
+\]
+Recall that \(\delta(t)\) itself is only defined at \(t=0\), and so we may consider the effect of \(\delta(t)\) as a kind of initial condition that is provided to \(y(t)\). As we saw in the section on ZIR, an LTIC system's response to no input consists of a linear combination of its characteristic modes, \(c_1e^{\lambda_1 t} + \ ... \ c_Ne^{\lambda_N t}\). Since the input \(x(t) = \delta(t) = 0\) for \(t > 0\), we can assume that the system's response for \(t>0\) is the same as its response to zero input; that is, its characteristic modes. Returning once again to the superposition property, this means that we can express the systems ZSR as a combination of this zero-input response and its response to the unit impulse at \(t=0\).
+
+We'll use some concrete examples to explain behavior at \(t=0\), starting with the simplest one. Beginning with \(h(t) = \delta(t)\), where there are no system dynamics, the answer is trivial: \(h(t)\) must itself be the unit impulse function, \(\delta(t)\), to meet our criteria.
+
+Adding dynamics to the system, but keeping \(M=N\), \((D+1)h(t) = (D+1)\delta(t)\) is the next logical step. This linear differential equation essentially asks, what function, when summed with its derivative, is equal to the unit impulse function plus \textit{its} derivative? Again the answer is trivial: \(h(t) = \delta(t)\). We may reasonably conclude that for any system of this sort, \(h(t) = A_0\delta(t)\), where \(A_0\) is some constant determined by the coefficients of \(Q(D)\) and \(P(D)\). Thus, when \(M=N\), \(h(t) = A_0\delta(t) + (c_1e^{\lambda_1 t} + \ ... \ + c_Ne^{\lambda_N t})u(t)\) (since the characteristic modes occur only for \(t>0\)).
+
+What about when \(M < N\), such as in the case \((D+1)h(t) = \delta(t)\)? Here, we're looking for some function \(h(t)\) that, when summed with its first derivative, results in a single delta function at \(t=0\). Like with our initial discussion on differential equations, we'll test a function we know to be the correct answer, confirm it's accurate, and avoid the details of its derivation for the time being. Testing \(e^{-t}u(t)\), \(\frac{d}{dt}e^{-t}u(t) = -e^{-t}u(t) + e^{-t}\delta(t)\) (use the product rule if you want to derive this yourself), and so \(\frac{d}{dt}e^{-t}u(t) + e^{-t}u(t) = e^{-t}u(t) - e^{-t}u(t) + e^{-t}\delta(t)\), which reduces to \(h(t) = e^{-t}\delta(t)\). Again, at \(t=0\), \(e^0=1\), so \(h(0) = \delta(t)\). Therefore, for a system where \(M < N\), the impulse response \(h(t)\) may be given, more generally, as \(h(t) = (c_1e^{\lambda_1 t} + \ ... \ + c_Ne^{\lambda t})u(t)\).   
+
+Lastly, we will need to solve for \(c_1, \ ... \ , c_N\) with the use of initial conditions before defining our completed ZSR. How can we solve for those? The given or found initial conditions of the system were already solved for in the ZIR, but we can only assume that the application of a unit impulse to the system will result in new initial conditions.
+
+Assuming the signal is causal, we know that \(h(t)\) and all its derivatives are zero prior to \(t=0\), but what about at at \(t=0\)? Going back to our assumption that \(\delta(t)\) sets new initial conditions on the system, we can assign placeholder values to those new initial conditions \(K_1, \ ... \ , K_N\), so that \(h(0^+) = K_1\), \(\dot{h}(0^+) = K_2\), and so on. The only function that can take us from \(0\) to \(K_1\) or \(K_2\) in such a short time is \(u(t)\). Considering we've found the response of the system for \(t>0\), we want to focus solely on what's happening at \(t=0\). To keep our notation manageable here, we'll refer to the systems response for \(t>0\) as \(h_1(t)\). Then we can say that \(h(t) = K_1u(t) + h_1(t)\) and \(\dot{h}(t) = K_2u(t) + \dot{h}_1(t)\).
+
+Taking the derivative of both these functions, 
+\begin{align*}
+	& \dot{h}(t) = K_1\delta(t) + \dot{h}_1(t) \\
+	& \ddot{h}(t) = K_1\dot{\delta}(t) + K_2\delta(t) + \ddot{h}_1(t).
+\end{align*}
+
+Neglecting the systems response for \(t>0\), we now have 
+\begin{align*}
+	&\dot{h}(0) = K_1\delta(t) \\
+	&\ddot{h}(0) = K_1\dot{\delta}(t) + K_2\delta(t),
+\end{align*}
+and so on for any number of derivatives.
+
+How can we then use these to find our new initial conditions \(K_1\) through \(K_N\)? We may use a technique known as impulse matching to help us find their values. 
+
+I think the textbook's Example 2.5 misses some important details, so I'll walk through it step by step, and hopefully that will clarify the impulse matching technique.
+
+The given equation describing the system in Example 2.5 is \((D^2 + 5D + 6)y(t) = (D+1)x(t)\). Since we're looking for the impulse response \(h(t)\), we'll set \(y(t) = h(t)\) and \(x(t) = \delta(t)\). That then reduces to \[
+	\ddot{h}(t) + 5\dot{h}(t) + 6h(t) = \dot{\delta}(t) + \delta(t).
+\]
+
+Without going through the entire derivation like we did before, we can move faster by assuming that since \(M=1< N=2\), there will be no \(\delta(t)\) term in the impulse response \(h(t)\). Since the left-hand side is a second-order derivative, we expect a response of the form \[
+	h(t) = (c_1e^{\lambda_1} + c_2e^{\lambda_2})u(t).
+\]
+
+Our first step is to solve the characteristic equation, derived from the right-hand side of the differential equation, as \[
+	(D^2 + 5D + 6) = \lambda^2 + 5\lambda + 6 = 0.
+\]
+ 
+Solving for \(\lambda\), \begin{align*}
+  &\lambda_1 = -2 \\
+	&\lambda_2 = -3.
+\end{align*}
+
+Substituting \(\lambda\) back into our \(h(t)\), \[
+	h(t) = (c_1e^{-2t} + c_2e^{-3t})u(t).
+\]
+
+Now, we'll use impulse matching to find the two initial conditions we need, \({h}(0)\) and \(\dot{h}(0)\), or \(K_1\) and \(K_2\). Recall that we found earlier that \(\dot{h}(t) = \delta(t)K_1\) and \(\ddot{h}(t) = \dot{\delta}(t)K_1 + \delta(t)K_2\).
+
+Plugging those into our given differential equation to substitute for \(\ddot{h}(t)\) and \(\dot{h}(t)\) at \(t=0\):
+\begin{align}
+	&\ddot{h}(0) + 5\dot{h}(0) + 6h(0) = \ddot{\delta}(t) + \delta(t)\\
+	&\dot{\delta}(t)K_1 + \delta(t)K_2 + 5\delta(t)K_1 + h(0) = \dot{\delta}(t) + \delta(t).
+\end{align}
+
+Then, we can collect coefficents of \(\dot{\delta}(t)\) and \(\delta(t)\) on the left-hand side, 
+\[
+	\dot{\delta(t)}K_1 + \delta(t)(5K_1 + K_2) + h(0) = \dot{\delta}(t) + \delta(t).
+\]
+
+This example is pretty simple: on the right-hand side, \(\dot{\delta}(t)\) and \(\delta(t)\) both have coefficients of \(1\).Matching the coefficients of those two impulse terms on the right-hand side, we get
+\begin{align*}
+	& K_1 = 1 \\
+	& 5K_1 + K_2 = 1,
+\end{align*}
+
+which solves as 
+\begin{align*}
+	&K_1 = 1 \\
+	&K_2 = -4
+\end{align*}
+
+Now, we can find \(c_1\) and \(c_2\) by setting initial conditions equal to our new \(K_1\) and \(K_2\), as 
+\begin{align*}
+	&h(0) = c_1 + c_2 = K_1 = 1 \\
+	&\dot{h}(0) = -2c_1 - 3c_2 = K_2 = -4,
+\end{align*}
+
+which yields 
+\begin{align*}
+	&c_1 = -1\\
+	&c_2 = 2
+\end{align*}
+
+Substituting this into our original equation for \(h(t)\),
+\[
+	h(t) = (-e^{-2t} + 2e^{-3t})u(t).
+\]
+
+Finally, this is the system's ZSR.
+
 \subsection{Total Response}
 
 The total response of a system of is the sum of its zero-state and zero-input responses, given mathematically as \[
