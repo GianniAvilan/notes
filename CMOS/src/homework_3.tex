@@ -1,0 +1,36 @@
+\documentclass{article}
+\title{ECE 478-- Homework 3}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 478}
+\fancyhead[R]{Homework 3}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\setcounter{section}{2}
+\begin{document}
+\setcounter{section}{4}
+\setcounter{subsection}{1}
+\begin{enumerate}[label=\thesubsection]
+	\item
+		Here, the goal is to find the rising and falling propagation delays for this gate when it drives the input to \(h\) identical gates. Here, I'm assuming that the output of the gate under consideration drives \textit{one} input to a second gate, since all the fanout gates will be two-input gates as a rule. Propagation delay \(t_{pd}\) refers specifically to the worst-case delay between a gate's input and output changing. Due to the physical characteristics of CMOS networks, this worst-case delay is often different depending on whether the gate is pulling up or down, and so we differentiate between input and output propagation delay. 
+
+		In our case, the initial gate is driving a single node, which is then connected to \(h\) inputs of other, identical gates. To derive the worst-case rising and falling delay as a function of \(h\), we can first find the equivalent resistance and capacitance of each component by using the RC delay model, and then, using the Elmore delay model, we can roughly calculate the effective delay as a function of \(h\) using our RC values. 
+
+  The relevant resistance and capacitance values of the NOR gate under consideration are a function of both transistor sizing and layout. Beginning with transistor sizing, we'll define a resistance \(R\) and \(C\), which refer to the effective resistance and gate/diffusion capacitance of an nMOS gate with transistor width \(2\lambda\). Increasing the transistor's width by a factor of \(k\) will lead to a proportional increase in both its resistance and capacitance, so that \(R = kR\) and \(C = kC\), where \(k=2\lambda\).
+
+	In a unit inverter, transistor sizing is adjusted so that \(R = R\) in both the pull-up and pull-down network, which results in a pMOS that is twice as wide as the nMOS. In a 2-input NOR gate, the pull-up network will be comprised of 2 series-connected pMOS transistors, while the pull-down network will be comprised of two parallel-connected nMOS transistors. This results in an equivalent resistance of \(\frac{4R}{k}\) for the pull-up network, and \(\frac{R}{k}\) for the pull down network. To achieve rise and fall resistances equal to a unit inverter, we select a pMOS width of \(k=4=8\lambda\) and an nMOS width of \(k=1=2\lambda\).
+
+	This sizing, though, has an opposite effect on capacitance: the pMOS transistors in the pull-up network now have gate/diffusion capacitances of \(4\mathrm{C}\), while nMOS transistors remain at \(C\).
+
+\end{enumerate}
+\end{document}
