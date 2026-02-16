@@ -1,4 +1,5 @@
 \documentclass{article}
+\usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{microtype}
@@ -7,6 +8,17 @@
 \usepackage{amsmath}
 \begin{document}
 \section{Chapter 4: Electrostatics}
+\setcounter{subsection}{2}
+\subsection{Coulomb's Law}
+An integral part of any electrostatic analysis is the ability to find the electric field intensity \(\vec{E}\) and the associated electric flux density \(\vec{D}\) at any given point, based on the influence of some charged point, surface, or volume. (Recall from Chapter 1 that electric field density \(\vec{D} = \varepsilon \vec{E}}\) and represents the quantity of flux passing through a unit area perpendicular to the field).
+
+Beginning with point charges, Coloumb's Law provides a simple way of deriving the electric field induced by a single point charge with no mass, with a charge of \(q\): \[
+	\vec{E} = [\frac{q}{4\pi\varepsilon_0R^2}]\hat{\alpha_R},
+\]
+where \(R\) is the radial distance (shortest straight-line path from the charge to the point being measured) and \(\hat{\alpha_R}\) is the unit vector pointing away from the charge. The influence of multiple point charges follow the superposition property, and can found as the sum of the electric field intensity due to each individual point charge (this will often require some vector math to dertermine the direction of \(\vec{E}\) at some point).
+
+This kind of model is ideal, because it allows us to consider larger distributions of charge, such as charged lines, planes, spheres, and cylinders, as collections of point charges, which we can then integrate to find the sum of their influences (there's an easier way to do this using Gauss's Law, which we'll see shortly).
+
 \setcounter{subsection}{8}
 \subsection{Capacitance}
 
