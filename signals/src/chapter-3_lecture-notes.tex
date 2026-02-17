@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=1em, indent=12pt]{parskip}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\begin{document}
+\setcounter{section}{1}
+\section{Chapter 3: Time-Domain Analysis of Discrete-Time Systems} 
+\setcounter{subsection}{0}
+\subsection{Introduction}
+Discrete-time signals, unlike continous-time signals, have a discretized domain \(n\) rather than a continous domain \(t\), and have a range specified by \(x[n]\). Any sequence of numbers can be considered a discrete-time signal. Discrete-time signals may also arise as a result of sampling continous-time signals at some specified rate.
+
+Uniform sampling is ideal, and the only process we will be working with in this class, meaning that the continuous-time signal will be sampled with a consistent period of \(T\), such that \(x[n] = x(nT)\). 
+
+It's worth noting that \textit{sampling} and \textit{quantization} are different processes. Sampling occurs on the t-axis and picks out period values of a continuous signal, converting it to a discrete-time signal. Quantization occurs on the y-axis, and converts an analog signal to a digital one by reducing its real value to the closest available digital value. 
+
+For discrete-time signals, the measurement of energy and power are almost identical to that for continuous time signals: 
+\begin{align*}
+	&E_x = \sum_{n=\infty}^{\infty}|x[n]|^2 \\
+	&P_x = \lim_{N \to \infty}\frac{1}{2N+1}\sum_{-N}^{N}|x[n]|^2.
+\end{align*}
+Similar to continuous-time signals, periodic discrete-time signals may have their power calculated over a single period \(N_0\) rather than taking the limit as \(N \to \infty\). For discrete-time signals, we may define a \textit{fundamental period}, the smallest value of \(N_0\) that satisfies 
+\[
+	x[n] = x[n+N_0].
+\]
+
+Standard signal operations (time-shifting, time-reversal) are similar to those in continuous-time signals: 
+\begin{align*}
+	&x_s[n] = x[n-5] \\
+	&x_r[n] = x[-n].
+\end{align*}
+The discrete analogue of compression and expansion of continuous-time signals is downsampling and upsampling. Since discrete-time signals rely on a finite number of values, compression and expansion result in \textit{less} or \textit{more} values. In downsampling (compression), every other sample is deleted, and the signal is whittled down to \(\frac{n}{2}\) samples. In upsampling (expansion), intermediate values are inserted for a total of \(2n\) samples. We could set the intermediate, added samples to 0, but it makes more sense to artificially interpolate the average value of the two adjacent samples at each added sample. It's important to remember that we haven't added any real data here that represents a real-world value, but we haven't lost any either (like we do in downsampling).
+\end{document}
