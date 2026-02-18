@@ -1,0 +1,83 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=1em, indent=12pt]{parskip}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\begin{document}
+\setcounter{section}{4}
+\section{Chapter 5: Power} 
+\setcounter{subsection}{0}
+\subsection{Introduction}
+Power is the limiting factor in many computing chips, as power density \(\frac{W}{\mathrm{cm}^2}\) does not scale linearly.
+
+Reviewing power, 
+\begin{align*}
+  &P(t) = I(t)V(t) \\
+	&E = \int_{0}^{T}P(t)dt \\
+	&P_{avg} = \frac{1}{E}.
+\end{align*}
+
+In the context of CMOS circuits, variation in current causes variation in power, since \(VDD\) is considered constant in ideal conditions.
+
+Mathematically,
+\begin{align*}
+	& P_{VDD} = I_{DD}(t)V_{DD}\\ 
+\end{align*}
+
+The ouptut of a unit inverter, to use a familiar example, stores energy in the load capacitances present at \(V_{out}\). Since CMOS transistors are not ideal switches, we can approximate half the energy from \(V_{DD}\) as being dissipated in the transistor as heat.
+
+The capacitance present in a CMOS transistor "softens" the edges of a linear input-output voltage, and the effects of this capacitance define the power consumption of a CMOS transistor as it switches.
+
+The spike in power drawn from \(V_{DD}\), \(P_{VDD}\) requires an exceptionally stable power supply. NOTE: what happens when current stays constant for a CMOS network tied to VDD? 
+
+Assuming some constant switching frequency, 
+\[
+	P_{\mathrm{switching}} = \frac{1}{T}\int_{0}^{T}i_{DD}(t)V_{DD}dt = CV_{DD}^2f_{sw},
+\]
+where \(f_{sw}\) is the constant switching frequency.
+
+In a real IC, we use activity factor \(\alpha\) to calculate the actual switching frequency, since not every switch in a circuit is switching every cycle. For a clock, of course, \(\alpha = 1\). 
+
+In total, dynamic power, 
+\[
+  P_{\mathrm{switching}} = \alpha CV^2_{DD}f,
+\]
+where \(f\) is the clock frequency.
+
+We generally assume that short circuit current is negligible, assuming equal rise and fall times, as it consumes \(<10\%\) of dynamic power. Rise and fall times are legitimate circuit constraints and affect the degree to which short circuit current does affect the circuit. 
+
+Static power, on the other hand, is parasitic power in the ICs. Sources of static power include subthreshold leakage, gate leakage, junction leakage, and contention current (see Chap. 2 for more details). Clocks consume a ton of power. 
+
+Learn to estimate dynamic power based on activity factor, avg transistor width, process size, and clock speed (split between logic and memory chips, due to different sizing and activity factor).
+
+Neglecting wire capacitance and short circuit current, calculate \(C\) for each type of chip, and then sum the two and replace \(C\) in the calculation for \(P_{\mathrm{dynamic}}\). Dynamic power reduction in data centers has a high return in terms of cost. Strategies to reduce? 
+
+Minimize activity factor, minimize capacitance, lower supply voltage as close to \(V_{t}\) as possible, and frequency limits. Clock domain partitioning and scale clock frequency dynamically. Activty factor etimation can be found probabilistically. 
+\[
+	\alpha_i = \overline{P}_i * P_i.
+\]
+Based on individual nodes, completely random data has \(P=0.5\) and \(\alpha = 0.25\) as a result. Understanding the patterns in data (bank account balance is usually zero in the upper bits), can help to calculate a more accurate estimation for activity factor by accounting for how often a node is going to be on or off, statistically. 
+
+Additionally, AND and OR gates have a lower activity factor. Why? Using a NAND2 as an example, activity on the input sometimes causes no activity on the output. Gray code can be used in hardware designs to reduce power consumption, switching one bit at a time. Hamming distance? 
+
+Table of switching probabilities based on logic gate type (XNOR2 is real bad). 
+
+Example: AND4 with two levels of gates. Estimate \(\alpha\) at each node if inputs are \(P=0.5\). (Use DeMorgan's, two NANDs and a NOR displayed as a bubble-input AND)
+\begin{align*}
+  &P = 1-P_aP_b = 1-(0.5)(0.5) = \frac{3}{4} \\
+	&\alpha = (0.75)(0.25) = \frac{3}{16} \\
+  &P_2 = \overline{P}_a \overline{P}_b = \frac{1}{16}\\
+	&\alpha = \frac{15}{256} = ~0.0856.
+\end{align*}
+Activity factor, ideally, never increases along a network path, and hopefully goes down.
+
+Clock gating turns off the clock to registers in unused blocks. Is this why we prefer hard-coded memory over RAM? (among other reasons). 
+
+Voltage domain crossing. Voltage domains represent different optimal voltage sources for each part of the circuit, or dynamic voltage (buck-boost converter in a phase-locked loop?) Voltage domain crossing is when there's enough of a difference in domains to create a problem with \(V_t\), can fix this using a level converter. 
+
+Static power is consumed even in a quiescent state through leakage current, etc. Subthreshold leakage is current between source and drain of a transistor when it is off. Depends on \(V_{t}\). Lower means more leakage. Leakage control methods (look at textbook). Gate leakage is a function of \(t_{ox}\) and \(V_{gs}\). 
+
+Analyze NAND leakage table, practice determining leakage from layout/type of gate/etc. Varies with input pattern. Junction leakage. Determine leakage example given a bunch of parameters. Static power dissipation tends to be much smaller than dynamic power. Power gating using header switch transistors.
+\end{document}

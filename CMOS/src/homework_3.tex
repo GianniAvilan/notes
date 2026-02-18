@@ -21,11 +21,7 @@
 \setcounter{section}{4}
 \setcounter{subsection}{1}
 \begin{enumerate}[label=\thesubsection]
-	\item
-		Here, the goal is to find the rising and falling propagation delays for this gate when it drives the input to \(h\) identical gates. Here, I'm assuming that the output of the gate under consideration drives \textit{one} one input to a second 2NOR gate, since all the fanout gates will be two-input gates (that said, each input consists of a pMOS transistor and an nMOS transistor, with separate gate capacitances).
-
-		Propagation delay \(t_{pd}\) refers specifically to the worst-case delay between a gate's input and output changing. Due to the physical characteristics of CMOS networks, this worst-case delay is often different depending on whether the gate is pulling up or down, and so we differentiate between input and output propagation delay. To account for the worst case pMOS series resistance in the pull-up network of the 2NOR gate, the pMOS gate width must be adjusted to be four times the size of the nMOS gate width to achieve the same worst-case equivalent rising and falling resistances of a unit inverter (\(R = R\)). See Fig. 1 for the drawn diagram of the 2NOR. 
-
+	\item See Fig. 1 for the drawn diagram of the 2NOR gate under consideration. 
 		\begin{figure}[H]
 		  \centering
 		  \includegraphics[width=0.4\textwidth]{homework-3_fig-1.jpg}
@@ -33,9 +29,9 @@
 		  \label{fig:2NOR}
 		\end{figure}
 
-		To derive the worst-case rising and falling delay as a function of \(h\) identical gates being driven by this one, we can first find the equivalent resistance and capacitance of each component by using the RC delay model, and then, using the Elmore delay model, we can roughly calculate the effective delay as a function of \(h\) using our RC values. 
+		To derive the worst-case rising and falling delay as a function of \(h\) identical gates being driven by this one, we may first find the equivalent resistance and capacitance of each component by using the RC delay model, and then, using the Elmore delay model, we may estimate the effective delay as a function of \(h\) using the given RC values. 
 
-		In the pull-up network, each pMOS transistor will have a gate and diffusion capacitance of \(4\mathrm{C}\) and an equivalent channel resistance of \(\frac{R}{2}\). In the pull-down network, each nMOS transistor will have a gate and diffusion capacitance of \(C\) and and an equivalent channel resistance of \(R\). 
+		In the pull-up network, each pMOS transistor will show a gate and diffusion capacitance of \(4\mathrm{C}\) and an equivalent resistance of \(\frac{R}{2}\). In the pull-down network, each nMOS transistor will have a gate and diffusion capacitance of \(C\) and and an equivalent channel resistance of \(R\). 
 
 		Beginning with worst-case falling delay \(t_{pdf}\), we consider worst-case resistance on the path between Y and GND to be the case when a single nMOS transistor is on, and its equivalent resistance is \(R\). Considering diffusion capacitances, the pMOS drain diffusion capacitance \(4\mathrm{C}\) is connected to Y, as well as two parallel nMOS drain diffusion capacitances \(C + C = 2C\). We may ignore any pMOS diffusion capacitances not on the path between Y and GND, as well as the two nMOS source diffusion capacitances, as these are shorted to GND through the substrate tap. In total, diffusion capacitance sums to \(4C + 2C = 6C\) for the driving 2NOR gate. On the other end, the gate capacitances of the pMOS and nMOS transistor at the load 2NOR gate sum to \(4C + C = 5C\), and increase with each added fanout gate. 
 
@@ -67,15 +63,36 @@
 			t_{pdf} = R(5C+5hC) = RC(5+5h).
 		\]
 		\setcounter{subsection}{3}
-		\item For an AOIXX gate, the Boolean logic function for \(n\) inputs to the first AND gate and \(m\) inputs to the second gate is 
-			\[
-				Y = \overline{(A_1A_2 \ ... \ A_n) + (B_1B_2 \ ... \ B_m)}.
-			\]
-			In practice, this represents a pull-up network consisting of \(n\) parallel pMOS transistors in series with \(m\) pMOS transistors and a pull-down network consisting of \(n\) series nMOS transistors in parallel with \(m\) series nMOS transistors. 
-
-			Targeting symmetric equivalent resistances in the worst case, we will size pMOS transistors at a width of \(8\lambda\), and the nMOS transistors at a width of \(\lambda n\) for the "A" path to ground and \(2\lambda m\) for the "B" path. 
-
-			Neglecting gate capacitance, since the given AOIXX gate is not loaded, we'll start by deriving rising delay, \(t_{pdf}\) using the Elmore delay approximation. I will assume uncontacted, shared diffusion nodes for series connected transistors and contacted but shared diffusion nodes for parallel connected transistors. Ignoring capacitances that are shorted to VDD or GND by substrate/well taps, the worst case scenario is a series resistance of \(R\) through two pMOS transistor channels, with any parallel transistors lowering the equivalent resistance. At node 1, between the two networks of parallel pMOS transistors, the path to VDD will consist of a resistance of \(\frac{R}{2}\) and a diffusion capacitance of 
-
+	\item For an AOI21 gate, with unit inverter-equivalent rising and falling resistances, Fig. 3 shows the circuit diagram (with transistor sizing), stick diagram optimized to reduce delay, and worst-case rising and falling RC equivalent circuits, estimating lower diffusion capacitances at shared, fully contacted nodes and shared, uncontacted nodes.
+		\begin{figure}[H]
+		  \centering
+		  \includegraphics[width=0.8\textwidth]{homework-3_fig-3.jpg}
+		  \caption{AOI21 schematic, stick diagram, and RC equivalent circuits}
+		  \label{fig:AOI21}
+		\end{figure}
+		Using the Elmore delay model to estimate rising and falling delay, respectively, 
+		\begin{align*}
+		 &\tau_{pdr} = R(6C) + \frac{R}{2}(8C) = 10RC \\
+		 &\tau_{pdf} = R(6C) + \frac{R}{2}(C) = \frac{13}{2}RC = 6.5RC.
+		\end{align*}
+		\setcounter{subsection}{5}
+	\item Fig. 4 shows a comparison between normalized delay \(d\) as a function of fanout \(h\) for a 2NOR and 2NAND gate, accounting for parasitic delay \(p\). A comparison shows that 2NOR and 2NAND gates share equal parasitic delays, and thus share an equal normalized delay \(d\) when not driving other gates. However, when connected as the drivers to \(h\) fanout gates, 2NAND gates perform better as more fanout gates are added, where the difference in delay between the two grows larger with each added load gate.
+			\begin{figure}[H]
+			  \centering
+			  \includegraphics[width=0.5\textwidth]{homework-3_fig-4.jpg}
+			  \caption{Logical effort comparison between 2NOR and 2NAND gates}
+			  \label{fig:logical}
+			\end{figure}
+			\setcounter{subsection}{9}
+		\item Fig. 5 shows the circuit diagram for a 4NAND gate with transistor sizing chosen for unit inverter-equivalent resistances. 
+			\begin{figure}[H]
+			  \centering
+			  \includegraphics[width=0.5\textwidth]{homework-3_fig-5.jpg}
+			  \caption{4NAND gate with unit inverter-equivalent transistor widths}
+			  \label{fig:label}
+			\end{figure}
+			At each input, we estimate gate capacitance to be the sum of nMOS and pMOS gate capacitances, and so the input capacitance \(C_{in} = 6C\). For a unit inverter, \(C_{in} = 3\), and so logical effort, the ratio between this gate's input capacitance and an equivalent unit inverter's input capacitance, is \(g = \frac{6}{3}\).
+			setcounter{subsection}{19}
+		\item The input capacitance of the given unit inverter is \(C_{\mathrm{in}}=4C\). Therefore, the logical effort of a 2NAND fabricated using the same process, where \(R_{\mathrm{pMOS}} = 3R_{\mathrm{nMOS}}\), is the sum of the gate capacitance of the two driven input gates, \(C_{\mathrm{in}} = 2C+3C = 5C\), and so logical effort \(g_{\mathrm{2NAND}}=\frac{5}{4}\). For a 2NOR gate fabricated using the same process, \(C_{\mathrm{in}} = C + 6C = 7C\), and so logical effort \(g_{\mathrm{2NOR}} = \frac{7}{4}\).
 \end{enumerate}
 \end{document}
