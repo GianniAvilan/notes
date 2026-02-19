@@ -190,8 +190,8 @@ and the resultant ZIR is
 		\end{align}
 		assume \(b_0 = 0\), \(P(D) = D+5\) and solve for \(y_n(t)\), assuming \(y_n(0) = 0\) and \(\dot{y}_n(0) = 1\) as 
 		\begin{align*}
-			&h(t) = c_1e^{-3t} + c_2e^{-t} \\
-			&\dot{h}(t) = -3c_1e^{-3t} - c_2e^{-t} \\ \\
+			&h(t) = (c_1e^{-3t} + c_2e^{-t})u(t) \\
+			&\dot{h}(t) = (-3c_1e^{-3t} - c_2e^{-t})u(t) \\ \\
 			&h(0) = c_1 + c_2 = 0 \\
 			&\dot{h}(0) = -3c_1 - c_2 = 1 \\ \\
 			&c_1 = -0.5, \ \ c_2 = 0.5 \\ \\
@@ -333,7 +333,7 @@ which matches the initial solution for \(h(t)\).
 							\begin{enumerate}[label=(\roman*)]
 								\item For BIBO stability, we will first find the impulse response of the system \((D + 1)(D^2-6D+5)y(t) = (3D+1)x(t)\), 
 									\[
-										h(t) = \frac{2}{3}e^{5t}-\frac{1}{2}e^t-\frac{1}{6}e^{-t}.
+										h(t) = (\frac{2}{3}e^{5t}-\frac{1}{2}e^t-\frac{1}{6}e^{-t})u(t).
 									\]
 									Taking its absolute integral,
 									\[
