@@ -101,11 +101,7 @@
 			&c_1 = \frac{c}{2}e^{j\theta} = 2.136e^{j0.359} \\
 			&c_2 = \frac{c}{2}e^{-j\theta} = 2.136e^{-j0.359}.
 		\end{align*}
-		Then the equivalent, complex ZIR would be 
-		\[
-			y_{\mathrm{zir}}(t) = 2.136e^{(-1+j0.359)t} + 2.136e^{(-1-j0.359)t}.
-		\]
-		As mentioned, both equations are equivalent, and show an oscillatory, decaying response to the inital conditions, which is to be expected given complex-valued characteristic roots.
+		The result is a decaying sinusoid, which is to be expected given complex-valued characteristic roots.
 
 		See Fig. 1 for a plot of the ZIR.
 
@@ -115,6 +111,244 @@
 		  \caption{ZIR response}
 		  \label{fig:ZIR 2.2-1(b)}
 		\end{figure}
+		\addtocounter{enumii}{1}
+	\item Given the system described by \(D^2 + 2D +10\{y(t)\} = (D^5-D)\{x(t)\}\) with inital conditions \(y_{\mathrm{zir}}(0) = \dot{y}_{\mathrm{zir}}(0) = 1,\) the characteristic equation \(\lambda^2 + 2\lambda + 10 = 0\), produces solutions 
+		\begin{align*}
+			& \lambda_1 =  -1+j3\\
+			& \lambda_2 = -1-j3.
+		\end{align*}
+		Using the same process as for the prior problem, the corresponding ZIR and its derivative are given by 
+		\begin{align*}
+			&y_{\mathrm{zir}}(t) = ce^{-t}\cos{(3t+\theta)} \\
+			&\dot{y}_{\mathrm{zir}}(t) = -ce^{-t}\cos{(3t+\theta)} - 3ce^{-t}\sin{(3t+\theta)}.
+		\end{align*}
+		Solving for \(c\cos{(\theta})\) and \(c\sin{(\theta})\), 
+		\begin{align*}
+		 & c\cos{(\theta)} = 1\\
+		 & c\sin{(\theta)} = 1
+		\end{align*}
+		Therefore, \(c = 1\) and \(\theta = 0.7854\), so 
+		\begin{align*}
+			&c_1 = 0.5e^{j0.7854} \\ 
+			&c_2 = 0.5e^{-j0.7854},
+		\end{align*}
+and the resultant ZIR is 
+    \[
+			y_{\mathrm{zir}}(t) = e^{-t}\cos{(3t+0.359)}.
+    \]
 \end{enumerate}
+\setcounter{subsection}{3}
+\setcounter{subsubsection}{2}
+  \item Given the system described by \((D^2 + 4D + 3)y(t) = (D+5)x(t)\), we may find the impulse response \(h(t)\) by setting the input \(x(t) = \delta(t)\), so that 
+		\[
+			(D^2 + 4D + 3)h(t) = (D+5)\delta(t).
+		\]
+		Because \(M < N\), we may assume that there is no delta component in the impulse response, and it is exclusively composed of the system's characteristic modes. Solving for \(\lambda_1\) and \(\lambda_2\), 
+		\begin{align*}
+			&\lambda_1 = -3 \\
+			&\lambda_2 = -1,
+		\end{align*}
+		and so
+		\[
+			h(t) = (c_1e^{-3t} + c_2e^{-t})u(t).
+		\]
+		Solving for constants \(c_1\) and \(c_2\), we'll set "placeholder" initial jumps of \(h(0^+) = K_1\) and \(\dot{h}(0^+) = K_2\). Then, taking derivatives and limiting ourselves to the system response at \(t=0\) (meaning we can ignore its characteristic modes for the time being), 
+		\begin{align*}
+			&\dot{h}(t) = K_1\delta(t) \\
+			&\ddot{h}(t) = K_1\dot{\delta}(t) + K_2\delta(t).
+		\end{align*}
+		Then, taking the system description for \(t=0\) and replacing \(\dot{h}(0)\) and \(\ddot{h}(0)\) with the aforementioned impulse terms,
+		\begin{align*}
+			&(K_1\dot{\delta}(t) + K_2\delta(t)) + 4K_1\delta(t) + h(0) = \dot{\delta}(t) + 5\delta(t), \\
+			&K_1\dot{\delta}(t) + (4K_1 + K_2)\delta(t) + h(0) = \dot{\delta}(t) + 5\delta(t).
+		\end{align*}
+		Matching coefficients of \(\dot{\delta}(t)\) and \(\delta(t)\) on either side, 
+		\begin{align*}
+			&K_1 = 1 \\
+			&4K_1 + K_2 = 5,
+		\end{align*}
+		and so, solving for \(K_1\) and \(K_2\), 
+		\begin{align*}
+			&K_1 = 1 \\
+			&K_2 = 1.
+		\end{align*}
+		Next, finding constants \(c_1\) and \(c_2\) using \(h(t) = (c_1e^{-3t} + c_2e^{-t})u(t)\) and \(\dot{h}(t) = (-3c_1e^{-3t} - c_2e^{-t})u(t) + (c_1e^{-3t}+c_2e^{-t})\delta(t)\), 
+		\begin{align*}
+			&h(0^+) = c_1 + c_2 = 1 \\
+			&h(0^+) = -3c_1 - c_2 = 1,
+		\end{align*}
+		so that \(c_1 = -1\) and \(c_2 = 2\).
+
+		Therefore, the total impulse response is given as 
+		\[
+			h(t) = (-e^{-3t} + 2e^{-t})u(t).
+		\]
+		
+		Using the simplified impulse matching method to confirm the results, 
+		\begin{align}
+			h(t) = b_0\delta(t) + [P(D)y_n(t)]u(t),
+		\end{align}
+		assume \(b_0 = 0\), \(P(D) = D+5\) and solve for \(y_n(t)\), assuming \(y_n(0) = 0\) and \(\dot{y}_n(0) = 1\) as 
+		\begin{align*}
+			&h(t) = c_1e^{-3t} + c_2e^{-t} \\
+			&\dot{h}(t) = -3c_1e^{-3t} - c_2e^{-t} \\ \\
+			&h(0) = c_1 + c_2 = 0 \\
+			&\dot{h}(0) = -3c_1 - c_2 = 1 \\ \\
+			&c_1 = -0.5, \ \ c_2 = 0.5 \\ \\
+			&y_n(t) = -0.5e^{-3t} + 0.5e^{-t}.
+		\end{align*}
+		Solving for \(h(t),\)
+		\[
+			h(t) = [(D+5)(-0.5e^{-3t} + 0.5e^{-t})]u(t) = [(1.5e^{-3t} - 0.5e^{-t}) + (-2.5e^{-3t} + 2.5e^{-t})]u(t).
+		\]
+		Simplyfing, 
+		\[
+			h(t) = (-e^{-3t} + 2e^{-t})u(t),
+		\]
+which matches the initial solution for \(h(t)\).
+\setcounter{subsection}{4}
+\setcounter{subsubsection}{18}
+\item 
+	Given the system whose unit impulse response is \(h(t) = [(1-2t)e^{-2t}]u(t)\), we can find the ZSR of the system, \(y(t)\), as the convolution of the input \(x(t)\) and the impulse response, 
+	\[
+		h(t) * x(t) = \int_{0}^{\infty}h(\tau)x(t-\tau)d\tau,
+	\]
+	or 
+	\[
+	  x(t) * h(t) = \int_{0}^{\infty}x(\tau)x(t-\tau)d\tau.
+	\]
+		For input \(x(t) = u(t)\), the convolution of \([(1-2t)e^{-2t}]u(t) * u(t)\) simplifies via the distributive property as 
+			\[
+				e^{-2t}u(t) * u(t) - 2te^{-2t}u(t) * u(t).
+			\]
+			The two resulting convolutions are most closely matched in Table 2.1 as 
+			\begin{align*}
+				&te^{\lambda_1 t}u(t) * e^{\lambda_2 t}u(t) = \frac{e^{\lambda_2 t} - e^{\lambda_1 t} + (\lambda_1 - \lambda_2)te^{\lambda_1 t}}{(\lambda_1 - \lambda_2)^2}u(t) \\
+				&e^{\lambda t}u(t) * u(t) = \frac{1-e^{\lambda t}}{-\lambda}u(t). 
+			\end{align*}
+			Solving for the first convolution using \(\lambda = -2\), 
+			\[
+				e^{-2t}u(t) * u(t) = \frac{1-e^{-2t}}{-2}u(t).
+			\]
+			Solving for the second, using \(\lambda_1 = -2\) and \(\lambda_2 = 0\), 
+			\[
+				2te^{-2t}u(t) * u(t) = 2\frac{-e^{-2t} - 2te^{-2t}}{4}u(t).
+			\]
+			Therefore, 
+			\[
+			y_{\mathrm{zsr}}(t) = [-\frac{1}{2}e^{-2t} - \frac{1}{2}(-e^{-2t} - 2te^{-2t})]u(t) = te^{-2t}.
+			\]
+			\setcounter{subsubsection}{27}
+			\item
+				\begin{enumerate}[label=\alph*), start=2]
+					\item For \(c(t) = A[u(t-3) - u(t-5)] * B[u(t+5) - u(t+3)]\), we can define areas for no overlap where \(t < 3\) and \(t > 2\), partial overlap where \(-2<t<0\) and \(0<t<2\), and full overlap at \(t=0\). Assuming \(B=2A\), arbitrarily, for the sake of the example, Fig. 2 shows the defined areas as well as the graph of the convolution itself as a function of \(t\).
+					\begin{figure}[H]
+					  \centering
+					  \includegraphics[width=\textwidth]{homework-2_fig-2.jpg}
+					  \caption{c(t) for each area of overlap/no overlap}
+					  \label{fig:conv_1}
+					\end{figure}	
+					\addtocounter{enumii}{3}
+					As shown, the convolution \(c(t)\) as a function of time grows linearly from \(t=-2\) to \(t=0\), up to a value of of \((A\times B)^2\), and then decreases linearly from \(t=0\) to \(t=2\).
+				\item For \(c(t) = e^{-t} * [u(t) - u(t-3]\), we can define an area of no overlap where \(t<0\), and an area of overlap for \(t>0\), which diminishes slowly as \(t \to \infty\).
+
+					Fig. 3 shows several defined areas along with the convolution itself as a function of \(t\).
+					\begin{figure}[H]
+					  \centering
+					  \includegraphics[width=\textwidth]{homework-2_fig-3.jpg}
+					  \caption{c(t) for areas of overlap/no overlap}
+					  \label{fig:conv_2}
+					\end{figure}
+				\end{enumerate}
+				\setcounter{subsection}{5}
+				\setcounter{subsubsection}{1}
+				\item
+					BIBO stability is also known as \textit{external} stability, and is related to the stability of the system when provided with some external input. Given a bounded signal (ones that does not grow towards infinity over time), a BIBO-stable system provides a bounded output (one that does not grow towards infinity over time). As one might expect, BIBO stability can be determined from the system's impulse response \(h(t)\), where BIBO-stable systems meet the criteria 
+					\[
+					  \int_{-\infty}^{\infty}|h(\tau)|d\tau < \infty
+					\]
+
+					BIBO stability is a natural consequence of asymptotic or \textit{internal} stability, which, as the name suggests, depends on the system's internal dynamics when presented with no input signal. A system's asymptotic stability can be determined based on its characteristic roots; if any lie in the right half of the s-plane, the system is asymptotically unstable.
+					\begin{enumerate}[label=\alph*)]
+						\item 
+							\begin{enumerate}[label=(\roman*)]
+								\item To determine BIBO stability, we'll investigate the impulse response \(h(t)\) of the system described by \((D^2 + 8D + 12)y(t) = (D-1)x(t)\). Using the simplified impulse matching method shown before and solving for \(h(t)\) in MATLAB, 
+									\[
+										h(t) = (\frac{e^{-6t} + 3e^{-2t}}{4})u(t).
+									\]
+									Then, evaluating the absolute integral of \(h(t)\),
+									\[
+									  \int_{0}^{\infty}|h(\tau)|d\tau \approx 0.244,
+									\]
+									and so the system is \textbf{BIBO-stable}.
+
+								\item BIBO-stability on its own does not imply asymptotic stability, so we'll check the criteria for asymptotic stability as well.
+									
+									Solving the system's characteristic equation \(\lambda^2 + 8\lambda + 12 = 0\), we will find characteristic modes 
+								\begin{align*}
+									&\lambda_1 = -6 \\
+									&\lambda_2 = -2
+								\end{align*}	
+								Since both resultant characteristic modes, \(e^{-6t}\) and \(e^{-2t}\), have a negative real part, and are thus in the left side of the s-plane, the system is considered asymptotically stable.
+							\end{enumerate}
+						\item 
+							\begin{enumerate}[label=(\roman*)]
+                \item Starting again with BIBO stability, we will derive the impulse response of \(D(D^2+3D+2)y(t) = (D+5)x(t)\) using MATLAB, 
+									\[
+										h(t) = (5e^{-2t} + \frac{5}{2})u(t).
+									\]
+									Evaluating the integral, 
+									\[
+									  \int_{0}^{\infty}|h(\tau)|d\tau = \infty,
+									\]
+									and so the system is \textbf{not} BIBO-stable.
+								\item Evaluating asymptotic stability, we will find the characteristic equation \(\lambda^3 + 3\lambda^2 + 2\lambda = 0\); finding its roots: 
+									\begin{align*}
+									  & \lambda_1 = 0\\
+										& \lambda_2 = -2\\
+										& \lambda_3 = -1,
+									\end{align*}
+									resulting in characteristic modes of \(1\), \(e^{-2t}\), and \(e^{-t}\). However, since one of the characteristic roots is \(\lambda_1 = 0\), which lies on the imaginary axis of the s-plane, we would consider the system to be \textbf{marginally stable}; that is, when presented with a small input or disturbance, it will stabilize in a different state from its initial state prior to the input.
+							\end{enumerate}
+						\item 
+							\begin{enumerate}[label=(\roman*)]
+								\item Once again, for BIBO stability, we will analyze the impulse response of \(D^2(D^2+2)y(t) = x(t)\), 									
+									\[
+										h(t) = (\frac{t}{2} - \frac{\sqrt{2}sin(\sqrt{2}t)}{4})u(t).
+									\]
+									Taking the absolute integral of \(h(t)\), 
+									\[
+									  \int_{0}^{\infty}|h(\tau)|d\tau = \infty,
+									\]
+									and Fso the system is \textit{not} BIBO-stable.
+								\item Analyzing the characteristic roots for asymptotic stability, 
+									\begin{align*}
+										& \lambda_1, \lambda_2 = 0 \\
+										& \lambda_3 = j \sqrt{2} \\
+										& \lambda_4 = -j \sqrt{2},
+									\end{align*}
+									since there are repeated roots on the imaginary axis, we consider this system asymptotically \textbf{unstable}, which matches our prior assessment of BIBO-instability.
+							\end{enumerate}
+						\item 
+							\begin{enumerate}[label=(\roman*)]
+								\item For BIBO stability, we will first find the impulse response of the system \((D + 1)(D^2-6D+5)y(t) = (3D+1)x(t)\) as
+									\[
+										h(t) = \frac{2}{3}e^{5t}-\frac{1}{2}e^t-\frac{1}{6}e^{-t}.
+									\]
+									Taking its absolute integral,
+									\[
+									  \int_{0}^{\infty}|h(\tau)|d\tau = \infty,
+									\]
+									and so the system is \textbf{not} BIBO-stable.
+									\item
+										Solving the system's characteristic equation results in the following roots: 
+										\begin{align*}
+											& \lambda_1 = 5\\
+											& \lambda_2 = -1\\
+											& \lambda_3 = 1,
+										\end{align*}
+										and since two of the roots lie in the right side of the s-plane (positive real parts), the system is asymptotitcally \textbf{unstable}.
+							\end{enumerate}
+					\end{enumerate}
 \end{enumerate}
 \end{document}
