@@ -35,13 +35,13 @@
 		 &y_{\mathrm{zir}}(0) = 4 \\
 		 &\dot{y}_{\mathrm{zir}}(0) = -1,
 		\end{align*}
-		begin by setting \(P(D)x(t)\) to zero to find the zero-input response, \(y_{\mathrm{zir}}(t) = c_1e^{\lambda_1 t} + c_2e^{\lambda_2 t}\).
+		begin by setting \(P(D)x(t)\) to zero to find the zero-input response, defined as \(y_{\mathrm{zir}}(t) = c_1e^{\lambda_1 t} + c_2e^{\lambda_2 t}.\)
 
-		To find \(\lambda_1\) and \(\lambda_2\), solve the characteristic equation \(\lambda^2 + 2\lambda + 5=0 \), which returns two complex values, 
+		To find \(\lambda_1\) and \(\lambda_2\), we will solve the characteristic equation \(\lambda^2 + 2\lambda + 5=0 \), which produces two complex roots, 
 		\[
 			\lambda_1 = -1+j2, \ \lambda_2 = -1-j2.
 		\]
-		We can pick two way to solve for \(c_1\) and \(c_2\): we can keep the equation in complex form and solve for the constants, or we can assume that the given system is real and therefore must have a real ZIR, which will allow us to solve for the constants \(c_1\) and \(c_2\) more easily. If assume that the ZIR is real, the \(c_1\) and \(c_2\) must be conjugates, expressed as 
+		We can pick one of two ways to solve for \(c_1\) and \(c_2\): we can keep the ZIR in complex form and solve for the \(c_1\) and \(c_2\), or we can solve for the constants \(c_1\) and \(c_2\) more easily by converting the ZIR to a real form. In that case, \(c_1\) and \(c_2\) must be conjugates, expressed as 
 		\begin{align*}
 			& c_1 = \frac{c}{2}e^{j\theta} \\
 			& c_2 = \frac{c}{2}e^{-j\theta}.
@@ -54,25 +54,25 @@
 		\[
 			y_{\mathrm{zir}}(t) = \frac{ce^{-t}}{2}[\cos{(2t+\theta)} + j\sin{(2t+\theta)} + \cos{(-2t-\theta)} + j\sin{(-2t-\theta)}.]
 		\]
-		Since \(\cos{(-x)} = \cos{(x)}\) and \(\sin{(-x)} = -\sin{(x)}\), this reduces to 
+		Since \(\cos{(-x)} = \cos{(x)}\) and \(\sin{(-x)} = -\sin{(x)}\), we may further reduce the ZIR to 
 		\[
 		\frac{ce^{-t}}{2}(2\cos{(2t+\theta)}) = ce^{-t}\cos{(2t+\theta)}.
 		\]
-		Now, we can easily solve for \(c\) and \(\theta\) in the real domain by setting \(t=0\) for \(y_{\mathrm{zir}}(t)\) and \(\dot{y}_{\mathrm{zir}}(t)\), 
+		Now, we may easily solve for \(c\) and \(\theta\) as real values by setting \(t=0\) for \(y_{\mathrm{zir}}(t)\) and \(\dot{y}_{\mathrm{zir}}(t)\), 
 		\begin{align*}
 		 & y_{\mathrm{zir}}(t) = ce^{-t}\cos{(2t+\theta)} \\
 		 & \dot{y}_{\mathrm{zir}}(t) = -ce^{-t}\cos{(2t+\theta)} - 2ce^{-t}\sin{(2t+\theta)}.
 		\end{align*}
-		Setting these expressions equal to the given initial conditions with \(t=0\), 
+		Setting these expressions equal to the given initial conditions at \(t=0\), 
 		\begin{align*}
 			&y_{\mathrm{zir}}(0) = c\cos{(\theta)} = 4 \\ 
-			&\dot{y}_{\mathrm{zir}}(0) = c\cos{(\theta)} - 2c\sin{(\theta)} = -1.
+			&\dot{y}_{\mathrm{zir}}(0) = -c\cos{(\theta)} - 2c\sin{(\theta)} = -1.
 		\end{align*}
 		Solving for \(c\cos{(\theta)}\) and \(c\sin{(\theta)}\) using a system of equations,  
 		\begin{align*}
 			&\begin{bmatrix}
 				1 & 0 \\
-        1	& -2
+        -1	& -2
 			\end{bmatrix}
 			\begin{bmatrix}
 				c\cos{(\theta)} \\
@@ -84,22 +84,22 @@
 			\end{bmatrix} \\ \\
 			&\begin{bmatrix}
 				1 & 0 & 4 \\
-				1 & -2 & -1
+				-1 & -2 & -1
 			\end{bmatrix}
 			\Rightarrow \ 
 			\begin{matrix}
 				&c\cos{(\theta)} = 4 \\
-				&c\sin{(\theta)} = 1.5
+				&c\sin{(\theta)} = -1.5
 			\end{matrix}
 		\end{align*}
-		Considering both terms as the two coordinates of a complex number, we may solve for \(c\) and \(\theta\) as \(c = \sqrt{4^2 + 1.5^2} = 4.272\) and \(\theta = \tan^{-1}{\frac{1.5}{4}} = 0.359\), we can substitute this back into our solution for \(y_{\mathrm{zir}}(t)\), which gives us the complete ZIR, 
+		Considering both terms to be the coordinates of a complex number mapped onto the x-y plane, we may solve for \(c\) and \(\theta\) as \(c = \sqrt{4^2 + 1.5^2} = 4.272\) and \(\theta = \tan^{-1}{\frac{-1.5}{4}} = -0.359\), we can substitute this back into our solution for \(y_{\mathrm{zir}}(t)\), which gives us the complete ZIR, 
 		\[
-			y_{\mathrm{zir}}(t) = 4.272e^{-t}\cos{(2t + 0.359)}.
+			y_{\mathrm{zir}}(t) = 4.272e^{-t}\cos{(2t - 0.359)}.
 		\]
-		Finally, we can convert our values for \(c\) and \(\theta\) back to \(c_1\) and \(c_2\) if we want, as 
+		Finally, we will convert our values for \(c\) and \(\theta\) back to \(c_1\) and \(c_2\) if we want, as 
 		\begin{align*}
-			&c_1 = \frac{c}{2}e^{j\theta} = 2.136e^{j0.359} \\
-			&c_2 = \frac{c}{2}e^{-j\theta} = 2.136e^{-j0.359}.
+			&c_1 = \frac{c}{2}e^{j\theta} = 2.136e^{-j0.359} \\
+			&c_2 = \frac{c}{2}e^{-j\theta} = 2.136e^{j0.359}.
 		\end{align*}
 		The result is a decaying sinusoid, which is to be expected given complex-valued characteristic roots.
 
@@ -112,7 +112,7 @@
 		  \label{fig:ZIR 2.2-1(b)}
 		\end{figure}
 		\addtocounter{enumii}{1}
-	\item Given the system described by \(D^2 + 2D +10\{y(t)\} = (D^5-D)\{x(t)\}\) with inital conditions \(y_{\mathrm{zir}}(0) = \dot{y}_{\mathrm{zir}}(0) = 1,\) the characteristic equation \(\lambda^2 + 2\lambda + 10 = 0\), produces solutions 
+	\item Given the system described by \(D^2 + 2D +10\{y(t)\} = (D^5-D)\{x(t)\}\) with initial conditions \(y_{\mathrm{zir}}(0) = \dot{y}_{\mathrm{zir}}(0) = 1,\) the characteristic equation \(\lambda^2 + 2\lambda + 10 = 0\), produces solutions 
 		\begin{align*}
 			& \lambda_1 =  -1+j3\\
 			& \lambda_2 = -1-j3.
@@ -125,16 +125,16 @@
 		Solving for \(c\cos{(\theta})\) and \(c\sin{(\theta})\), 
 		\begin{align*}
 		 & c\cos{(\theta)} = 1\\
-		 & c\sin{(\theta)} = 1
+		 & c\sin{(\theta)} = -\frac{2}{3}.
 		\end{align*}
-		Therefore, \(c = 1\) and \(\theta = 0.7854\), so 
+		Therefore, \(c = 1.202\) and \(\theta = -0.588\), so 
 		\begin{align*}
-			&c_1 = 0.5e^{j0.7854} \\ 
-			&c_2 = 0.5e^{-j0.7854},
+			&c_1 = 0.6e^{-j0.588} \\ 
+			&c_2 = 0.6e^{j0.588},
 		\end{align*}
 and the resultant ZIR is 
     \[
-			y_{\mathrm{zir}}(t) = e^{-t}\cos{(3t+0.359)}.
+			y_{\mathrm{zir}}(t) = 1.202e^{-t}\cos{(3t-0.588)}.
     \]
 \end{enumerate}
 \setcounter{subsection}{3}
@@ -249,8 +249,8 @@ which matches the initial solution for \(h(t)\).
 					  \label{fig:conv_1}
 					\end{figure}	
 					\addtocounter{enumii}{3}
-					As shown, the convolution \(c(t)\) as a function of time grows linearly from \(t=-2\) to \(t=0\), up to a value of of \((A\times B)^2\), and then decreases linearly from \(t=0\) to \(t=2\).
-				\item For \(c(t) = e^{-t} * [u(t) - u(t-3]\), we can define an area of no overlap where \(t<0\), and an area of overlap for \(t>0\), which diminishes slowly as \(t \to \infty\).
+					As shown, the convolution \(c(t)\) as a function of time grows linearly from \(t=-2\) to \(t=0\), up to a value of \((A\times B)*\mathrm{width}\) (here, the widths of each rectangular pulse are equal), and then decreases linearly from \(t=0\) to \(t=2\).
+				\item For \(c(t) = e^{-t} * [u(t) - u(t-3)]\), we may define an area of no overlap where \(t<0\), and an area of overlap for \(t>0\), which diminishes slowly as \(t \to \infty\).
 
 					Fig. 3 shows several defined areas along with the convolution itself as a function of \(t\).
 					\begin{figure}[H]
@@ -289,7 +289,7 @@ which matches the initial solution for \(h(t)\).
 									&\lambda_1 = -6 \\
 									&\lambda_2 = -2
 								\end{align*}	
-								Since both resultant characteristic modes, \(e^{-6t}\) and \(e^{-2t}\), have a negative real part, and are thus in the left side of the s-plane, the system is considered asymptotically stable.
+								Since both resultant characteristic modes, \(e^{-6t}\) and \(e^{-2t}\), have a negative real part, and are thus in the left side of the s-plane, the system is considered \textbf{asymptotically stable}.
 							\end{enumerate}
 						\item 
 							\begin{enumerate}[label=(\roman*)]
@@ -301,37 +301,37 @@ which matches the initial solution for \(h(t)\).
 									\[
 									  \int_{0}^{\infty}|h(\tau)|d\tau = \infty,
 									\]
-									and so the system is \textbf{not} BIBO-stable.
-								\item Evaluating asymptotic stability, we will find the characteristic equation \(\lambda^3 + 3\lambda^2 + 2\lambda = 0\); finding its roots: 
+									and so the system is \textbf{BIBO-unstable}. 
+								\item Evaluating asymptotic stability, we may use the characteristic equation \(\lambda^3 + 3\lambda^2 + 2\lambda = 0\); finding its roots: 
 									\begin{align*}
 									  & \lambda_1 = 0\\
 										& \lambda_2 = -2\\
 										& \lambda_3 = -1,
 									\end{align*}
-									resulting in characteristic modes of \(1\), \(e^{-2t}\), and \(e^{-t}\). However, since one of the characteristic roots is \(\lambda_1 = 0\), which lies on the imaginary axis of the s-plane, we would consider the system to be \textbf{marginally stable}; that is, when presented with a small input or disturbance, it will stabilize in a different state from its initial state prior to the input.
+									resulting in characteristic modes of \(1\), \(e^{-2t}\), and \(e^{-t}\). Since one of the characteristic roots is \(\lambda_1 = 0\), which lies \textit{on} the imaginary axis of the s-plane, we would consider the system to be \textbf{marginally stable}; that is, when presented with a small input or disturbance, it will eventually stabilize, but in a different state from its initial state prior to the input.
 							\end{enumerate}
 						\item 
 							\begin{enumerate}[label=(\roman*)]
 								\item Once again, for BIBO stability, we will analyze the impulse response of \(D^2(D^2+2)y(t) = x(t)\), 									
 									\[
-										h(t) = (\frac{t}{2} - \frac{\sqrt{2}sin(\sqrt{2}t)}{4})u(t).
+										h(t) = (\frac{t}{2} - \frac{\sqrt{2}\sin{(\sqrt{2}t)}}{4})u(t).
 									\]
 									Taking the absolute integral of \(h(t)\), 
 									\[
 									  \int_{0}^{\infty}|h(\tau)|d\tau = \infty,
 									\]
-									and Fso the system is \textit{not} BIBO-stable.
+									and so the system is \textit{BIBO-unstable}. 
 								\item Analyzing the characteristic roots for asymptotic stability, 
 									\begin{align*}
 										& \lambda_1, \lambda_2 = 0 \\
 										& \lambda_3 = j \sqrt{2} \\
-										& \lambda_4 = -j \sqrt{2},
+										& \lambda_4 = -j \sqrt{2}.
 									\end{align*}
-									since there are repeated roots on the imaginary axis, we consider this system asymptotically \textbf{unstable}, which matches our prior assessment of BIBO-instability.
+									Since there are repeated roots on the imaginary axis, we consider this system \textbf{asymptotically unstable}, which matches our prior assessment of BIBO-instability.
 							\end{enumerate}
 						\item 
 							\begin{enumerate}[label=(\roman*)]
-								\item For BIBO stability, we will first find the impulse response of the system \((D + 1)(D^2-6D+5)y(t) = (3D+1)x(t)\) as
+								\item For BIBO stability, we will first find the impulse response of the system \((D + 1)(D^2-6D+5)y(t) = (3D+1)x(t)\), 
 									\[
 										h(t) = \frac{2}{3}e^{5t}-\frac{1}{2}e^t-\frac{1}{6}e^{-t}.
 									\]
@@ -339,7 +339,7 @@ which matches the initial solution for \(h(t)\).
 									\[
 									  \int_{0}^{\infty}|h(\tau)|d\tau = \infty,
 									\]
-									and so the system is \textbf{not} BIBO-stable.
+									and so the system is \textbf{BIBO-unstable}.
 									\item
 										Solving the system's characteristic equation results in the following roots: 
 										\begin{align*}
@@ -347,7 +347,7 @@ which matches the initial solution for \(h(t)\).
 											& \lambda_2 = -1\\
 											& \lambda_3 = 1,
 										\end{align*}
-										and since two of the roots lie in the right side of the s-plane (positive real parts), the system is asymptotitcally \textbf{unstable}.
+										and since two of the roots lie in the right side of the s-plane (positive real parts), the system is \textbf{asymptotically unstable}.
 							\end{enumerate}
 					\end{enumerate}
 \end{enumerate}
