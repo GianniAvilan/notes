@@ -7,10 +7,11 @@
 \usepackage{enumitem}
 \usepackage{amsmath}
 \begin{document}
+\setcounter{section}{3}
 \section{Chapter 4: Electrostatics}
 \setcounter{subsection}{2}
 \subsection{Coulomb's Law}
-An integral part of any electrostatic analysis is the ability to find the electric field intensity \(\vec{E}\) and the associated electric flux density \(\vec{D}\) at any given point, based on the influence of some charged point, surface, or volume. (Recall from Chapter 1 that electric field density \(\vec{D} = \varepsilon \vec{E}}\) and represents the quantity of flux passing through a unit area perpendicular to the field).
+An integral part of any electrostatic analysis is the ability to find the electric field intensity \(\vec{E}\) and the associated electric flux density \(\vec{D}\) at any given point, based on the influence of some charged point, surface, or volume. (Recall from Chapter 1 that electric field density \(\vec{D} = \varepsilon \vec{E}\) and represents the quantity of flux passing through a unit area perpendicular to the field).
 
 Beginning with point charges, Coloumb's Law provides a simple way of deriving the electric field induced by a single point charge with no mass, with a charge of \(q\): \[
 	\vec{E} = [\frac{q}{4\pi\varepsilon_0R^2}]\hat{\alpha_R},
@@ -18,6 +19,55 @@ Beginning with point charges, Coloumb's Law provides a simple way of deriving th
 where \(R\) is the radial distance (shortest straight-line path from the charge to the point being measured) and \(\hat{\alpha_R}\) is the unit vector pointing away from the charge. The influence of multiple point charges follow the superposition property, and can found as the sum of the electric field intensity due to each individual point charge (this will often require some vector math to dertermine the direction of \(\vec{E}\) at some point).
 
 This kind of model is ideal, because it allows us to consider larger distributions of charge, such as charged lines, planes, spheres, and cylinders, as collections of point charges, which we can then integrate to find the sum of their influences (there's an easier way to do this using Gauss's Law, which we'll see shortly).
+
+When dealing with a charge distribution, we'll consider a continuous surface or volume with some charge density \(\rho\), usually given in Coulombs per unit area. Often, these charge distributions will be uniform, meaning they will be represented by a constant, and do not vary across the given surface or throughout the given volume, though we may see some that depend on location (given in one of the three coordinate axes we've considered).
+
+A simple way of finding the total charge present on a given surface or within a given volume is to integrate the given density, \(\rho\), over the relevant bounds. Cylindrical and spherical coordinates often come in handy here, since they'll allow us to easily find the total charge present in, for example, a spherical shell, given the inner and outer radii. Then, to find the electric field exerted by the charged surface or volume at some point in space \(P\), we'll simply integrate the differential electric field, \[d \vec{E} = \hat{\alpha_{R'}}\frac{\rho_s ds}{4\pi\varepsilon R'^2},\] over the given surface (this example is for the electric field induced by surface charge, but can be easily adapted to handle volumes as well.) Note that the apostrophe notation use with \(R\) indicates that this represents the radial distance/unit vector from the differential surface/volume to the point \(P\), which likely varies as a function or space.
+
+\setcounter{subsection}{3}
+\subsection{Gauss's Law}
+
+A much simpler way of finding the electric field induced by a charged surface or volume, especially symmetric ones, is by using Gauss's Law. 
+
+Gauss's Law may be expressed as 
+\[
+	\oint_{S}\vec{D}\cdot d \vec{s} = Q,
+\]
+which indicates that the total charge enclosed by some Gaussian (closed) surface \(S\) is equal to the total flux through the surface \(S\). Note that \(\vec{D}\) is electric flux density, which corresponds to the strength and direction of an associated electric field independent from the surrounding medium's permittivity, while \(d \vec{s}\) represents the differential surface vector (that is, the direction normal to the Gaussian surface at a point). 
+
+To solve for electric flux in general, that is, the component of electric field that is normal to the Gaussian surface, we simply divide by the permittivity of the surrounding area. For example, given a point charge of \(q\), Gauss's Law says that at any point on the surface of a Gaussian sphere with radius \(r\) enclosing the given point charge, 
+\[
+	\vec{E} \int_{0}^{2\pi} \int_{0}^{\pi} R^2 \sin{(\theta)} d \theta d \phi = \frac{q}{\varepsilon}.
+\]
+
+Integrating this expression results in Coulomb's Law, 
+\[
+  E = \frac{q}{4 \pi \varepsilon R^2}.
+\]
+
+Gauss's Law, often using a sphere as a Gaussian surface, is incredibly useful for calculating the magnitude of electric flux in a region based solely on its permittivity and a reasonable estimate of the electric charge bounded within a parametrized Gaussian surface. Be careful to note that the application of Gauss's Law, for the most part, is in analysis of symmetrical charge distributions. When dealing with other, less well-behaved shapes, Coulomb's Law, though more complex, will win out. 
+
+\setcounter{subsection}{4}
+\subsection{Electric Scalar Potential}
+
+Voltage, short for voltage potential and synonymous with electric potential, represents the amount of work required to move a unit charge from one point to another, in particular under the influence of an external electric field. As such, it is defined as the opposite of the field at some point; for example, in a uniform field \(E\) that runs in, say, the y-direction, we can begin by thinking of the work required to move that charge in the \text{it} y-direction. Moving the charge in said direction by one differential distance would result in a differential work \(d \vec{W}\) (this could also represent the equivalent change in kinetic energy). This differential work over some distance \(l\) may be expressed as 
+\[
+	dW = \vec{F}_{\mathrm{ext}} \cdot d \vec{l} = -q \vec{E} \cdot d \vec{l},
+\]
+in units of joules. In other words, work represents the amount of force exerted in the given direction, usually under the influence of other forces. As shown by the math above, the force exerted on a charged particle in an electric field must be matched by an external force to move the particle along a given path; the dot product ensures that we're only including the components of that force that move us in that direction. Finally, we can divide by \(q\) to normalize the given quantity, such that it is given per unit charge, and we are left with \(\frac{J}{C}\), or volts \(\frac{dW}{q} = - \vec{E} \cdot d \vec{l} = dV\) (note that \(dV\) has no direction, due to the dot product). More often than not, rather than referring to this differential voltage \(dV\), we will refer to a potential \textit{difference}; that is, the sum of the differential voltages along some path. Conveniently, we may use an integral for this, 
+\[
+  \int_{P_1}^{P_2}dV = -\int_{P_1}^{P_2}\vec{E} \cdot d \vec{l},
+\]
+where \(P_1\) and \(P_2\) are the relevant points over which we'd like to calculate the potential/voltage difference. The given integral is \textit{path independent}, meaning that it will produce the same results regardless of the path taken between \(P_1\) and \(P_2\). Thus, it is usually most convenient to choose a straight line path to simplify the use of \(d \vec{l}\). When calculating the potential difference between some point \(P\) and an area of zero potential (commonly referred to as ground), we will integrate on the path between that point and a point infinitely far away, 
+\[
+  V = -\int_{\infty}^{P}\vec{E}\cdot d \vec{l}.
+\]
+
+Though electric potential differences arising from charged surfaces and volumes may be calculated in a similar way to the electric field, it may at times be easier, given an electric field, to use the gradient function we saw earlier. Since voltage is a scalar quantity that stems from a vector quantity (electric field) we can use the following relationship to find the potential difference between two points, 
+\[
+  \vec{E} = - \nabla V.
+\]
+We may also use this relationship to easily find \(\vec{E}\) without as much mathematical work as using Coulomb's Law.
 
 \setcounter{subsection}{8}
 \subsection{Capacitance}

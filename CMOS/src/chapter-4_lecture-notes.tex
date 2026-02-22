@@ -41,7 +41,9 @@ Example: Estimate worst-case rising and falling delay of a 3-input NAND driving 
 
 Parasitic delay vs effort delay. Parasitic delay is independent of load, whereas effort delay is based on fanout. Best-case (minimum, contamination) delay can be substantially less than worst-case (maximum, propagation) delay. Useful to estimate the best-case worst-case range? Diffusion capacitance assumptions are based on layout. Layout can reduce delay below worst-case assumptions. 
 
-\subsection{Logical Effort}
+\subsection{Linear Delay Model	}
+
+Logical effort is based primarily on the 
 
 Sizing gates and designing gate networks is automated, so we're learning about the mathematical foundations of these systems by learning logical effort theory. Logic networks can be immensely complicated, and we'd like to make layout as efficient as possible mathematically. Example of the design of a decoder for a register file. 16-word register file, each word is 32 bits wide. Constraints: max fanout of 10. Each bit presents load of 3 unit-sized transistors. 
 

@@ -1,0 +1,59 @@
+\documentclass{article}
+\title{ECE 478-- Homework 4}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 478}
+\fancyhead[R]{Homework 4}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\begin{document}
+\setcounter{section}{5}
+\setcounter{subsection}{1}
+\begin{enumerate}[label=\thesubsection]
+	\item Dynamic power is a function of three major factors: supply voltage \(V_{DD}\), total capacitance \(C\), and switching frequency \(f\). Power itself is a function of voltage across a circuit element and current through the element.
+
+		When a pMOS transistor turns on and charges the load to \(V_{DD}\),roughly half the energy drawn from the power supply is dissipated as heat in the pMOS transistor, while the other half is stored in the load capacitance. During the discharge phase, the energy stored in the capacitor is then dissipated as heat in the nMOS transistor. The total effect of this process for each rising and falling transition can be expressed in therms of the average power. Since this share of a CMOS network's power consumption can be attributed solely to the switching frequency and sum of the total capacitances at each node, we refer to it as the \textit{dynamic power}. 
+
+		Finally, we can assume that the average CMOS circuit does not switch at every node once for every clock cycle (unless, of course, it's a clock circuit), and so we can express the switching frequency not in terms of clock frequency, but in terms of the activity factor \(\alpha\). 
+
+		In total, for \(V_{DD} = 0.9 \mathrm{V}\), \(f_{sw}=0.1(450 \times 10^6) \mathrm{Hz}\), and total capacitance of \(C=(450 \times 10^{-12})(70)\mathrm{F}\),
+		\[
+			P_{\mathrm{switching}} = 1.1482 \ \mathrm{W}.
+		\]
+		\setcounter{subsection}{4}
+	\item The activity factor \(\alpha\) can be manually derived for a single node in a CMOS circuit as \(\alpha = \overline{P_i}P_i\), where \(P_i\) is the probability that node \(i\) is 1 (as opposed to 0). Therefore, \(\alpha\) represents the probability that the node switches from one cycle to the next.
+
+		Based on the small slice of data represented in Fig. 5.34, we see that two transistions from 0 to 1 occur over a period of \(10 \mathrm{ns}\), or 10 clock cycles, and so \(\alpha = \frac{2}{10} = 0.2\) for this period.
+		\setcounter{subsection}{7}
+	\item The probability that the output of any gate is high, \(P_Y\), is a function of the probability that its inputs are high or low, depending on the type of gate. Given that the output and inputs in each of the below cases is binary (can have one of two values), their probabilities are considered binomial, and the sum of the probabilities of the two possible outcomes always equals one. Since, for our purposes, the inputs are mutually exclusive, we may also use the multiplication rule in probability, where the probability of multiple, mutually exclusive probabilites occuring at the same time is given by their individual probabilites multiplied together. Mathematically,
+		\begin{align*}
+			&P_Y + \overline{P}_Y = 1 \\
+			&P_{A \mathrm{and} B} = P_AP_B.
+		\end{align*}
+
+		We will use \(P_Y\) to indicate the probability that the \(Y\) node at the output is high, and \(\overline{P}_Y\) to indicate that it is low (likewise for the inputs).
+
+		For an AND2 gate, there is only one condition under which \(Y\) is high: when \(A\) and \(B\) are both high. Therefore, if the nodes at \(A\) and \(B\) have a probability \(P_A\) and \(P_B\) of being high, then \(P_Y = P_AP_B\).
+
+		For an AND3 gate, the only condition under which \(Y\) is high is when all three input nodes are high, and so, similar to the 2AND gate, \(P_Y = P_AP_BP_C\).
+
+		For an OR gate, there are several conditions under which the output \(Y\) is high, and only one where it is low. Since \(P_Y = 1-\overline{P}_Y\), it's easiest to first find the probability that the output of the gate is low, \(\overline{P}_Y\). The one condition under which \(Y\) is low is that \(A\) and \(B\) are both low. Therefore, \(\overline{P}_Y = \overline{P}_A\overline{P}_B\), and so \(P_Y = 1 - \overline{P}_A\overline{P}_B\). 
+
+		NAND2 gates have a single condition under which \(Y\) is low, when \(A\) and \(B\) are both \textit{high}, and so \(\overline{P}_Y = P_AP_B\) and therefore \(P_Y = 1-P_AP_B\). 
+
+		The output of a NOR2 gate is only on when both inputs are low, and so \(P_Y = \overline{P}_A\overline{P}_B\). 
+
+		XOR2 gates are slightly more complicated, since there are two conditions that make the output high, and two that make it low. In probability, we can use the addition rule, which states that the probability of one event or another occuring (again, mutually exclusive) is given by \(P_{A \mathrm{or} B} = P_A + P_B\). The two events we care about here are the two that set the output high, \(A = 1\) or \(B = 1\), but not \(A = B = 0\) or \(A = B = 1\). Therefore, \(P_Y = P_A\overline{P}_B + \overline{P}_AP_B\).
+
+\end{enumerate}
+\end{document}
