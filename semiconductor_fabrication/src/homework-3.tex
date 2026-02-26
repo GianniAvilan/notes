@@ -1,0 +1,63 @@
+\documentclass{article}
+\title{ECE 496 -- Homework 3}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage[margin=1in]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 496}
+\fancyhead[R]{Homework 3}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\begin{document}
+\setcounter{section}{2}
+\setcounter{subsection}{1}
+\begin{enumerate}[label=\thesubsection]
+	\item
+	\begin{enumerate}[label=\alph*)]
+	\item At each mask step, there is a fraction of the die that are good. At the next mask step, a fraction of the remaining die will be good, and so on. Since the potential for errors compounds, to get a total fraction of 0.3 good die at the end, each mask step should produce, at minimum, a fraction of \(0.3^{\frac{1}{25}}=0.953\) good die.
+	\item Similarly, for a total fraction of 0.7 good die, each mask step should produce a minimum fraction of \(0.7^{\frac{1}{25}} = 0.9858\) good die.
+\end{enumerate}
+\setcounter{subsection}{4}
+\item
+	\begin{enumerate}[label=\alph*)]
+		\item For the n-diffusion window, negative photoresist should be used to create a window in the photoresist layer, where the exposed area of barrier layer can be easily etched away with a solvent, and then n-doped. Then, the contact windows can also be etched away using a negative photoresist. Finally, a positive photoresist can be used for the metal etch step, which \textit{leaves} a layer of barrier material in the exposed area. Then, the metal etch can be applied, and will only contact the exposed substrate material where there is no barrier layer.
+		\item The textbook contains an example of potential alignment marks for a multi-mask process, shown below. It's likely that a similar pattern could be used in the above process.
+			\begin{figure}[H]
+			  \centering
+			  \includegraphics[width=0.4\textwidth]{homework-3_fig-1.jpg}
+			  \caption{Potential alignment marks for the diode process in Q-2.4(a)}
+			  \label{fig:alignment}
+			\end{figure}
+	\end{enumerate}
+	\setcounter{subsection}{6}
+	\item
+		\begin{enumerate}[label=\alph*)]
+			\item For a feature size of \(0.25 \ \micro\mathrm{m}\) with a numerical aperture of \(1\), using 
+				\[
+				  F = 0.5 \frac{\lambda}{NA},
+				\]
+				\(\lambda = \frac{F \times NA}{0.5} = \frac{0.25 \times 10^{-6}}{0.5} = 250 \ \mathrm{nm}\).
+
+				Then, depth of field can be calculated using 
+				\[
+				  DF = 0.6 \frac{\lambda}{(NA)^2},
+				\]
+				as \(DF = 0.6 \times 250 \times 10^{-9} = 150 \ \mathrm{nm}\).
+			\item Repeating the entire process for \(NA = 0.5\), \(\lambda = \frac{0.25 \times 10^{-6} \times 0.5}{0.5} = 125 \ \mathrm{nm}\) and \(DF = \frac{0.6 \times 125 \times 10^{-9}}{0.25} = 300 \ \mathrm{nm}.\)
+		\end{enumerate}
+		\setcounter{subsection}{7}
+	\item Using \(NA = 1\), the largest aperture size, and solving for feature size, \(F = 0.5 \frac{193 \times 10^{-9}}{1} = 96.5 \ \mathrm{nm}\).
+		\setcounter{subsection}{8}
+	\item Using the process for the previous \(F = 0.5\frac{13 \times 10^{-9}}{1} = 6.5 \ \mathrm{nm}\).
+\end{enumerate}
+\end{document}
