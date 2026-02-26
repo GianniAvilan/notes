@@ -110,4 +110,92 @@ As with the continous-time discussion, \(M=N\) at most, and more often than not,
 
 To solve a difference equation, we can resort to an iterative or recursive method. Similar to a continuously-valued differential equation, the solution to \(y[0]\) requires knowledge of some initial conditions; that is, the system's prior outputs (if we use the delay form of the difference equation) \(y[n-1], y[n-2], \ ... \ y[-N]\), and the right hand side can be solved similarly. Therefore, a recursive or iterative method is often appropriate to solve a given difference equation, where previous values of the input/output are used to determine the corresponding value at \(n=0\). Then, each future step can also be solved for using the previous step, and so on, as long as we have \(N\) initial conditions available to us to solve for y[0].
 
+In continuous-time systems, we used the \(D\) operator to represent differentiation. Here, we'll use \(E\) as the \textbf{advance operator}, where
+\begin{align*}
+	&Ex[n] = x[n+1] \\
+	&E^2x[n] = x[n+2],
+\end{align*}
+and so on.
+
+Then, we can represent any discrete system's difference equation as
+\[
+	Q[E]y[n] = P[E]x[n].
+\]
+
+\subsection{System Response to Internal Conditions: The Zero-Input Response}
+
+Similar to continuous-time differential equations, we'll handle the zero-input response by setting \(x[n] = 0\),
+\[
+	Q[E]y_0[n] = 0.
+\]
+Recall that earlier in the chapter, we defined \(e^{\lambda n} = \gamma^n\), where \(e^{\lambda} = \gamma\). Therefore, the solution to \(y_0\) is now represented as 
+\[
+	y_0[n] = c_1\gamma_1^n + c_2\gamma_2^n + \ ... \ + c_n\gamma^n_N.
+\]
+As in continuous time, the ZIR will be determined in total by the roots, 
+
+For example: consider the LTID system 
+\[
+	y[n+2] - 0.6y[n+1] - 0.16y[n] = 5x[n+2].
+\]
+Setting the input to \(x[n] = 0\) and considering it to be \textit{causal} \textbf{(note: why is this important?)}, with initial conditions \(y[-1] = 0\) and \(y[-2] = \frac{25}{4}\), we will use \(E\) notation, 
+\[
+	(E^2 - 0.6E -0.16)y[n] = 5E^2x[n],
+\]
+which yields roots
+\[
+  \gamma^2 - 0.6\gamma - 0.16 = 
+\]
+\begin{align*}
+	\gamma_1 = -0.2 &&\gamma_2 = 0.8.
+\end{align*}
+Then, finding \(c_1\) and \(c_2\) using initial conditions, 
+\begin{align*}
+	c_1 = \frac{1}{5} && c_2 = \frac{4}{5},
+\end{align*}
+so that
+\[
+	y_0[n] = \frac{1}{5}(-0.2)^n + \frac{4}{5}(0.8)^n \ \ \ n \geq 0.
+\]
+
+Analysis of the characteristic roots \(\gamma_1, \gamma_2, \ ... \, \gamma_n\) will yield information about the system's stability, but the criteria shifts from right- and left-half plane to whether the root is less than, equal to, or greater than unity (on the unit circle). \textbf{(note: look into rationale for this more)}. As in continuous-time systems, pay close attention to whether the roots are real, repeated, and/or complex; this affects the form of your final solution.
+
+The above methodology is different from the iterative method, since any \(n\) can be plugged into the equation. This is the analogue of the analytical solution to a differential equation, as opposed to the numerical solution.
+
+\subsection{The Unit Impulse Response h[n]}
+
+The impulse response for discrete-time systems is, analogous to continuous-time systems, 
+\[
+	h[n] = \frac{b_N}{a_N}\delta[n]+ y_c[n]u[n].
+\]
+Comparing to continuous systems, \(b_0 = \frac{b_N}{a_N}\) and \(y_c[n]\) is a linear combination of the characteristic modes \(\gamma_1, \gamma_2, \ ... \ \gamma_n\), which will depend on the system's characteristic modes. As before, we will not need \(\frac{b_N}{a_N}\) if \(M < N\), since it is 0.
+
+How do we find the initial conditions \(c_1, c_2, \ ... \ c_n\)? Remember that before the impulse is applied, the system is in its zero state, but after the impulse is applied, new initial conditions are set. So, we will need two values of \(h[n]\) to find these new conditions. We can use the iterative method to find these conditions, such that \(h[-1] = h[-2] = 0\), then using these two values for \(n=0\) and \(n=1\) to find \(h[0]\) and \(h[1]\) and solve for \(c_1, c_2, \ ... \ c_n\) using the general solution. \textbf{(note: review this in much more detail, and go back and review impulse matching for continuous-time systems too, might make more sense now with the comparison available between the two types of system.)}
+
+For example: find the impulse response \(h[n]\) for \(y[n+1] - y[n] = x[n]\). We know that the general form of \(h[n]\) is \(\frac{b_N}{a_N}\delta[n] + y_c[n]u[n]\). Here, \(a_N = -1\) and \(b_N = 1\), so \(\frac{b_N}{a_N} = -1\). Now, we know \(h[n] = -\delta[n] + y_c[n]u[n]\). Now, we find \(y_c[n]\), the linear combination of the characteristic modes \(\gamma_1\) and \(\gamma_2\). Using the characteristic equation, 
+\begin{align*}
+	&(E-1)y[n] = x[n] \\
+	&\gamma - 1 = 0 \\
+	&\gamma_1 = 1.
+\end{align*}
+\textbf{note: why only one mode?}
+Using this mode, we now have \(y_c[n] = k\gamma^n = k \times 1^n = k\), since there is only one characteristic mode. Now, we need to find \(k\). Using the iterative method mentioned earlier, 
+\begin{align*}
+	&y[n] - y[n-1] = x[n-1] \\
+	&h[n] - h[n-1] = \delta[n-1] \\
+	&h[0] - h[-1] = \delta[-1] \ \ h[0] = 0.
+\end{align*}
+Therefore, we can plug in \(h[0] = 0\) now, and 
+\[
+	h[0] = -\delta[0] + ku[0] \Rightarrow -1 + 0 = k \Rightarrow k = 1.
+\]
+
+Then we can find the impulse response:
+\[
+	h[n] = -\delta[n] + u[n].
+\]
+\textbf{Why doesn't this match the textbook answer?}
+
+If you draw out the \(h[n]\) that we found, you'll see that it reduces to \(h[n] = u[n-1]\), so both are correct, just formulated differently.
+
 \end{document}

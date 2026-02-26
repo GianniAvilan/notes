@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=1em, indent=12pt]{parskip}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\begin{document}
+\setcounter{section}{5}
+\section{Chapter 6: Power} 
+\setcounter{subsection}{0}
+\subsection{Introduction}
+Interconnect refers to the wires linking transistors in a CMOS circuit. Wires themselves have resistance, capacitance, and inductance, which induces an RC delay similar to that discussed in chapter 4. We'll also cover the effects of steadily decreasing wire sizing/scaling, crosstalk, and repeaters (used to minimize interconnect related delay).
+
+In the etching process, there are trenches cut in the silicon dioxide to be filled with copper, and the result is a retangular interconnect with a width, length, and thickness. In addition, wires have a consistent spacing \(s\) from their neighbors. The sum of width and spacing is \textbf{pitch}.
+
+Modern CMOS processes use 6-10+ layers of interconnect, named as \(M1, M2, \ ... \ , MN\) for \(N\) layers. Layers get thicker as we go up from the base transistor layers. The cross-sectional area determines the resistance (inversely proportional). Vias connect VDD and GND vertically throughout the material. Clock signal may also be connected vertically through a low resistance path (due to the larger thickness at the top).
+
+\subsection{Interconnect Modeling}
+In terms of the water model, the "narrowness" impedes flow, capacitance is a leaky trough under the pipe, and inductance represents the inertia or momentum of the water (kickback if you try to suddenly try to stop the flow).
+
+Wires can be approximated by lumped element models, rather than breaking the wire into discrete segments. An L-model is like the Elmore model, but the \(\pi\)-model is more useful to us (one resistor with two capacitors to GND at each terminal, with a capacitance of \(\frac{C}{2}\).
+
+Propagation delay through a wire is proportional to the square of the length (non-linear). Approximately, \(t_d \approx 0.4d^2RC\) and \(t_r \approx d^2RC\).
+
+"10x transistor" means transistors are 10 times the unit size.
+
+Example: Delay of a 10x inverter driving a 2x inverter at the end of a 1mm wire. Assume wire capacitance of \(0.2 \ \mathrm{fF}/\micro\mathrm{m}\) and that a unit-sized inverter has \(R=1 k\ohm\) and \(C=0.1 \ \mathrm{fF}\). 
+
+Apply Elmore delay: \(\tau_{pd}\ = 1000\ohm \times 100 \mathrm{fF} + 1000 + 800 \ohm \times 100 + 0.6 \ \mathrm{fF} = 281 \ \mathrm{ps}.\)
+
+We can use sheet resistance as a dimensionless unit \(R_{\square}=\frac{\rho}{t}\), so that then \(R = R_\square \frac{l}{w}\). Practice calculating sheet resistivity. (resistivity \(\rho = \ohm \cdot \mathrm{cm}\) is given). Vias/contacts also have resistance, but are often placed in parallel to reduce total resistance.
+
+Capacitance of wires is complicated (of course). For a coaxial conductor, for example, 
+\[
+	C = \frac{2\pi\varepsilon}{\log{\frac{r_o}{r_i}}}.
+\]
+Similarly complex equations for capacitance between plates of different sizes, arrangements, geometries. Look into "fringing". Capacitance is a function of width and spacing (pitch). Technically capacitance is more sensitive to spacing than width (see textbook diagram, Fig. 6.12).
+
+For example, find the energy required per unit length to send a bit of information in a CMOS process.
+
+\subsection{Interconnect Impact}
+
+Wire delay increases as wires get smaller, this is a huge problem as CMOS processes become smaller and smaller. Wire delay is now outpacing gate delay, and are a larger concern. This is still true, but it can be minimized by shorter wires. \textbf{what is logical span?}
+
+Crosstalk, quick changes in voltage are not great when capacitors (separated wires) are involved (also called capacitive coupling). This introduces noise on other paths (bad). This also increases delay, depending on the behavior of neighbors (\textbf{how does this relate to Miller effect?}). Victim/agressor model. Review capacitance in AC circuits (linear circuit element, so shouldn't be too bad?) Review all this stuff in the book. Driver size factors into this.
+
+Going back to noise margins, this is where noise levels due to crosstalk come into play. This has all kinds of consequences, like extra delay, extra power, memory issues, etc.
+
+\subsection{Interconnect Engineering}
+Ground layers between every signal (very extreme). degrees of freedom are width, spacing, layers, and shielding. Repeaters may also be used to reduce delay. Since delay is proportional to the square of length, we can break the wires into \(n\) shorter segments, and drive each one with a repeater/buffer, often inverters. inverter sizing/power matters here. how many to include? 
+
+\end{document}
