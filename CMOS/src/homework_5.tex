@@ -1,0 +1,39 @@
+\documentclass{article}
+\title{ECE 478-- Homework 4}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 478}
+\fancyhead[R]{Homework 4}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\begin{document}
+\setcounter{section}{6}
+\setcounter{subsection}{1}
+\begin{enumerate}[label=\thesubsection]
+	\item Simplifying the wire under consideration to a uniform slab of material, we may use \textit{sheet resistance} to easily derive the resistance of the material per unit length.
+
+		First, to find the sheet resistance, we will need the material's resistivity as well as its thickness, while incorporating the thickness of the barrier material. Using Table 6.2, we may estimate the bulk resistivity of Cu at \(22\degree \ \mathrm{C}\) as \(1.7 \ \micro\ohm \cdot \mathrm{cm}\). Assuming that barrier material is included in the parameters given by Table 6.1, this reduces the effective thickness of the M1 layer in the Intel 45 nm stack to \(144 - 10 = 134 \ \mathrm{nm}\). Then, calculating the sheet resistance,
+		\[
+			R_{\square} = \frac{\rho}{t-t_{\mathrm{barrier}}} = \frac{1.7 \micro\ohm \cdot \mathrm{cm}}{134 \ \mathrm{nm}} = 1.19 \times 10^5 \ \frac{\micro\ohm}{\square} = 1.27 \ \frac{\mathrm{m}\ohm}{\square}.
+		\]
+		This refers to the resistance of a slab of equal length and width for the given material, regardless of dimensions used. 
+
+		Then, multiplying sheet resistance by a length of \(1 \ \mathrm{mm}\) and dividing by width, once again reducing the effective width by \(2t_{\mathrm{barrier}}\), since the conductive material is surrounded on either side by a \(10 \ \mathrm{nm}\) layer of barrier material, 
+		\[
+			R_{\mathrm{per \ mm}} = R_{\square}\frac{l}{w - 2t_{\mathrm{barrier}}} = (1.27 \ \frac{\mathrm{m}\ohm}{\square}) \ \frac{1 \ \mathrm{mm}}{60 \ \mathrm{nm}} = 21.17 \ \ohm.
+		\]
+	\setcounter{subsection}{2}
+	\item 
+\end{enumerate}
+\end{document} 

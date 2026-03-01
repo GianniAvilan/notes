@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ECE 341 Lab 1 - Introduction to MATLAB                %
+% ECE 341 Lab 2 - Time Domain Analysis of Continuous-Time Systems%
 % Author: Gianni Avilan                                 %
 % 02.04.2026                                            %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -81,7 +81,8 @@ fprintf('Testing the function,\n\n');
 fprintf('Providing two numbers, x1 = -3 and x2 = 2,\n\n');
 absolute_max(-3,2);
 
-fprintf('Providing three numbers, x1 = -3, x2 = 2, x3 = 5, returns an error,\n\n');
+fprintf('Providing three numbers, x1 = -3, x2 = 2, x3 = 5, returns an error,\n\n')
+absolute_max(-3,2,5);
 
 %% Problem 14
 clear
