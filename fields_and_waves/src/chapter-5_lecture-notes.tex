@@ -112,8 +112,105 @@ where \(\hat{\alpha}_r = \frac{\vec{R}}{|\vec{R}|}\).
 
 Alternately, 
 \[
-\vec{H} = \frac{I}{4\pi} \int \frac{d \vec{l} \times \vec{R}}{R^3} \ \mathrm{\frac{A}{M}}. \ \mathrm{(check \ these \ units)}
+\vec{H} = \frac{I}{4\pi} \int \frac{d \vec{l} \times \vec{R}}{R^3} \ \mathrm{\frac{A}{m}}.
 \]
-The direction of the resultant field will be in the \(\phi\) direction around the wire.
+The direction of the resultant field will be rotating in the \(\phi\) direction around the wire. Note that \(d \vec{l}\) is in the direction of the current \(I\).
+
+Solving problems using Biot-Savart:
+
+For example, we have a linear conductor of length \(l\) carrying a current of \(I\) along the \(z\) axis. Find the magnetic flux density \(\vec{B}\) at a point \(P\) located at a distance of \(r\) in the \(x-y\) plane.
+
+To make the problem simpler, we may center the conductor at the origin, meaning one end is at \(-\frac{l}{2}\) and the other is at \(\frac{l}{2}\). We know that the magnetic field will be in the \(\hat{\alpha}_\phi\) direction, and we assume a magnetic permeability of \(\mu_0\). Therefore, 
+\[
+  \vec{H} = \frac{I}{4\pi} \int \frac{d \vec{l} \times \vec{R}}{R^3}.
+\]
+
+First, we need to define a few parameters. In this case, \(d \vec{l} = \hat{\alpha}_z dz\), since the conductor exists along the \(z\) axis. Finding the difference vector between any point on along the conductor and \(P\), we can express \(\vec{R}\) as \(\hat{\alpha}_r \cdot r - \hat{\alpha}_z \cdot z\). Then, \(d \vec{l} \times \vec{R} = (\hat{\alpha}_z dz) \times (\hat{\alpha}_r \cdot r - \hat{\alpha}_z \cdot z) = \hat{\alpha}_\phi r dz\).
+
+Then, 
+\[
+	\vec{H} = \frac{I}{4\pi}\int_{-\frac{l}{2}}^{\frac{l}{2}} \frac{\hat{\alpha}_\phi r dz}{(z^2 + r^2)^{\frac{3}{2}}} = \hat{\alpha}_\phi \frac{I}{4\pi}\cdot r \int_{-\frac{l}{2}}^{\frac{l}{2}} \frac{dz}{(z^2 + r^2)^{\frac{3}{2}}}.
+\]
+Using a standard formula for integration, this reduces to
+\[
+	\vec{H} = \hat{\alpha}_\phi \frac{I\cdot r}{4\pi} \cdot \frac{I}{r^2}(\frac{z}{\sqrt{r^2+z^2}} \ \Big|_{-\frac{l}{2}}^{\frac{l}{2}}) = \hat{\alpha}_\phi \frac{I\cdot l}{2\pi r \sqrt{4r^2 + l^2}}.
+\]
+
+Finding \(\vec{B}\), 
+\[
+	\vec{B} = \mu_0 \vec{H} = \hat{\alpha}_\phi\frac{\mu_0 I \cdot l}{2\pi r \sqrt{4r^2 + l^2}} \ \mathrm{T}.
+\]
+
+We may simplify this equation for an identical conductor to the above conductor, except that it extends to infinity. So, as \(l \to \infty\),
+\[
+  \vec{B} = \hat{\alpha}_\phi \frac{\mu_0 I}{2\pi r}.
+\]
+
+Later, we will show that the same problem can be solved more easily using Ampere's Law, the magnetic field analogue to Gauss's Law.
+
+As another example, a circular loop of radius \(a\) carries a current of \(I\). Find the magnetic flux density \(\vec{B}\) at a point on the axis of the loop. 
+
+Use the right-hand rule to determine that, if the current \(I\) flows counter-clockwise, the field will be in the \(\hat{\alpha}_z\) direction (fingers are current, thumb is field). Since the loop is symmetric (centered at the origin of the \(x-y\) plane, the \(x-y\) components will cancel, and there will be a net field only in the \(z\) direction at any point along the \(z\) axis.
+
+Then, finding \(d \vec{l}\), we may use cylindrical coordinates to find \(d \vec{l} = \hat{\alpha}_\phi a d \phi\). Then, \(\vec{R}\) can be expressed as \(\vec{R} = \hat{\alpha}_z \cdot z - \hat{\alpha}_r \cdot a\), and \(d \vec{l} \times \vec{R} = \hat{\alpha}_r a z d \phi + \hat{\alpha}_z a^2 d\phi\). 
+
+Simplyfing, \(dH \to \hat{\alpha}_z\), and \(H = \int d \vec{H}\).
+
+Solving, 
+\[
+	\vec{B} = \mu_0 \vec{H} = \hat{\alpha}_z \frac{mu_0 I \cdot a^2}{2(z^2 + a^2)^{\frac{3}{2}}} \ \mathrm{T}.
+\]
+
+When two current carrying conductors exert magnetic fields forces, there is an analogous relationship to that between two point charges; that is, the superposition principle is such that the forces contributed by each conductor sums with the force exerted by the other. In addition, there is a force on each conductor exerted by the other.
+
+For two parallel conductors with current runnin gin the same direction along the \(z\) direction, we may find the force exerted on the second conductor, for example, as 
+\[
+  \vec{F}_2 = (\vec{I} \times \vec{B})L = -\hat{\alpha}_y \frac{\mu_0 I_1 I_2 l}{2\pi d}.
+\]
+Similarly, 
+\[
+  \vec{F_1} = \hat{\alpha}_y \frac{\mu_0 I_1 I_2}{2\pi d}.
+\]
+The takeaway here is there is an \textit{attractive} force between the wires. 
+
+In terms of Maxwell's equations, magnetostatics can be reduced to 
+\begin{align*}
+	& \nabla \cdot \vec{D} = \rho_v\\
+	& \nabla \times \vec{E} = 0 \\
+	& \nabla \cdot \vec{B} = 0.
+\end{align*}
+
+Moving on, Ampere's Law relates the static magnetic field to the source of the field (current), and states that the line integral of the magnetic field \(\vec{H}\) around a closed path is equal to the current flowing through the surface bounded by that path. Mathematically, 
+\[
+	\oint_C \vec{H} \cdot d \vec{l} = I.
+\]
+In terms of magnetic flux density \(\vec{B}\), 
+\[
+  \oint_C \vec{B} \cdot d \vec{l} = \mu_0 I.
+\]
+
+Using Ampere's Law, we can solve the infinitely long conductor problem from before much more simply. 
+
+Using the same conductor, infinitely long and lying along the \(z\) axis, we may find the magnetic field intensity at a distance \(r\) in the \(x-y\) plane. First, we can assume that the magnetic field is in the \(\phi\) direction, so \(\vec{H} = \hat{\alpha}_\phi H\). Then, \(d \vec{l} = \hat{\alpha}_\phi r d \phi\). Therefore, Ampere's Law in this case reduces to 
+\[
+  \int_{0}^{2\pi} \hat{\alpha}_\phi H \cdot \hat{\alpha}_\phi r d\phi = H\cdot r \cdot 2\pi = I.
+\]
+
+This agrees with our prior assessment, that 
+\[
+  H = \frac{I}{2\pi r}.
+\]
+
+As another example, a long straight wire of radius \(a\) carries a current \(I\) that is uniformly distributed over its cross section. Find the magnetic field \(\vec{H}\) a) inside the wire and b) outside the wire.
+
+Again, we may center the wire at the origin of the \(x-y\) axis to solve more easily for \(\vec{H}\). Applying Ampere's Law again, if we create a closed loop inside the wire with radius \(r \leq a\), \(H 2\pi r = \frac{I}{\pi a^2} \cdot \pi r^2\), using the current density. Simplifying, 
+\[
+	\vec{H} = \hat{\alpha}_\phi\frac{I \cdot r}{2 \pi a^2} \ \mathrm{\frac{A}{m}}.
+\]
+
+Outside the loop, 
+\[
+	\vec{H} = \hat{\alpha}_\phi	\frac{I}{2 \pi r}.
+\]
 \end{document}
 

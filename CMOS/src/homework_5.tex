@@ -1,5 +1,5 @@
 \documentclass{article}
-\title{ECE 478-- Homework 4}
+\title{ECE 478-- Homework 5}
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{enumitem}
@@ -12,7 +12,7 @@
 \fancyhf{}
 \fancyhead[L]{Gianni Avilan-Losee}
 \fancyhead[C]{ECE 478}
-\fancyhead[R]{Homework 4}
+\fancyhead[R]{Homework 5}
 \fancyfoot[C]{\thepage}
 \usepackage{microtype}
 \usepackage{textcomp, gensymb}
@@ -34,6 +34,34 @@
 			R_{\mathrm{per \ mm}} = R_{\square}\frac{l}{w - 2t_{\mathrm{barrier}}} = (1.27 \ \frac{\mathrm{m}\ohm}{\square}) \ \frac{1 \ \mathrm{mm}}{60 \ \mathrm{nm}} = 21.17 \ \ohm.
 		\]
 	\setcounter{subsection}{2}
+\item For the wire in the \(pi\)-model, we can use the sheet resistance to derive total resistance, and the given capacitance per unit length to derive the capacitance on each side of the wire's resistance. Finding the resistance first, we'll use \(\lambda = 0.3 \ \micro\mathrm{m}\) to find width \(w = 0.3 \times 4 = 1.2 \ \micro\mathrm{m} = 1.2 \times 10^{-3} \ \mathrm{mm}\). Then,
+		\[
+			R_{\mathrm{wire}} = R_{\square} \ \frac{l}{w} = 0.08 \times \frac{5}{1.2 \times 10^{-3}} = 333.34 \ \ohm.
+		\]
+		Then, using capacitance per unit length of \(C = 0.2 \ \mathrm{\frac{fF}{\micro m}}\), 
+		\[
+			C_{\mathrm{wire}} = (0.2 \times 10^{-15})(5 \times 10^{3}) = 1 \times 10^{-12} = 1 \ \mathrm{pF}.
+		\]
+		Fig. 1 shows the corresponding \(\pi\)-model representation of the wire with the above parameters.
+\end{enumerate}
+\renewcommand{\thesubsection}{\thesection.\Alph{subsection}}
+\begin{enumerate}[label=\thesubsection]
+	\setcounter{subsection}{1}
+	\item First, we can model the process of crosstalk between a switching and non-switching wire as a capacitive voltage divider by assuming the victim wire is floating (we'll correct for this assumption momentarily). In the above case, 
+		\[
+			\Delta V_{\mathrm{victim}} = \frac{C_{\mathrm{adj}}}{C_{\mathrm{gnd-v}} + C_{\mathrm{adj}}} \Delta V_{\mathrm{agressor}}. = \frac{0.08}{0.2} = 0.4 \ \mathrm{V}.
+		\]
+		Therefore, in a floating, non-switching victim wire, we'd expect to see a peak change of \(0.4 \ \mathrm{V}\) in the victim wire for a corresponding \(1 \ \mathrm{V}\) change in the agressor wire. 
+
+		In our case, however, the victim wire is not floating; instead, it is driven by an inverter of equal resistance to the agressor wire. Under these conditions, the victim's driver will supply current to oppose and reduce the undesireable voltage spike, proportional to the time constant ratio \(k\) of the agressor to the victim. Since both victim and agressor in this case have an identical time constant \(\tau\), \(k=1\), and the peak change in the victim wire may be expressed as 
+		\[
+			\Delta V_{\mathrm{victim}} = 0.4 \times \frac{1}{1+k} = 0.2 \ \mathrm{V}.
+		\]
+	\setcounter{subsection}{2}
 	\item 
+		\begin{enumerate}[label=\arabic*.]
+			\item 
+			\item 
+		\end{enumerate}
 \end{enumerate}
 \end{document} 
