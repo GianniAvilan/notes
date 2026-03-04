@@ -198,4 +198,67 @@ Then we can find the impulse response:
 
 If you draw out the \(h[n]\) that we found, you'll see that it reduces to \(h[n] = u[n-1]\), so both are correct, just formulated differently.
 
+\textbf{Note:} Apparently we call them natural modes not characteristic modes in discrete time. Nevermind not sure about this now.
+
+Review of closed-form determination of the impulse response (see Drill 3.14 in textbook).
+
+\subsection{System Response to External Input: The Zero-State Response}
+
+To find the ZSR of the system given an input signal \(x[n]\), we use the same property as a continuous-time system, by convoluting the input signal with the impulse response, 
+\[
+	x[n] * h[n] = y[n].
+\]
+
+Review differences in the width property for discrete vs continuous time.
+
+Discrete-time convolution follows similar steps to continuous time convolution. First, you'll "flip" one function, \(g[m] = g[-m]\) (this mirrors the function about the \(y\) axis. We can begin to shift \(g[-m]\), and there can be no overlap, partial overlap, and complete overlap between the two signals. Rather than evaluating the function, though, we will sum at each discrete step of the shift.
+
+This results in an iterative kind of solution. Can we find a closed-form solution? The general solution can be found in Chapter B of the textbook.
+
+\subsection{System Stability}
+
+As usual, the total response is ZIR + ZSR. Mathematically,
+\[
+	\sum_{j=1}^{N}c_j\gamma_j^n + x[n] * h[n].
+\]
+
+Similarly, again, to the continuous-time case, BIBO stability can be determined by evaluating the impulse response of the system; is it absolutely summable? Mathematically, BIBO criteria is
+\[
+	\sum_{n=-\infty}^{\infty}|h[n]| < K_2 < \infty.
+\]
+Again, internal stability can be used to make conclusions about BIBO (external) stability.
+
+Internal stability itself depends on the ZIR of the system (its characteristic roots/modes.)
+
+Quick review of complex math, polar v rectangular form. As a consequence of how polar complex numbers work, we can assume that stability criteria for discrete time is 
+\begin{align*}
+	&|\gamma| < 1 \\
+	&|\gamma| > 1 \\
+	&|\gamma| = 1,
+\end{align*}
+where each case determines stable, marginally unstable, and unstable systems.
+
+In short, you may determine internal stability using the values of \(\gamma\) that are found by solving the system's characteristic equation.
+
+\subsection{Exam review}
+
+Only first part of chapter 3, otherwise just Chapter 1, 2; lectures 1-7.
+
+Chapter 1, signal classification, energy, power, etc. Equation sheet will be provided. No graphical convolution, thank fucking god. Signal energy and power, what is an energy signal vs power signal. Signal operations, shifting, scaling, etc. Classification of signals (easier than systems), using the unit step to describe piecewise functions (this will \textbf{definitely} be on the test, and we will need to know how to do slopes, etc. Probably good to review slope-intercept and point-slope form). System classification, we may need to show math for is it time-variant, etc. for causal, memoryless, maybe just need to write out justification, no math. total response is ZIR + ZSR.
+
+Chapter 2, we will need to find system response given differential equation. Impulse matching (simplified) equation is given. Just know how to use them, find zero-input response and impulse response. Use response to find system stability. 
+
+From Chapter 3, we will need to know the following: 
+Power and energy for discrete-time signals, impulse and unit functions in discrete time, he will either give us an equation and ask for the graph, or give us the graph and ask for the equation (unit step in discrete time).
+
+What problems should you focus on more? 
+\begin{enumerate}
+	\item Represent a CT signal using \(u(t)\).
+	\item System classification (linearity (use math justification), causality, time variance, memoryless, causal, analog/digital, invertible, stability).
+	\item Internal and external stability analysis. Given a differential equation, tell me what the internal and external stability is, mathematically. Given the characteristic modes, not the impulse response. So we can assume that an internally stable/unstable system is externally stable/unstable.
+	\item Finding the impulse response of a system, given the differential equation.
+	\item DT signal representation (only one Chapter 3 question).
+	\item a little extra credit, as a treat.
+\end{enumerate}
+
 \end{document}

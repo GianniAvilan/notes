@@ -1,0 +1,128 @@
+\documentclass{article}
+\title{ECE 341 -- Midterm 1 Practice}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{ECE 341}
+\fancyhead[R]{Midterm 1 Practice}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\begin{document}
+\setcounter{section}{2}
+\setcounter{subsection}{2}
+\setcounter{subsubsection}{2}
+\begin{enumerate}[label=\textbf{\thesubsubsection}]
+	\item Consider a linear time-invariant system with input \(x(t)\) and output \(y(t)\) that is described by the differential equation
+		\[
+			(D+1)(D^2-1){y(t)} = (D^5-1){x(t)}
+		\]
+		Furthermore, assume \(y(0) = \dot{y}(0) = \ddot{y}(0) = 1.\)
+		\begin{enumerate}[label=(\alph*)]
+			\item What is the order of this system?
+				\vfill
+			\item What are the characteristic roots of this system?
+				\vfill 
+			\item Determine the zero-input response \(y_{\mathrm{zir}}(t)\). Simplify your answer.
+				\vfill
+		\end{enumerate}
+	\newpage
+	\setcounter{subsubsection}{3}
+	\item A real LTIC system with input \(x(t)\) and output \(y(t)\) is described by the following constant-coefficient linear differential equation:
+		\[
+			(D^3 + 9D){y(t)} = (2D^3 + 1){x(t)}.
+		\]
+		\begin{enumerate}[label=(\alph*)]
+			\item What is the characteristic equation of this system?
+			\vfill
+			\item What are the characteristic modes of this system?
+			\vfill
+		  \item Assuming \(y_{\mathrm{zir}}(0)=4\), \(\dot{y}_{\mathrm{zir}}(0) = -18\), and \(\ddot{y}_{\mathrm{zir}}(0) = 0\), determine this system's zero-input response \(y_{\mathrm{zir}}(t).\) Simplify \(y_{\mathrm{zir}}(t)\) to include only real terms (i.e., no \(j\)'s should appear in your answer).
+			\vfill
+		\end{enumerate}
+		\newpage
+		\setcounter{subsubsection}{11}
+	\item A system is described by a constant-coefficient linear differential equation and has zero-input response given by \(y_0(t) = 2e^{-t}+3.\)
+		\begin{enumerate}[label=(\alph*)]
+			\item Is it possible for the system's characteristic equation to be \(\lambda + 1 = 0\)? Justify your answer.
+				\vfill
+			\item Is it possible for the system's characteristic equation to be \(\sqrt{3}(\lambda^2 + \lambda) = 0\)? Justify your answer.
+				\vfill
+			\item Is it possible for the system's characteristic equation to be \(\lambda(\lambda + 1)^2 = 0\)? Justify your answer.
+				\vfill
+		\end{enumerate}
+		\newpage
+		\setcounter{subsection}{3}
+		\setcounter{subsubsection}{5}
+	\item Find the unit impulse response of an LTIC system specified by the equation specified by the equation
+		\[
+			(D^2 + 6D + 9)y(t) = (2D + 9)x(t).
+		\]
+		\newpage
+		\setcounter{subsubsection}{7}
+	  \item A causal LTIC system with input \(x(t)\) and output \(y(t)\) is described by the constant coefficient integral equation
+			\[
+			  y(t) + \int 3y(t)dt + \int\int 2y(t)dt = \int\int x(t)dt - \int\int\int x(t)dt.
+			\]
+			\begin{enumerate}[label=(\alph*)]
+				\item Express this system as a constant coefficient linear differential equation in standard operator form.
+					\vfill
+				\item Determine the characteristic modes of this system.
+					\vfill
+				\item Determine the impulse response \(h(t)\) of this system.
+					\vfill
+			\end{enumerate}
+			\newpage
+			\setcounter{subsubsection}{4}
+		\item Find the unit impulse response for the first-order allpass filter specified by the equation
+			\[
+				(D+1)y(t) = -(D-1)x(t)
+			\]
+			\newpage
+			\setcounter{subsection}{4}
+			\setcounter{subsubsection}{13}
+		\item Using direct integration, find \(e^{-at}u(t)*e^{-bt}u(t)\).
+			\newpage
+			\setcounter{subsection}{4}
+			\setcounter{subsubsection}{16}
+		\item The unit impulse response of an LTCI system is
+			\[
+				h(t) = e^{-t}u(t)
+			\]
+			Find this system's (zero-state) response \(y(t)\) if the input \(x(t)\) is
+			\begin{enumerate}[label=\alph*)]
+				\item \(u(t)\)
+					\vfill
+				\item \(e^{-t}u(t)\)
+					\vfill
+				\item \(e^{-2t}u(t)\)
+					\vfill
+				\item \(\sin{(3t)}u(t)\)
+					\vfill
+			\end{enumerate}
+				Use the convolution table (Table 2.1) to find your answers.
+				\newpage
+				\setcounter{subsubsection}{21}
+			\item A first order allpass filter impulse response is given by
+				\[
+					h(t) = -\delta(t) + 2e^{-t}u(t)
+				\]
+				\begin{enumerate}[label=\alph*)]
+					\item Find the zero-state response of this filter for the input \(e^{t}u(-t)\).
+						\vfill
+					\item Sketch the input and the corresponding zero-state response.
+						\vfill
+				\end{enumerate}
+				\setcounter{subsubsection}{23}
+				\newpage
+			\item The zero-state response of an LTIC system to an input \(x(t) = 2e^{-2t}u(t)\) is \(y(t) = [4e^{-2t} + 6e^{-3t}]u(t)\). Find the impulse response of the system. [\textit{Hint:} We have not yet developed a method of finding \(h(t)\) from the knowledge of the input and the corresponding output. Knowing the form of \(x(t)\) and \(y(t)\), you will have to make the best guess of the general form of \(h(t)\).]
+\end{enumerate}
+\end{document}
