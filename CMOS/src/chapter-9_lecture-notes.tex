@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=1em, indent=12pt]{parskip}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\begin{document}
+\setcounter{section}{8}
+\section{Chapter 9: Combinational Circuit Design} 
+\setcounter{subsection}{1}
+\subsection{Circuit Families}
+Since CMOS circuits inherently invert their output, we can use DeMorgan's law to "bubble push" and simplify existing logic designs into the minimum number of NAND and NOR gates required to fulfill the logic function under consideration.
+
+This ties back to logical effort, and its relationship to, now, compound gates rather than inverters. Recall that logical effort is a ratio comparing the input or gate capacitance of a CMOS circuit when compared to a unit inverter in the same process.This logical effort, combined with the parasitic capacitance inherent to the circuit, allows us to calculate a normalized delay value that compares easily to other designs.
+
+Input logical effort may be asymmetric in some gates, where different input paths may have different logical efforts. For example, in an AOI21 gate, the logical effort of inputs A and B are different from input C.
+
+Unfortunately, Elmore delay is a simplistic model when applied to parasitic delay; assuming different logical efforts for different inputs, the inputs may arrive \textit{at different times}. Elmore delay models assume inputs that switch simultaneously, leading to an innacurate model of delay in complex circuits. Delay changes depending on which input arrives or switches first, leading to unequal delays depending on the state.
+
+We can generalize this idea by referring to inner and outer inputs, where the most inner input is closest to output, and outer is closest to the rail. Then we may connect the latest input to the inner terminal. Second-order complication for Elmore delay.
+
+Asymmetric gates favor one input over another, which results in an approach where the most critical signal may be prioritized. Then, we can boost the size of the non-critical input to equalize resistance and use a smalle transistor (less capacitance). Therefore, we will approach \(g=1\) on the the critical input at the cost of increasing total logical effort. On the other hand, we may also design gates with completely symmetric inputs, at the cost of using more transistors than strictly necessary. Skewed gates favor the rising or falling edge over the other. Lots of ways to tweak sizing/number of transistors to achieve the results we want, usually at some cost to other, less critical functionality. Compare skewed and unskewed logical effort, for both rising and falling edge (obviously, logical effort impacts delay times). HI- and LO-skew: we can define logical effort as compared to the input capacitance of an \textit{unskewed} inverter. Skewed gate catalog.
+
+You can even combine skewed and asymmetric gates to reduce parasitic delay further for critical inputs, at the cost of increased delay on other inputs. 
+
+In terms of lowest possible delay, we want as little capacitance as we can everywhere. In these terms, pMOS is always the less ideal choice since these transistors are twice as wide and thus twice as capacitive. Prior to CMOS technology, nMOS processes had not pMOS, and used a pull-up transistor that was always on. Voltage will appear across the pull-up resistor and generate static power, wasting energy and heating up the chip. Though this is impractical at scale, there are some CMOS circuits where this kind of approach may be more ideal than the alternative, using a small pMOS rather than a resistor. This is called a ratioed circuit or pseudo-nMOS. Review issues with this approach. Effective for big NOR gates.
+
+Dynamic logic gates adress some of the issues in the above circuit design techniques. Dynamic logic uses an oscillating clock signal to switch between precharge and evaluate stages. Y is precharged in this technique.
+
+Zoned out momentarily and now we're talking about feet. Footed/unfooted difference? Compare logical effort, this seems to be the rule of thumb here. Dynamic gates, though, require montonically rising inputs. You can't cascade these types of gates because they produce non-monotonic patterns You can't cascade these types of gates because they produce non-monotonic outputs. The solution is domino gates, where every dynamic gate is passed through an inverter to convert the dynamic output to a monotonic signal.
+
+Leakage happens, dynamic RAM. These nodes can only hold their values for nanoseconds, so we use a keeper transistor to account for this. Dynamic logic isn't used much anymore, because it's incredibly complicated to manage all the problems, charge sharing is a also a problem. The floating outputs are highly sensitive to noise, including from the power supply, etc. Dynamic logic gates also have high activity factors, since the clocked transistors are \(\alpha = 1\), leading to high power consumption. 
+
+Pass transistor circuits can be used like switches as well, and they drive diffusion terminals (what is that) as well as gates. Use for a 2-input MUX, gates should be restoring.
+
+\end{document}

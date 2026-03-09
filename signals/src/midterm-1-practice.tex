@@ -17,10 +17,78 @@
 \usepackage{microtype}
 \usepackage{textcomp, gensymb}
 \begin{document}
+\begin{enumerate}[label=\textbf{\thesubsubsection}]
+\setcounter{section}{1}
+\setcounter{subsection}{4}
+\setcounter{subsubsection}{2}
+\item Express each of the signals in Fig. 1 by a single expression valid for all \(t\).
+	\begin{figure}[H]
+	  \centering
+	  \includegraphics[width=0.4\textwidth]{midterm-practice_fig-1.png}
+	  \caption{CT signals}
+	  \label{fig:ct-sigs}
+	\end{figure}
+	\begin{enumerate}[label=\alph*)]
+		\item Using point-slope form, \((y-y_1) = m(x-x_1)\), we can express (a) as a piecewise function, where the first section can be expressed as \((y-4) = 4(x-0) \to x_{1a}(t) = 4t + 4\), and the second section can be expressed as \((y-4) = -2(x-0) \to x_{1b}(t) = -2x + 4\). More succinctly, 
+			\[
+			  x_1(t) = 
+				\begin{cases}
+					4t + 4 & -1 < t < 0 \\
+					-2t + 4 & 0 < t < 2 \\
+					0 & \mathrm{elsewhere}.
+				\end{cases}
+			\]
+			Using the unit step function, 
+			\[
+				(4t + 4)[u(t+1) - u(t)] + (-2t + 4)[u(t) - u(t-2)].
+			\]
+		\item The first section of (b) is defined already as \(t^2\), and the second section may be found in point-slope form as \((y+4) = 2(x-2) \to x_{2b}(t) = 2t - 8\). More succinctly,
+			\[
+			  x_2(t) =
+				\begin{cases}
+					t^2 & 0 < t < 2 \\
+					2t-8 & 2 < t < 4 \\
+					0 & \mathrm{elsewhere}.
+				\end{cases}
+			\]
+			Using the unit step function, 
+			\[
+				t^2[u(t) - u(t-2)] + (2t-8)[u(t-2) - u(t-4)].
+			\]
+	\end{enumerate}
+\setcounter{subsubsection}{4}
+\item Define signal \(x(t) = u(t-1) - u(t-2.5) - 2\delta(t-4) + \delta(t-6).\)
+	\begin{enumerate}[label=\alph*)]
+		\item Sketch \(y(t) = \int_{-\infty}^{t}x(\tau) \ d\tau\).
+			\begin{figure}[H]
+			  \centering
+			  \includegraphics[width=0.4\textwidth]{midterm-practice_fig-2.png}
+			  \caption{Plot of \(y(t)\)}
+			  \label{fig:y(t)}
+			\end{figure}
+		\item Describe a simple change that can be made to the right-most delta function in \(x(t)\) so that \(y(t) = \int_{-\infty}^{t}x(\tau) \ d\tau\) has finite energy.
+			Setting the coefficient of \(\delta(t)\) to \(0.5\) will "zero out" the function after \(t=4.\)
+		\item Sketch \(z(t) = \int_{t}^{\infty}x(\tau) \ d\tau\).
+		\item Determine real constants \(A\) and \(B\) so that \(w(t) = x(\frac{t-A}{B})\) has a region of support \([-2,2].\)
+	\end{enumerate}
+\setcounter{subsection}{7}
+\setcounter{subsubsection}{1}
+\item For the systems described by the following equations, with the input \(x(t)\) and output \(y(t)\), determine which of the systems are linear and which are nonlinear.
+	\begin{enumerate}[label=\alph*)]
+		\item \[\frac{dy(t)}{dt}+2y(t) = x^2(t).\]
+			Testing the additive property first,
+			\begin{align*}
+				&\frac{dy_1(t)}{dt} + 2y_1(t) = x_1(t)^2 \\
+				&\frac{dy_2(t)}{dt} + 2y_2(t) = x_2(t)^2.
+			\end{align*}
+			Then, 
+			\[
+				\frac{d}{dt}[k_1y_1(t) = k_2y_2(t)] + 2[k_1y_1(t) + k_2y_2(t)] = k_1x_1(t)^2 + k_2x_2(t)^2.
+			\]
+	\end{enumerate}
 \setcounter{section}{2}
 \setcounter{subsection}{2}
 \setcounter{subsubsection}{2}
-\begin{enumerate}[label=\textbf{\thesubsubsection}]
 	\item Consider a linear time-invariant system with input \(x(t)\) and output \(y(t)\) that is described by the differential equation
 		\[
 			(D+1)(D^2-1){y(t)} = (D^5-1){x(t)}

@@ -1,0 +1,79 @@
+\documentclass[12pt]{report}
+\hbadness=100000%
+\usepackage[margin=1in]{geometry}
+\setlength{\parskip}{5pt}
+\usepackage{xurl}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\renewcommand{\bibname}{References}
+
+\title{ECE 496 - Silicon Integrated Circuit Design Technology Lab 3: Oxidation \\ Spring 2026, Lab Section B}
+\author{Gianni Avilan-Losee}
+\date{\today}
+\begin{document}
+\maketitle
+\setcounter{chapter}{3}
+\setcounter{section}{0}
+\section{Objectives}
+
+This lab's objective was to familiarize ourselves with the oxidation process for silicon wafer manufacturing, and the standard process for post-oxidation inspection to ensure acceptable results.
+
+\section{Background}
+
+\subsection{Thermal Oxidation}
+
+A critical step in the silicon wafer manufacturing process is \textbf{oxidation}, wherein the cleaned wafer's surface is exposed to oxygen and heat to encourage the controlled growth of a silicon dioxide (SiO2) barrier layer. Though we will limit ourselves to dry thermal oxidation in this lab, it's worth briefly discussing the differences between wet and dry thermal oxidation, as well as the advantages and disadvantages of the two approaches. Both processes are typically carried out at \(900\) to \(1200 \degree \mathrm{C}\), to encourage easier diffusion of water vapor or oxygen through the surface of the silicon wafer \cite{textbook}. 
+
+The wafer is typically placed in an oxidation furnace, which is then set to a temperature within the range defined above, and, in wet oxidation, water vapor is introduced into the oven; in dry oxidation, a mix of pure, gaseous nitrogen and oxygen is introduced. Over time, the oxygen at the surface of the silicon wafer undergoes a chemical reaction with the silicon and forms a layer of silicon dioxide at the surface. Since silicon is consumed as part of this process, and oxygen is able to diffuse through the surface, the resultant layer of silicon dioxide extends above and below the original surface of the silicon wafer.
+
+Since continued oxide layer growth results in a thicker layer for oxygen to diffuse through, the growth rate decreases as time goes on. The entire process can be approximated with a differential equation, 
+\[
+  \frac{dX_o}{dt} = \frac{J}{M} = (DN_0/M)/(X_o + D/k_s),
+\]
+modeled using Fick's first law of diffusion. Without going into detail, we can show that wet oxidation is, by far, the faster process for growing a specified thickness of silicon dioxide. Why, then, use dry oxidation? 
+
+In general, dry oxidation results in more consistent and higher-quality silicon dioxide growth, with the trade-off of a much longer oxidation time when compared to wet oxidation \cite{dry-wet}.
+
+The oxidation furnace used in this lab was a Carbolite oxidation furnace, with a 3508 controller.
+
+\subsection{Post-Oxidation Wafer Inspection}
+
+Once the wafer has been oxidized for the necessary amount of time, we must ensure that the silicon dioxide layer matches the initial target thickness. In this lab, an ellipsometer was used to measure light reflected off the oxidized wafer's surface, and then the resultant values were analyzed digitally to ensure the correct results.
+
+Four values were collected; namely, P1, A1, P2, and A2, corresponding to the polarizer and analyzer drum angles at two different locations on the wafer's surface. Each value is determined by finding the point at which the minimum amount of light impacts the detector. Then, using both sets of readings, film thickness can be estimated to a reasonable degree of accuracy.
+
+\section{Procedure}
+
+After following proper gowning and cleanroom procedure, and entering the lab, the 100mm wafers were loaded into the oxidation furnace, which was preheated to \(110 \degree \mathrm{C}\), and left for 10 minutes. Then, the temperature was slowly increased to \(910 \degree \mathrm{C}\) to protect both the wafers and the furnace from thermal shock, and pure O2 was piped into the chamber, beginning the oxidation process. This temperature was then held steady for one hour, after which oxygen is cut off to the oxidation chamber, and the temperature was allowed to slowly drop to \(400 \degree \mathrm{C}\). Normally, another chemical cleaning process would precede this step; but for time reasons, the initial clean was considered sufficient.
+
+Then, the wafers were transferred to another bay for inspection. 
+
+Using the ellipsometer, thickness measurements were taken on the surface of the wafer and transferred to Gaertner Ellipsometer Measurement Program (GEMP) software for analysis.
+
+\section{Results and Discussion}
+\subsection{Post-Oxidation Wafer Inspection}
+Ellipsometry measurements were performed on the surface of a fully oxidized wafer, as follows: 
+\begin{align*}
+  &\mathrm{A1} = 40.4 \\
+  &\mathrm{P1} = 96.7 \\
+  &\mathrm{A2} = 185.0 \\
+  &\mathrm{P2} = 160.0 
+\end{align*}
+
+When analyzed in GEMP, this yielded a thickness of 303.5 \AA, very different from the expected value of \(1000\) \AA. This was likely to due to imperfections in the wafer's surface and/or impurities, and further analysis would be required to determine the oxide layer's overall quality.
+
+\section{Conclusion}
+
+In conclusion, the above process clarified the importance of accurate and controlled oxidation processes, as well as sophisticated measurement techniques. It's likely that the quality of the wafer used impacted the oxidation process and the resultant thickness measurements, though it's difficult to determine whether the measurement methodology was flawed, user error is responsible, or some unknown variable.
+
+\begin{thebibliography}{4}
+	\bibitem{textbook} Jaeger, R. (2001). \textit{Introduction to Microelectronic Fabrication: Volume 5 (Modular Series on Solid State Devices} (2nd ed.). Pearson.
+	\bibitem{dry-wet} Jimin, W., Yu, L., Ruiwei, L. (2003). An improved silicon-oxidation-kinetics and accurate analytic model of oxidation. \textit{Solid-State Electronics, 47}(10), https://doi.org/10.1016/S0038-1101(03)00135-7.
+\end{thebibliography}
+
+\end{document}
+

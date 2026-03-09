@@ -1,0 +1,33 @@
+\documentclass{article}
+\title{ECE 478-- Homework 6}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 478}
+\fancyhead[R]{Homework 6}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\begin{document}
+\setcounter{section}{7}
+\setcounter{subsection}{1}
+\begin{enumerate}[label=\thesubsection]
+	\item Constant field scaling allows us represent changes in the scale of CMOS devices with a unitless quantity \(S\). Assuming ideal constant field scaling (that is, scaling the size of a CMOS device without changing the strength of its internal electric field), we may use Table 7.4 to determine that gate delay \(\tau\) scales by a factor of \(\frac{1}{S}\). Thus, using an initial gate delay of \(\tau = 500 \ \mathrm{ps}\), we may assume that by scaling the device in question by a factor of \(S=2\), the new gate delay \(\tau = \frac{500}{2} = 250 \ \mathrm{ps}\).
+
+		Using Table 7.5, we see that repeated wire RC delay per unit length, assuming constant field scaling of gates, scales by a factor of \(\sqrt{S}\); in our case, this causes the delay to \textit{increase}, so that \(t_wr = 500 \sqrt{2} \approx 707 \ \mathrm{ps}\). This concords with our intuitive sense of wire scaling and its impact on delay; reduced height in an interconnect will lower its cross-sectional area and increase its resistance, leading to higher delay.
+
+		In total, this leads to an overall reduction in delay from \(500 + 500 = 1000 \ \mathrm{ps}\) to \(250 + 707 = 957 \ \mathrm{ps}\), or a 4.3\% reduction in delay.
+		\begin{enumerate}
+			\item
+    \end{enumerate}
+	\end{enumerate}
+\end{document}

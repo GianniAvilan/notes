@@ -213,5 +213,142 @@ Outside the loop,
 	\vec{H} = \hat{\alpha}_\phi	\frac{I}{2 \pi r}.
 \]
 
+Continuing applications of Ampere's Law, find the magnetic flux density inside a closely wound toroidal coil with \(N\) turns of coil carrying a current \(I\). Also find \(\vec{B}\) for \(r<a\) and \(r>b\). 
+
+Beginning with \(r<a\), we may use Ampere's Law again, 
+\[
+  \oint \vec{B} \cdot d \vec{l} = \mu_0 I.
+\]
+Using a closed loop, \(B \cdot 2\pi r = \mu_0 \cdot I\). Since \(I=0\); that is, there is no current flowing inside the toroid's inner radius, there is no magnetic field in the region \(r<a\), and \(\vec{B} = 0\).
+
+Moving on to \(a<r<b\), we may once again assume that \(B\cdot 2\pi r = \mu_0 \cdot I\). What is the total current in the region \(a < r < b\)? Based on the number of turns, \(I_{\mathrm{total}} = I \cdot N\). Therefore, \(\vec{B} = \hat{\alpha}_\phi\ \frac{\mu_0 N I}{2\pi r}\). 
+
+Finally, outside the toroid, in the region \(r > b\), \(I=0\) and \(\vec{B}=0\). 
+
+\textbf{Note:} Double-check Ampere's Law and how it works, doesn't seem to be by \textit{enclosing} current, like Gauss's.
+
+Revisiting Maxwell's equations, 
+\begin{align*}
+	& \nabla \cdot \vec{D} = \rho_v \\
+	& \nabla \times \vec{E} = 0 \\
+	& \nabla \cdot \vec{B} = 0 \\
+	& \nabla \times \vec{H} = \vec{J}.
+\end{align*}
+The last equation correspond's to Ampere's Law, with a slightly different formulation. Integral of current density is current, duh. 
+
+\textbf{Note:} Revisit Stokes' Theorem, and relationship to current/current density.
+
+Static magnetic fields, like static electric fields, have boundary conditions. As a review of boundary conditions, we'd like to know how the magnetic field \(\vec{H}\) and the magnetic flux density \(\vec{B}\) change across a boundary with a difference in magnetic permeability.
+
+The relevant equations are
+\begin{align*}
+	& B_{1n} = B_{2n} \\
+	& \mu_1H_{1n} = \mu_2H_{2n} \\
+	& \hat{n} \times (\vec{H}_1 - \vec{H}_2) = \vec{J}_s \\
+	& H_{1t} - H_{2t} = J_s \\
+\end{align*}
+
+For most cases, \(J_s = 0\) and so \(H_{1t} = H_{2t}\).
+
+\subsection{Inductors and Inductance}
+
+Defining an \textbf{inductor}, an inductor is an energy storage device that stores energy in a magnetic field (similar to a capcitor, which stores energy in an electric field). As a reminder, \[C = \frac{Q}{V}.\]
+
+For inductance, 
+\[
+  L = \frac{\Lambda}{I},
+\]
+that is, flux linkage in webers over current. The energy stored in an inductor may be described as 
+\[
+  W_m = \frac{1}{2}LI^2.
+\]
+What is flux linkage \(\Lambda\)? Flux linkage of an inductor is the total magnetic flux that links the current; similar to magnetic flux, but if you have \(N\) turns, like in the toroid example, the total magnetic flux \(\Phi\) that passes through those windings is the flux linkage.
+
+Mathematically, 
+\[
+  \Phi = \int\int_S \vec{B} \cdot d \vec{s}.
+\]
+For \(N\) turns, 
+\[
+  \Lambda = N \cdot \Phi.
+\]
+
+Common types of inductors:
+
+Solenoids have cylindrical shaped frames and have \(N\) turns of current-carrying wire wound around them. Deriving their inductance, 
+\[
+  L = \frac{\mu N^2 \pi a^2}{l},
+\]
+where \(a\) is the radius and \(l\) is the length. 
+
+Toroids have donut-shaped frames with \(N\) turns of current-carrying wire wound around them. Deriving their inductance, 
+\[
+  L = \frac{\mu N^2 a^2}{2 \cdot r_0},
+\]
+where \(r_0\) is the average? radius and \(a\) is??
+
+For example, if the magnetic flux \(\Phi\) produced by a given current links that same current, then the resulting inductance is self-inductance, but if it links the current in another circuit, then the resulting inductance is mutual inductance (requires two separate circuits/structures).
+
+Self-inductance:
+\[
+	L = \frac{\Lambda}{I} = \frac{\mu}{I} \int \int_s \vec{B} \cdot d \vec{s}.
+\]
+
+Mutual inductance: 
+\[
+	L_{12} = \frac{\Lambda_{12}}{I_{1}} = \frac{N_2}{I_1} \int \int_{s_2} \vec{B}_1 \cdot d \vec{s}_{s_2}.
+\]
+
+The procedure for determining inductance is as follows:
+\begin{enumerate}
+	\item Choose a proper coordinate system
+	\item Assume a current \(I\) in the conducting wire
+	\item Find \(\vec{B}\) from \(I\). (i.e., use Ampere's Law)
+	\item Find \(\Phi\) (magnetic flux) as
+		\[
+			\Phi = \int \int_S \vec{B} \cdot d \vec{s}
+		\]
+	\item Find flux linkage as
+		\[
+		  \Lambda = N \cdot \Phi
+		\]
+	\item Finally, 
+		\[
+		  L = \frac{\Lambda}{I}.
+		\]
+\end{enumerate}
+As an example, develop an expression for the inductance per unit length of a coaxial line with inner and outer conductors of radii \(a\) and \(b\) and an insulating material of \(\mu\).
+
+Using Ampere's Law, we can find the field that exists in the region \(a < r < b\) as 
+\[
+  \vec{B} = \hat{\alpha}_\phi \frac{\mu I}{2 \pi r}.
+\]
+
+Calculating the flux, 
+\[
+  \Phi = \int \int_s \vec{B} \cdot d \vec{s} = \int_0^l \int_a^b \hat{\alpha}_\phi \frac{\mu I}{2 \pi r} \cdot \hat{\alpha}_\phi \ dr \ dz.
+\]
+Therefore, 
+\[
+	\Phi = \frac{\mu I}{2 \pi} \cdot l \int_a^b \frac{1}{r} \ dr = \frac{u I l}{2 \pi} \ln{(\frac{b}{a})}.
+\]
+Finally, 
+\[
+  \Lambda = N \cdot \Phi = \Phi,
+\]
+and 
+\[
+	L = \frac{\Lambda}{I} = \frac{\mu l}{2 \pi} \ln{(\frac{b}{a})}.
+\]
+Therefore, self-inductance in this case is a function of permeability and inner/outer radius, primarily, if we divide by \(l\) to find inductance per unit length.
+
+Mathematically, for a coaxial cable,
+\[
+	L' = \frac{\mu}{2 \pi} \ln{(\frac{b}{a})}.
+\]
+
+As a final example, find the mututal inductance between a conducting rectangular loop and very long, straight wire.
+
+Assuming a current of \(I\) on the straight wire, we will first find \(\vec{B}\) using Ampere's Law in the form \(\vec{B} = \hat{\alpha}_\phi \frac{\mu I}{2 \pi r}\). Then, derive \(\Phi\) (\textbf{Note:} Review this in the book, brain cells fried).
 \end{document}
 

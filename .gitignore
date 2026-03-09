@@ -5,7 +5,6 @@
 *.toc
 *.fls
 *.fdp_latexmk
-*.synctex.gz*
 .DS_Store
 *.swp
 *.swo
