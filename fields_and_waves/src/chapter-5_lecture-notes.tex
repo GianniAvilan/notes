@@ -350,5 +350,42 @@ Mathematically, for a coaxial cable,
 As a final example, find the mututal inductance between a conducting rectangular loop and very long, straight wire.
 
 Assuming a current of \(I\) on the straight wire, we will first find \(\vec{B}\) using Ampere's Law in the form \(\vec{B} = \hat{\alpha}_\phi \frac{\mu I}{2 \pi r}\). Then, derive \(\Phi\) (\textbf{Note:} Review this in the book, brain cells fried).
+
+More examples of inductance.
+
+For example, \(N\) turns of wire are tightly wound on a toroidal frame of a rectangular cross section with dimensions shown below. Assuming the permeability of the medium to be \(\mu_0\), find the self inductance.
+
+Recall that inductance is defined as 
+\[
+  L = \frac{\Lambda}{I},
+\]
+\[
+	\Lambda = N \cdot \Phi,
+\]
+and 
+\[
+  \Phi = \int \int_S \vec{B} \cdot d \vec{s}.
+\]
+
+Assuming a current of \(I\) in the wire, we can find \(\vec{B}\) from \(I\); that is, the magnetic flux density. Using Ampere's Law,
+\[
+	\oint_c \vec{B} \cdot d \vec{l} = \mu_0 I_{\mathrm{tot}}.
+\]
+Multiplying current \(I\) by number of turns \(N\), 
+\[
+  \vec{B} = \hat{\alpha_\phi} \ \frac{\mu_0 N I}{2 \pi r}.
+\]
+Now knowing the magnetic flux density \(\vec{B}\), we may find the magnetic flux \(\Phi\). Using the aforementioned formula, 
+\[
+	\Phi = \int_{0}^{h} \int_{a}^{b} (\hat{\alpha_\phi} \ \frac{\mu_0 N I}{2\pi r}) \cdot (\hat{\alpha_\phi \ dr \ dz}) = \frac{\mu_0 N I h}{2\pi} \ \ln({\frac{b}{a}}).
+\]
+Now, with \(\Phi\), we can find flux linkage \(\Lambda\), using the aforementioned formula,
+\[
+	\Lambda = N \cdot \Phi = \frac{\mu_0 N^2 I h}{2\pi} \ln{(\frac{b}{a})}.
+\]
+Finally, inductance \(L\) can be found as
+\[
+	L = \frac{\Lambda}{I} = \frac{\mu_0 N^2 h}{2\pi} \ \ln{(\frac{b}{a})} \ \mathrm{H}.
+\]
 \end{document}
 

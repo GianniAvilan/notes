@@ -1,0 +1,108 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{parskip}
+\begin{document}
+\setcounter{section}{5}
+\section{Chapter 6: Maxwell's Equations for Time-Varying Fields}
+\setcounter{subsection}{-1}
+\subsection{Dynamic Fields}
+\(\vec{E}\) and \(\vec{D}\) in the static electric model \textbf{are not} related to \(\vec{H}\) and \(\vec{B}\) in the static magnetic model. In addition, static electric and magnetic fields \textbf{do not} give rise to waves that propagate and carry energy and information.
+
+In this chapter, we will see that a \textbf{changing} magnetic field induces an electric field, and vice versa; that is, they are coupled, and \(\vec{E}\) and \(\vec{D}\) will be related to \(\vec{H}\) and \(\vec{B}\), contrary to their lack of interaction in the static model.
+
+\subsection{Faraday's Law}
+
+To review, in the static case, 
+\[
+  \nabla \times \vec{E} = 0.
+\]
+
+Modifying this equation to cover time-varying fields, in a general sense, 
+\[
+  \nabla \times \vec{E} = \frac{-\partial \vec{B}}{\partial t}.
+\]
+When \(\frac{\partial \vec{B}}{\partial t} = 0\), this relationship simplifies to the static case. Taking the surface integral of both sides of the equation,
+\[
+  \int \int_S (\nabla \times \vec{E}) \cdot d \vec{s} = - \int \int_S \frac{\partial \vec{B}}{\partial t} \cdot d \vec{s}.
+\]
+Using Stoke's theorem to simplify, 
+\[
+  \oint_C \vec{E} \cdot d \vec{l} = \frac{-d}{dt} \int \int \vec{B} \cdot d \vec{s} = \frac{-d}{dt} \ \Phi.
+\]
+
+The process described by the above equation is known as \textbf{electromagnetic induction}, and the left-hand side can be called the induced voltage, \(V_{\mathrm{emf}}\).
+
+Extending to a general case, given \(N\) turns in a circuit, 
+\[
+	V_{\mathrm{emf}} = -N \ \frac{d\Phi}{dt}.
+\]
+In other words, the voltage induced by a changing magnetic field in a closed circuit is proportional to the rate of change in the magnetic flux and the number of turns \(N\) in the circuit. Obviously, the induced voltage then induces a corresponding current.
+
+There are different types of induction. 1) stationary circuit/time-varying \(\vec{B}\) \(\to\) transformer induction. This is how transformers operate, by using a changing magnetic field to induce a voltage/current in a stationary circuit. 2) Moving circuit/static \(\vec{B}\) \(\to\) motional induction. 3) moving circuit/time-changing \(\vec{B}\) \(\to\) general case.
+
+Mathetmatically, 
+\[
+	V_{\mathrm{emf}} = V_{\mathrm{emf}}^{\mathrm{tf}} + V_{\mathrm{emf}}^{\mathrm{m}}.
+\]
+
+\subsection{Stationary Loop in a Time-Varying Field}
+
+Reviewing each in more detail, starting with transformer induction, recall that in this type of induction, there will be an induced current generated in a closed loop/circuit due to a changing \(\vec{B}\) field. Note that the flux produced by the induced current opposes the change in \(\vec{B}\) (Lenz's Law). 
+
+Imagine a loop of wire (stationary) through which a changing \(\vec{B}\) is passing, and it is growing weaker with time. What direction will the induced current flow? Knowing that the \(\vec{B}\) field is decreasing, the induced \(\vec{B}\) field will \textit{oppose} this change, and increase. Using the right-hand rule, we can find the direction of the induced current. In the opposite case, where \(\vec{B}\) increases, the current will flow in the \textit{opposite} direction.
+
+Example time. A circular loop of \(N\) turns of conducting wire lies in the \(x\)-\(y\) plane with its center at the origin of a magnetic field given by \(\vec{B} = \hat{\alpha_z} \ B_0 \cos{(\frac{\pi r}{2b})}\sin{(\omega t)}\), where \(b\) is the radius of the loop and \(\omega\) is the angular frequency. Given this, find the emf induced in the loop.
+
+First, we can identify the type of induction as transformer induction, since the loop is stationary, and \(\vec{B}\) is a function of time \(t\). To find emf,
+\[
+	V_{\mathrm{emf}} = -N \frac{d\Phi}{dt}. 
+\]
+Therefore, we must first find magnetic flux \(\\Phi\) as a function of our circuit's structure and the magnetic field \(\vec{B}\).
+
+Using the formula for magnetic flux,
+\[
+  \Phi = \int \int_S \vec{B} \cdot d \vec{s}.  
+\]
+
+In this case, for a single loop, \(d \vec{s} = \hat{\alpha}_z \ r \ dr \ d\phi\).
+
+So, 
+\[
+	\Phi = \int_{0}^{2\pi} \int_{0}^{b} (\hat{\alpha}_z \ B_0 \cos{(\frac{\pi r}{2b})\sin{(\omega t)}}) \cdot (\hat{\alpha}_z \ r \ dr \ d\phi).
+\]
+
+Simplifying using integration by parts,
+\[
+	\Phi = 2\pi B_0 \sin{(\omega t)} \int_{0}^{b} \cos{(\frac{\pi r}{2b})} \cdot r \cdot dr = 2\pi B_0 \sin{(\omega t)}(\frac{2b^2}{\pi} - \frac{4b^2}{\pi^2}).
+\]
+
+Taking its time derivative, only the \(\sin\) function matters, so
+\[
+	\frac{d\Phi}{dt} = 2 \pi B_0(\frac{2b^2}{\pi} - \frac{4b^2}{\pi^2}) \omega \cos{(\omega t)}
+\]
+
+and so
+\[
+	V_{\mathrm{emf}} = -2 N \pi B_0(\frac{2b^2}{\pi} - \frac{4b^2}{\pi^2}) \omega \cos{(\omega t)} \ \mathrm{V}. 
+\]
+
+Another example problem: an inductor is formed by winding \(N\) turns of a thin conducting wire into a circular loop of radius \(a\). The inductor loop is in the \(x\)-\(y\) plane with its center at the origin, and connected to a resistor \(R\). In the presence of a magnetic field \(\vec{B} = B_0 (2 \hat{\alpha}_y + 3 \hat{\alpha}_z) \sin{(\omega t)}\). Find
+\begin{enumerate}[label=\alph*)]
+	\item the magnetic flux linking a single turn of the inductor.
+		In this case, the changing magnetic field has both \(y\) and \(z\) components, and not all of it will end up as magnetic flux \(\Phi\) as a result. \(d \vec{s}\) is the same as in the prior problem, \(d \vec{s} = \hat{\alpha}_z \ (r \ dr \ d\phi)\). Finding magnetic flux using the same integral setup as before, 
+		\[
+			\Phi = \int_{0}^{2\pi}\int_{0}^{a} B_0 (2 \hat{\alpha}_y + 3 \hat{\alpha}_z)\sin{(\omega t)} \cdot (\hat{\alpha}_z \ (r \ dr \ d\phi)).
+		\]
+		Simplifying, 
+		\[
+			\Phi = 3B_0 \pi a^2 \sin{(\omega t)}.
+		\]
+\end{enumerate}
+
+\end{document}

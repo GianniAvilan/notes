@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=1em, indent=12pt]{parskip}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\title{Wilder Tech Design Workflow}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\setcounter{section}{1}
+\subsection{Specification Analysis}
+Workflow begins with spec analysis. First of all, what specs will I need to reference for this project? Once you have them, it might be helpful to create a document summarizing the parts of the spec that you think will be relevant during the design process for easy reference later on. 
+
+Access to IEEE specs is paywalled, but we can get them through someone in the office, and some specs are already on the office server. Often, we'll use an multi-source agreement (MSA), a standardized agreement among industry players to ensure interoperability standards, and includes information on mechanical and electrical requirements. Sometimes, MSAs are proprietary draft versions, but more often than not, they're open source, along with USB, PCIe, HDMI standards, et cetera.
+
+\subsection{Design Architecture}
+Once the relevant specifications are organized and analyzed, we'll meet with our assigned mechanical engineer to coordinate on a preliminary design approach. Then, we'll have a whiteboard session with Ryan and Joey (lead electrical and mechanical engineers) to finalize a general design approach for the project in question. This will involve creating a list of design parameters like acceptable loss, impedance requirements, and the quantity of breakout signals, as well as making physical design choices such as the type of connector to use for breaking out signals. This meeting will also be where we create a preliminary bill of materials (P-BOM) to try and anticipate costs that will be made more specific by the sales department later down the line. 
+
+\subsection{Schematic Design}
+Once we've planned out a design, we'll start with the schematic design in OrCAD software. Starting with the padstack editor in Capture CIS, we may define the parameters of the pads and mechanical holes that will be used, eventually, in our final PCB layout, and define the relevant footprints. Then, using Capture CIS, the schematic symbols for any needed elements can be generated or imported from the Wilder master library. Paying close attention to readability, we can then generate a full schematic of the project, using off-page connectors as necessary. It's also convenient to keep PWR and GND connections lumped together for better readability, paying close attention to correct pin assignments in the process. Finally, using the schematic, a BOM can be generated and provided to the ME, and the associated netlist may be used later for the PCB layout step.
+
+\subsection{Stackup Construction}
+Here, we'll be trying to anticipate the type of materials that will be needed later when the PCB is manufactured. We don't often have the time and resources to prototype a board, so we'll need to do verification and simulation work carefully to ensure a 99\% success rate, since final PCBs are going to be ordered and manufactured at scale.
+
+Material choice is critical, depending on the requirements of the board. We handle anything from low to high-speed (in other words, from DC current to \(110 \ \mathrm{GHz},\)), where material choice and other small details become far more important at the high speed level. Choice of surface roughness is an especially important aspect of this stage, and defines the quality of the copper foil used in traces. Higher surface roughness will lead to more loss, but will be more inexpensive and have shorter lead times. 
+
+Fabrication can be done one of two ways, sub-lamination and sequential lamination. In sub-lamination, two boards are glued together (for example, two cores), and in sequential lamination, layers are added symmetrically on both sides. The two processes can be combined for multi-layer boards, and we need to be careful about defining our stackup in Excel such that the board we want is \textit{possible}. I haven't quite wrapped my head around this, but there are places we can generate vias and places we can't, and mechanical/laser drilling are both options. In particular, coplanar copper (inner layers) needs to be connected to a common GND using stitching vias. Note that mechanically-drilled vias are rectangular throughout, where laser-drilled vias are conical, affecting signal integrity in various ways, respectively.
+
+\subsection{Trace Geometry}
+
+In terms of trace geometry, Polar (software) will auto-calculate the impedance for us based on provided parameters, and the Polar screenshot can be included in the stackup spec sent to the board manufacturer. 
+
+We can choose from a number of common trace geometries which are bucketed into coplanar/non-coplanar and microstrip/stripline categories. Coplanar traces are "fenced in" on either side by GND traces to prevent crosstalk, where non-coplanar traces are not. Microstrip refers to outer traces, exposed to the air/solder mask, whereas stripline refers to inner traces, surrounded on the top and bottom by a dielectric material. In addition, the above categories apply to single-ended and differential transmission lines. 
+
+HFSS may then be used to model loss per inch at the relevant frequency or frequencies, in order to match the criteria we set in the design architecture phase, and then make necessary adjustments. In general, it's best to round up so as to leave breathing room for acceptable losses (it's easier to add wire length than it is to remove length).
+
+\subsection{Transition Simulations}
+Jumping into simulation, card edge pad impedance tuning along with MSA compliance, ski tip, J-lead, simulate those connectors \(\pm 1 \ohm\) maximum tolerance, impedance time plot. Tuning by changing pad size, via, pad size. DWA tuning (DWA?) tolerance analysis is a board shop thing, registration tolerance is via misalignment, etch tolerance. differential to single-ended traces, changeover, this is a capacitive area so minimize that. Time to frequency domain.
+
+\subsection{Board Design}
+Board design can be done in parallel with simulation (sometimes takes a bit). Define trace spacing, etc, in constraint manager. Length of traces, etc. Route study, what length of traces, etc. Once board is routed, DXF imported into HFSS to simulate crosstalk.
+
+Simulation can be used to tune your board design. Via cutout. Implement changes. Provide DXFs back and forth with ME (2D drawing of board layout). 
+
+Generate films and fabsheet, films are views of different layers, copper, silkscreen, solder mask, etc. Fabsheet is important for the fab, high level overview, drill tolerances, materials used, no lead, etc, soldering material, silkscreen material. Offset boards to avoid running along a fiberglass weave path (impedance issues).
+
+\subsection{PCB Fabrication Shop Communication}
+Stackup request, trace geometry adjustments. Stackup is the priority, and trace geometry. Heads-up ASAP, but design notes. 50\% done, send notes. Send them your stuff, adjust stackup, trace geometry adjustments. DFM (design for manufacturing). Request quotation, panels and boards, order and buy. minimum lot yield. Pre-ordering the material, 6-8 weeks. Final board 1-2 weeks before they receive material, so they can give final feedback. Board requirements and prices dictate board shop.
+
+\subsection{Design Review Process}
+Stackup, one week, eight weeks lead time, design review one week beforehand so all the EEs can review my board. Fab package is all my files. Physical board layout, DXFs primary/secondary for MEs. Schematic PDF and BOM. Wilder stackup, matches asdjustments from fab shop. Simulation results, compiled into a presentation. Review package. What is an ART file?
+\end{document}
+

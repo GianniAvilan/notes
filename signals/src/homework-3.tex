@@ -1,0 +1,39 @@
+\documentclass{article}
+\title{ECE 341 -- Homework 3}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{float}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 341}
+\fancyhead[R]{Homework 3}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\begin{document}
+\includepdf{homework-2_cover-page.pdf}
+\begin{enumerate}[label=\thesubsubsection]
+\setcounter{section}{3}
+\setcounter{subsection}{1}
+\setcounter{subsubsection}{1}
+\item 
+	\begin{enumerate}[label=\alph*)]
+		\item Taking the individual values of each non-zero \(x[n]\) shown in the the figure,
+			\[
+				\sum_{n=-2}^{0} (\frac{3}{2}n + 3)^2 + \sum_{-1}^{2} (-\frac{3}{2}n+3)^2 = 1^2 + 2^2 + 3^2 + 2^2 + 1^2 = 19.
+			\]
+			\item Again, taking the individual values of each non-zero \(x[n]\), 
+				\[
+				  \sum_{-3}^{3} (\frac{9}{3}n)^2 = (9+9) + (36 + 36) + (81 + 81) = 252.
+				\]
+	\end{enumerate}
+\end{enumerate}
+\end{document}

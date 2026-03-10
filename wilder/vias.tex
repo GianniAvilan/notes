@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=1em, indent=12pt]{parskip}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\title{Vias}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\setcounter{section}{0}
+\section{Introduction}
+Vias are vertical connections between two or more conductive layers of a printed circuit board, plated with metal, that form an electrical connection between those layers. Vias are composed of a barrel, pad, and antipad. The barrel refers to the metal-plated tube that travels between layers, the pad refers to the metal plating that connects each end of the barrel to its destination, and the antipad refers to the spacing between the barrel and any metal to which it is \textit{not} connected.
+
+Decisions about vias are influenced by the PCB stackup as well, and certain choices simply aren't possible due to the manufacturing constraints of sequential and sub-lamination methods. In addition, mechanical and laser drilling are both possible, with each approach representing pros and cons depending on the type of via being generated.
+
+An important parameter in via design is the aspect ratio (AR), which represents the ratio between via diameter and board thickness (or drilling depth), commonly represented as 
+\[
+	\mathrm{AR:} \frac{\mathrm{depth}}{\mathrm{diameter}}.
+\]
+
+\section{Types of Vias}
+\subsection{Through-hole Vias}
+The most common type of via is a through-hole via, and is generally constructed by drilling a top-to-bottom hole throughout the entire PCB, connecting \textit{all layers}. Generally, the maximum aspect ratio of through-hole vias will depend on the smallest available drill diameter (\textbf{what is this for us?}) and, of course, the thickness of the board. As an example, with a minimum drill diameter \(6 \ \mathrm{mil}\) and a board thickness of \(62 \ \mathrm{mils}\), 
+\[
+	\mathrm{AR} = \frac{62}{6} \approx 10:1.
+\]
+In practice, the use of smaller drill diameters is often more costly, and a \(6:1\) ratio is more common.
+
+Obviously, there are expections to the rule, and the possibility of higher aspect ratios appears when we start getting into non-standard board thicknesses. Non-standard plating thickness could also influence possible aspect ratios \textbf{(plating thickness is usually 1 mil, is that the case here too?)}
+
+\subsection{Buried/Blind Vias}
+Buried vias are, as the name suggests, are sandwiched between inner layers of a circuit board, and may connect two or more layers together without running the entire thickness of the board. Blind vias are very similar, but they connect outer layers to inner layers without punching through to the other side of the board.
+
+Buried/blind vias tend to be laser-drilled (\textbf{is this accurate?}) and have smaller aspec 
+\subsection{Microvias}
+In high density interconnect (HDI) designs, microvias are simply vias with a smaller-than-normal AR, and, obviously, allow us to design more complex circuits on smaller boards as compared to using traditional vias. 
+
+\section{Via Design in Cadence OrCAD}
+
+To begin with, we can use the Start tab to define a via and its associated pad geometry (circular, square, etc). (\textbf{things to think about when choosing an appropriate pad geometry for a via?}) This is also a good time to ensure you're using the correct units (bottom left corner of the window).
+
+Then, in the Drill tab, we may define the geometry of the hole (circular or square) and its finished diameter, with associated tolerances to account for manufacturing variations. Drill size will need to be slightly larger than finished diameter, since we need space for the metal plating inside the barrel (\textbf{is this accurate?}). We can also define row/column matrices in this section for clustered vias. 
+
+In the Design Layers tab, we can define the pads and antipads for each layer the via travels through, as well as adjusting their geometries if we don't want to use the default we set in the Start tab. (\textbf{Design vs Mask Layers?})
+
+\end{document}

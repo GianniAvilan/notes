@@ -26,8 +26,28 @@
 		Using Table 7.5, we see that repeated wire RC delay per unit length, assuming constant field scaling of gates, scales by a factor of \(\sqrt{S}\); in our case, this causes the delay to \textit{increase}, so that \(t_wr = 500 \sqrt{2} \approx 707 \ \mathrm{ps}\). This concords with our intuitive sense of wire scaling and its impact on delay; reduced height in an interconnect will lower its cross-sectional area and increase its resistance, leading to higher delay.
 
 		In total, this leads to an overall reduction in delay from \(500 + 500 = 1000 \ \mathrm{ps}\) to \(250 + 707 = 957 \ \mathrm{ps}\), or a 4.3\% reduction in delay.
+		\setcounter{subsection}{2}
+	\item 
+		First, the worst-case input delay for the NOR2X1 gate, based on the TSMC databook, \(B \to Y\uparrow\) is \(45 \ \mathrm{ps}\), and best-case input delay \(A \to Y\downarrow\) is \(18 \ \mathrm{ps}\).
+		We will use the formula given in the TSMC databook for adjusting delay based on derating factors
+		\[
+			t_{\mathrm{TPD}} = (K_{\mathrm{process}} \cdot [1:e +35 
+			+ (K_{\mathrm{volt}}) \cdot \Delta V_{dd})] \cdot [1+(K_{\mathrm{temp}} \cdot \Delta T)] \cdot t_{\mathrm{typical}}
+		\]
+		and using the allowable voltage and temperature ranges found in the databook, \(1.62 - 1.98 \ \mathrm{V}\) and \(0 - 125 \degree \ \mathrm{C}\), respectively, we may determine worst-case and best-case delay as follows:
 		\begin{enumerate}
-			\item
+			\item At \(V_{DD} = 1.62 \ \mathrm{V}\) and \(T = 125 \degree \ \mathrm{C},\) with a slow process speed, 
+				\[
+					t_{\mathrm{TPD}} = 1.293 \cdot [1 + (-0.731 \cdot -0.18)] \cdot [1 + (0.00123 \cdot 100)] \cdot t_{\mathrm{typical}} = 73.9 \ \mathrm{ps}.
+				\]
+			\item At \(V_{DD} = 1.98\) and \(T=0 \degree \ \mathrm{C}\), with a fast process speed,
+				\[
+					t_{TPD} = 0.781 \cdot [1 + (-0.511 \cdot 0.18)] \cdot [1 + (0.00123 \cdot 0)] \cdot 0.018 = 12.8 \ \mathrm{ps}.
+				\]
     \end{enumerate}
+		\item Using Eq. 7.3,
+			\[
+				C = \frac{I_{\mathrm{dc-max}}}{\alpha V_{DD}f},
+			\]
 	\end{enumerate}
 \end{document}
