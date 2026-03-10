@@ -1,0 +1,78 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=1em, indent=12pt]{parskip}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\begin{document}
+\setcounter{section}{3}
+\section{Chapter 4: Continuous-Time System Analysis using the Laplace Transform} 
+\setcounter{subsection}{0}
+\subsection{The Laplace Transform}
+As a review, the bilateral and unilateral Laplace transforms may be expressed as 
+\begin{align*}
+	& X(s) = \int_{-\infty}^{\infty}x(t) e^{-st} dt \\
+	& X(s) = \int_{0^-}^{\infty}x(t) e^{-st} dt,
+\end{align*}
+and the inverse Laplace transform may be expressed as 
+\[
+	x(t) = \frac{1}{2\pi j}\int_{c-j\infty}^{c+j\infty}X(s)e^{st}dt.
+\]
+
+To understand the Laplace transform, recall that \(s= \sigma + j\omega\), the complex frequency of the signal \(e^{st}\). Laplace transforms map a time-domain signal into the s-domain. In Circuits 2, we saw how transforming complex, second- or third-order circuits into the s-domain made it possible to solve them algebraically using KCL and KVL, rather than through a complex integro-differential equation representing its elements. Then, transforming them back into the time domain via the inverse Laplace transform, we could derive the solution.
+
+The Laplace transform is a linear operation, since it's based on integration. Mathematically, 
+\begin{align*}
+	&x_1(t) \Longleftrightarrow X_1(s) &x_2(t) \Longleftrightarrow X_2(s)
+\end{align*}
+
+Example 4.1: For a signal \(x(t) = e^{-at}u(t)\), find the Laplace transform \(X(s)\) and its region of convergence (ROC).
+\begin{align*}
+	&X(s) = \int_{-\infty}^{\infty} e^{-at} u(t) e^{-st}dt \\
+	&X(s) = \int_{0}^{\infty} e^{-at} e^{-st}dt = \int_{0}^{\infty}e^{-(s+a)t}dt \\
+\end{align*}
+
+\textbf{Important:} If the real value of \(s+a\) is positive, the integral will converge; but if \textit{not}, it won't converge. We'll need to note this in our solution.
+
+\begin{align*}
+	&e^{-at}u(t) \Longleftrightarrow \frac{1}{s+a} &\mathrm{ROC:} Re(s) > -a 
+\end{align*}
+
+Consider, for example, \(x(t) = -e^{-at}u(-t)\). In this case, the unit step is flipped along the \(y\)-axis (anti-causal). We can still find the Laplace transform for this signal, since the upper bound can be changed to \(0\), with a lower bound of \(-\infty\). However, we will get the \textit{same} Laplace transform for this signal as the prior one. That's why ROC is important, because it will distinguish these two signals when they are transformed back into the time domain, where they are different signals.
+
+\textbf{NOTE:} fill in the above with more details.
+
+In general, ROC is vital to any bilateral Laplace transforms for the above reasons. In the table of transform pairs that we'll be provided, ROC will be included. 
+
+The unilateral Laplace transform of the second, anti-causal signal would simply be \(0\), so bilateral transforms are vital for anti-causal signals to yield any kind of useful result.
+
+However, moest practical signals and systems are causal, and we may generalize the Laplace transforms for causal signals as 
+\[
+	X(s) = \int_{0^-}^{-\infty}x(t)e^{-st}dt,
+\]
+and no ROC specification is necessary.
+
+This shouldn't come up too much since we'll be working largely with causal signals. Table 4.1 provides select \textit{unilateral} Laplace transform pairs, useful for causal signals.
+
+Drill 4.1: By direct integration, find the Laplace transform \(X(s)\) and the region of convergence of \(X(s)\) for the gate function shown in Fig. 4.2(a). (Add the fig later, but it's a rectangular unit pulse from 0 to 2). 
+
+We won't often use direct integration, but its worth reviewing. Working through the entire integration, 
+\begin{align*}
+	X(s) &= \int_{-\infty}^{\infty} [u(t) - u(t-2)]e^{-st}dt \\
+			 &=\int_{-\infty}^{\infty} u(t) e^{st} dt - \int_{-\infty}^{\infty}u(t-2)e^{-st}dt \\
+			 &=\int_{0}^{\infty}e^{st}dt - \int_{2}^{\infty}e^{-st}dt \\
+			 &=\frac{1}{s}e^{-st} \Big|_0^\infty - [\frac{-1}{s}e^{-st}\Big|_2^\infty] \\
+			 &=(0-\frac{-1}{s}e^0)-[0-\frac{-1}{s}e^{-2s}] \\
+			 &=\frac{1}{s} - \frac{1}{s}e^{-2s}=\frac{1}{s}[1-e^{-2s}].
+\end{align*}
+
+In this case, direct integration was relatively simple (but still took multiple steps), and no ROC was needed since \(x(t)\) was a causal signal, but in most cases we'll use a table of transforms or software to carry out a Laplace transform.
+
+Inverse Laplace transforms were covered in Circuits 2, but worth reviewing. If a direct transform pair can't be found in the table, partial fraction expansion of \(X(s)\) is generally used to break the s-valued function into partial fractions that are listed in the table of inverse transforms. (Review Example 4.3 in the textbook for a worked-through unilateral inverse Laplace transform problem using partial fraction decomposition. Probably worth reviewing PFD using the cover-up method, especially for complex-valued fractions).
+
+Given a function \(X(s) = \dfrac{N(s)}{D(s)}\), the function is considered \textbf{strictly proper} if the degree of \(N(s)\) is less than the degree of \(D(s)\); if the degree of \(N(s)\) is equal to the degree of \(D(s)\), the function is considered \textbf{proper}. In the second case, we'll need an \(A\) constant in our partial fraction expansion (see section B.5 in the textbook for details. See Example 4.4 as well for examples of MATLAB-based partial fraction decomposition with strictly proper, proper, and improper functions \(X(s)\)).
+
+MATLAB gives you three vectors: r, p, and k; the residues, poles, and polynomial coefficients, respectively. Residues correspond to the numerators of the partial fraction, poles to the zeroes of the denominator, and polynomial coefficients to the added constant(s). When running the residue() command in MATLAB, pay close attention to the order of the coefficients, and insert zeroes where there is no \(s\) value in the polynomial.
+  
+\end{document}
