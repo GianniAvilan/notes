@@ -1,0 +1,41 @@
+\documentclass{article}
+\title{ECE 478 -- Midterm 3 Practice}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 478}
+\fancyhead[R]{Midterm 2 Practice}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\begin{document}
+\setcounter{section}{5}
+\section{Chapter 6}
+\subsection{Review}
+Wire geometry, resistance, capacitance, inductance. 
+\(\pi\)-model for finding Elmore delay. Use sheet resistance to eliminate detail and find resistance per unit length, using the width. Scaling affects RC wire delay. Crosstalk delay, Miller effect (\textbf{note:} definitely look further into Miller effect.) Capacitor voltage divider. Repeaters! Best length of wire between inverters, best repeater size. 
+\subsection{Questions}
+Pi-model question, resistivity question (sheet), multiple-choice scaling/RC question, Miller effect, maybe repeater.
+\section{Chapter 7}
+\subsection{Review}
+Process variation can be rolled into one variation parameter, \(K_{\mathrm{process}}\), so we don't need to labor over the details. Note that \(K_{\mathrm{load}}\) is given in \(\mathrm{\dfrac{ns}{pF}}\), so find the wire + gate capacitance of the load and multiply by \(K_{\mathrm{load}}\). Dennard scaling is the simplest assumption, where all dimensions scale in the same way to ensure a constant electric field. 
+\subsection{Questions}
+TSMC cell library derating factors, effects of voltage, temperature, process (all possible manufacturing factors rolled into one). Might include loaded gates. Definitely a Dennard scaling question.
+\section{Chapter 9}
+\subsection{Review}
+Inner/outer input issues (\textbf{review}). Why does this happen? Thinking about a series nMOS network, say \(B\) and \(C\) inputs are already 1 (the only condition in which a rising edge on \(A\) could case a falling \(Y\) output). Generalize this to a NOR gate? Same result? No, but we might have a similar situation on the rising edge.
+
+Say \(B\) transition causes \(Y\) to rise, then \(A\) must already be \(0\), and the \(A\) capacitor pre-charged. In the alternate case, where \(A\) transistions \textit{last}, both capacitors will need to charge. Asymmetric gates are complex to analyze, but the basic rationale makes sense. Skewed gates, \textbf{review}. Gets away from matching pull-up and pull-down strengths (why would you do this?) Ratioed circuits use an always-on pMOS transistor (basically a resistor). Key feature is the ratio of pull-up current to pull-down current (\textbf{review}). F e e t. Monotonic inputs, you can repeat these to make them work, but you can't cascade \textit{dynamic} gates.
+\subsection{Questions}
+Three-input multiple choice, NAND/NOR. Fill in transistor sizing for HI-skew and LO-skew (multiple-choice?). Probably something on ratioed and/or f e e t.
+\end{document}

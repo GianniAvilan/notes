@@ -45,9 +45,72 @@
 					t_{TPD} = 0.781 \cdot [1 + (-0.511 \cdot 0.18)] \cdot [1 + (0.00123 \cdot 0)] \cdot 0.018 = 12.8 \ \mathrm{ps}.
 				\]
     \end{enumerate}
+		\setcounter{subsection}{3}
 		\item Using Eq. 7.3,
 			\[
 				C = \frac{I_{\mathrm{dc-max}}}{\alpha V_{DD}f},
 			\]
+			we may solve for \(I_{\mathrm{dc-max}}\) as
+			\[
+				I_{\mathrm{dc-max}} = C \alpha V_{DD} f.
+			\]
+			Therefore, 
+			\[
+				I_{\mathrm{dc-max}} = (1 \times 10^{-12})(0.1)(1.8)(1 \times 10^9) = 0.18 \ \mathrm{mA}.
+			\]
+			\setcounter{subsection}{4}
+		\item 
+			\begin{enumerate}
+				\item Process size refers to the width of the transistor's gate, and so scales by a factor of \(S\), while gate delay scales with \(\frac{1}{S}\). Taking the ratio of gate delay between the two processes in this way, 
+					\[
+						\tau_{\mathrm{ratio}} = \frac{0.058}{0.083} \approx 0.7,
+					\]
+					and so, in the \(12 \ \mathrm{nm}\) process, we may expect gate delay to be roughly \(70 \%\) of gate delay in the \(17 \ \mathrm{nm}\) process.
+				\item Unrepeated RC wire delay per unit length, on the other hand, scales with \(S^2\), and so the ratio between the two processes is,
+					\[
+						t_{wu \ \mathrm{ratio}} = \frac{17^2}{12^2} \approx 2,
+					\]
+					and so we may expect unrepeated RC wire delay per unit length to be roughly twice as large in the \(12 \ \mathrm{nm}\) process as in the \(17 \ \mathrm{nm}\) process. 
+			\end{enumerate}
+			\setcounter{section}{9}
+			\setcounter{subsection}{3}
+		\item The figure below shows a 12-input NOR gate, built using NAND and NOR gates with three inputs or less:
+			\begin{figure}[H]
+			  \centering
+			  \includegraphics[width=0.6\textwidth]{homework-6_fig-1.jpg}
+			  \caption{12-input NOR gate built using CMOS logic}
+			  \label{fig:12NOR}
+			\end{figure}
+			\setcounter{subsection}{10}
+			\item
+				The following figure shows the layout for HI-skew and LO-skew NAND3 and NOR3 gates, sizing down transistors on the non-critical transistion by a factor of 2.
+			\begin{figure}[H]
+			  \centering
+			  \includegraphics[width=0.7\textwidth]{homework-6_fig-2.jpg}
+				\caption{HI-skew and LO-skew NAND3 and NOR3 gates}
+			  \label{fig:HI-LO}
+			\end{figure}
+Finding logical effort of each of the gates for the critical transition, the NAND3 HI-skew gate carries a logical effort of \(g_u=\frac{7}{6}\) when compared to an unskewed unit inverter capable of driving the same current; the NAND3 LO-skew gate carries a logical effort of \(g_d=\frac{4}{3}\).
+
+The NOR3 HI-skew gate carries a logical effort of \(g_u = \frac{13}{6}\), and the NO3 LO-skew gate carries a logical effort of \(g_d = \frac{4}{3}\).
+			\setcounter{subsection}{18}
+			\item
+				The following figure shows the layout of a pseudo-nMOS NAND3 gate and a pseudo-nMOS NOR3 gate, with appropriately-sized transistors.
+			\begin{figure}[H]
+			  \centering
+			  \includegraphics[width=0.6\textwidth]{homework-6_fig-3.jpg}
+				\caption{Pseudo-nMOS gates}
+			  \label{fig:pseudo}
+			\end{figure}
+			For the NAND3 gate, \(g_u = 4\), \(g_d = \frac{4}{3}\), and \(g_{\mathrm{avg}} = \frac{8}{3}\). For the NOR3 gate, \(g_u = \frac{4}{3}\), \(g_d = \frac{4}{9}\), and \(g_{\mathrm{avg}} = \frac{8}{9}\).
+			\setcounter{subsection}{27}
+			\item
+			\begin{figure}[H]
+			  \centering
+			  \includegraphics[width=0.6\textwidth]{homework-6_fig-4.jpg}
+				\caption{Dynamic footed and unfooted gates}
+			  \label{fig:feet}
+			\end{figure}
+				The dynamic, unfooted NAND3 gate carries a logical effort of \(g_d = \frac{3}{3}\), its footed counterpart a logical effort of \(g_d = \frac{4}{3}\); while the dynamic, unfooted NOR3 gate carries a logical effort of \(g_d = \frac{1}{3}\), and its footed counterpart carries a logical effor of \(\frac{2}{3}\).
 	\end{enumerate}
 \end{document}

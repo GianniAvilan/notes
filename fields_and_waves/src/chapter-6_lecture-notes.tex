@@ -103,6 +103,84 @@ Another example problem: an inductor is formed by winding \(N\) turns of a thin 
 		\[
 			\Phi = 3B_0 \pi a^2 \sin{(\omega t)}.
 		\]
+	\item the emf given that \(N=10\), \(B_0 = a2T\), \(a=10 \ \mathrm{cm}\), and \(\omega=10^3 \ \mathrm{\frac{rad}{s}}\).
+
+		Knowing that 
+		\[
+			V_{\mathrm{emf}} = -N \frac{d\phi}{dt} = -N \cdot 3 \pi a^2 B_0 \omega \cos{(\omega t)},
+		\]
+		substituting values, 
+		\[
+			V_{\mathrm{emf}} = -188.5 \cos{(10^3 t)} \ \mathrm{V}.
+		\]
+	\item the direction of the induced current at \(t=0\).
+		Recall that induced current always opposes the direction of change in the magnetic flux; therefore, the question is: is magnetic flux \(Phi\) increasing or decreasing at \(t=0\)?
+
+		We may evaluate the derivative \(\dfrac{d\Phi}{dt}\) at \(t=0\) to determine whether \(\Phi\) is increasing or decreasing. At \(t=0\), the derivative is positive (greater than zero), and so we may assume that \(\Phi\) is increasing at \(t=0\). Therefore, flux is increasing in the \(z\) direction at \(t=0\), and so the current will flow in the clockwise direction (right-hand rule for the negative \(z\) direction).
 \end{enumerate}
 
+\subsection{The Ideal Transformer}
+An ideal transformer has two sides, with loops of wire (\(N\) turns) wrapped around each side; generally, one side is connected to an AC source, and the other to a load. Using Faraday's Law, 
+\[
+  V = -N \frac{d\Phi}{dt}, 
+\]
+we can generalize to the case of an ideal transformer, where
+\[
+	\frac{V_1}{V_2} = \frac{N_1}{N_2},
+\]
+while 
+\[
+  \frac{I_1}{I_2} = \frac{N_2}{N_1}.
+\]
+In addition,
+\(R_{\mathrm{in}} = R_L \frac{N_1}{N_2}^2\) and \(Z_{\mathrm{in}} = Z_L \frac{N_1}{N_2}^2\).
+  
+\subsection{Moving Conductor in a Static Magnetic Field}
+As an example, a conducting wire of length \(l\) moves across a static magnetic field \(\vec{B} = \hat{\alpha}_zB_0\) with velocity \(\vec{u}=\hat{\alpha}_x u\).
+
+Recall that 
+\[
+  \vec{F}_m = q(\vec{u} \times \vec{B}).
+\]
+Therefore, 
+\[
+  \vec{E}_m = \frac{\vec{F}_m}{q} = \vec{u} \times \vec{B}.
+\] 
+This will induce a potential difference across the two ends of the wire, and 
+\[
+	V_{\mathrm{emf}} = \int_{2}^{1}\vec{E}_m \cdot d \vec{l} = \int_{2}^{1} (\vec{u} \times \vec{B}) \cdot d \vec{l} = \int_{}^{} (\hat{\alpha}_x u x \hat{\alpha}_z B_0) \cdot \hat{\alpha}_y dy = -u B_0 l.
+\]
+
+In general, if any segment of a closed circuit moves with a velocity \(\vec{u}\) across a static magnetic field \(\vec{B}\), then the induced motional emf is 
+\[
+	V_{\mathrm{emf}}^m = \oint (\vec{u} \times \vec{B}) \cdot d \vec{l}.
+\]
+
+As an example, a metal bar slides over a pair of conducting rails in a uniform magnetic field \(\vec{B} = \hat{\alpha}_z B_0\) with a velocity \(\vec{u} = \hat{\alpha}_x u\).
+\begin{enumerate}[label=\alph*)]
+	\item Determine the open circuit voltage \(V_0\) that appears across terminals 1 and 2.
+
+		First, determine the direction of the current; current will flow from protons to electrons, so clockwise. Then, find the voltage,
+		\begin{align*}
+			V_0 &= \int_{}^{} (\vec{u} \times \vec{B}) \cdot d \vec{l} \\
+					&=-u B_0 h \ \mathrm{V}
+		\end{align*}
+	\item Assuming that a resistance \(R\) is connected between the terminals, find the electric power dissipated in the resistor.
+
+		First, 
+		\[
+		  I = \frac{u B_0 h}{R},
+		\]
+		and so
+		\[
+		  P = I^2 R.
+		\]
+\end{enumerate}
+As another example, the rectangular loop shown below is located in the \(x\)-\(y\) plane and moves away from the origin with velocity \(\vec{u} = 5 \hat{\alpha}_y \mathrm{\frac{m}{s}}\) in a magnetic field given by \(\vec{B}(y) = \hat{\alpha}_z 0.2 e^{0.1y}\) \ mathrm{T}. If \(R = 5 \ohm\), find the current \(I\) at the instant that the loop sides are at \(y_1 = 2\) and \(y_2 = 2.5 \ \mathrm{m}\).
+
+Recall the formula for motional emf, 
+\[
+	V_{\mathrm{emf}}^m = \oint_C (\vec{u} \times \vec{B}) \cdot d \vec{l}.
+\]
+Since \(\vec{u} \times \vec{B}\) is along \(\hat{\alpha}_x\), voltages are induced across only the sides oriented along \(\hat{\alpha}_x\) (1 and 2, and 3 and 4).
 \end{document}
