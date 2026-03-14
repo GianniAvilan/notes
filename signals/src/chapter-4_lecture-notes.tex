@@ -74,5 +74,44 @@ Inverse Laplace transforms were covered in Circuits 2, but worth reviewing. If a
 Given a function \(X(s) = \dfrac{N(s)}{D(s)}\), the function is considered \textbf{strictly proper} if the degree of \(N(s)\) is less than the degree of \(D(s)\); if the degree of \(N(s)\) is equal to the degree of \(D(s)\), the function is considered \textbf{proper}. In the second case, we'll need an \(A\) constant in our partial fraction expansion (see section B.5 in the textbook for details. See Example 4.4 as well for examples of MATLAB-based partial fraction decomposition with strictly proper, proper, and improper functions \(X(s)\)).
 
 MATLAB gives you three vectors: r, p, and k; the residues, poles, and polynomial coefficients, respectively. Residues correspond to the numerators of the partial fraction, poles to the zeroes of the denominator, and polynomial coefficients to the added constant(s). When running the residue() command in MATLAB, pay close attention to the order of the coefficients, and insert zeroes where there is no \(s\) value in the polynomial.
+
+As an example, determine the inverse Laplace transform of 
+\[
+  X_b(s) = \frac{2s^2 + 7s +4}{(s+1)(s+2)^2}.
+\]
+Using MATLAB's conv() (\textbf{why?}) and residue() functions, we find 
+\[
+  X_b(s) = \frac{3}{(s+2)} + \frac{2}{(s+2)^2} - \frac{1}{(s+1)}.
+\]
+
+Using an example with complex roots, find the inverse Laplace transform of
+\[
+  \frac{8s^2 + 21s + 19}{(s+2)(s^2 + s + 7)}.
+\]
+MATLAB can handle complex values as well as real ones, and though we will find that both residues and poles are complex in this case, we may use angle() and abs() to express the complex values in polar form, which will then correspond to the table of inverse Laplace transforms.
+
+Laplace and inverse Laplace transforms may also be found using MATLAB's symbolic math toolbox, a useful approach when dealing with complex functions that have no corresponding formula in a table of transforms. In MATLAB, this is done using laplace() and ilaplace().
+
+Another example: Show that the Laplace transform of \(10e^{-3t} \cos{(4t + 53.13 \degree)}\) is \(\dfrac{(6s-14)}{(s^2+6s+25)}\). Use Table 4.1.
+
+Using Table 4.1, 
+\[
+	re^{-at}\cos{(bt + \theta) \longleftrightarrow \frac{As+B}{s^2+2as+c}}.
+\]
+
+Starting with \(r=10\), from the table, \(r = \sqrt{\frac{A^2C+b^2-2ABa}{c-a^2}}\). Glancing at the right-hand side, \(A=6\), \(B=-14\), \(a=3\), \(c=25\). Therefore, 
+\[
+  r = \sqrt{\frac{6^2(25) - 2(6)(-14)(3)}{25-3^2}} = \sqrt{100} = 10.
+\]
+Then,
+\[
+  b=\sqrt{c-a^2} = \sqrt{25-3^2} = \sqrt{16} = 4.
+\]
+Again, using the table, 
+\[
+	\theta = \tan^-1{(\frac{6(3) + 14}{6 \ \sqrt{25-32}})} = 53.13 \degree.
+\]
+
+Extra practice using MATLAB residue().
   
 \end{document}

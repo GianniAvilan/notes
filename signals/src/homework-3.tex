@@ -19,7 +19,7 @@
 \usepackage{textcomp, gensymb}
 \author{Gianni Avilan-Losee}
 \begin{document}
-\includepdf{homework-2_cover-page.pdf}
+\includepdf{homework-3_cover-page.pdf}
 \begin{enumerate}[label=\thesubsubsection]
 \setcounter{section}{3}
 \setcounter{subsection}{1}
@@ -35,5 +35,86 @@
 				  \sum_{-3}^{3} (\frac{9}{3}n)^2 = (9+9) + (36 + 36) + (81 + 81) = 252.
 				\]
 	\end{enumerate}
+	\setcounter{subsubsection}{2}
+\item 
+	\begin{enumerate}[label=\alph*)]
+		\item Finding the power of the signal, averaged across its period,
+			\[
+			  \frac{1}{12} (2\times3^2) + (2\times2^2) + (2\times1^2) \approx 2.33.
+			\]
+  \end{enumerate}
+	\setcounter{subsection}{2}
+	\setcounter{subsubsection}{7}
+	\item
+	\begin{enumerate}[label=\alph*)]
+  \item \(x[n-6]\) is the signal \(x[n]\) time-shifted forward by \(6\) units, and may be represented as 
+	\begin{figure}[H]
+	  \centering
+	  \includegraphics[width=0.6\textwidth]{homework-3_fig-1.png}
+		\caption{\(x[n-6]\)}
+	  \label{fig:time shift}
+	\end{figure}
+\item \(x[3n]\) is the compression of the signal \(x[n]\) by a factor of \(3\) units, and may be represented as 
+	\begin{figure}[H]
+	  \centering
+	  \includegraphics[width=0.6\textwidth]{homework-3_fig-2.png}
+		\caption{\(x[3n]\)}
+	  \label{fig:compression}
+	\end{figure}
+\item \(x[\frac{n}{3}]\) is the expansion of the signal \(x[n]\) by a factor of \(3\) units, and may be represented as 
+	\begin{figure}[H]
+	  \centering
+	  \includegraphics[width=0.6\textwidth]{homework-3_fig-3.png}
+		\caption{\(x[\frac{n}{3}]\)}
+	  \label{fig:expansion}
+	\end{figure}
+  \end{enumerate}
+	\setcounter{subsection}{3}
+	\setcounter{subsubsection}{3}
+	\item
+		\begin{enumerate}[label=\alph*)]
+			\item
+				The signal \(u[n-2] - u[n-6]\) may be represented as
+				\begin{figure}[H]
+				  \centering
+				  \includegraphics[width=0.6\textwidth]{homework-3_fig-4.png}
+					\caption{\(u[n-2] - u[n-6]\)}
+				  \label{fig:unit}
+				\end{figure}
+			\item The signal \(n\{u[n] - u[n-7]\}\) may be respresented as
+				\begin{figure}[H]
+				  \centering
+				  \includegraphics[width=0.6\textwidth]{homework-3_fig-5.png}
+				  \caption{\(n\{u[n] - u[n-7]\}\)}
+				  \label{fig:label}
+				\end{figure}
+		\end{enumerate}
+		\setcounter{subsection}{4}
+		\setcounter{subsubsection}{1}
+	\item 
+		\begin{enumerate}[label=\alph*)]
+			\item Since the value of y[n] corresponds to the value of the current item, plus the cumulative value of all previous items, so that
+				\[
+					y[n] - y[n-1] = x[n].
+				\]
+			\item The system can be represented graphically as a block diagram
+				\begin{figure}[H]
+				  \centering
+				  \includegraphics[width=0.6\textwidth]{homework-3_fig-6.jpg}
+				  \caption{Block diagram system representation}
+				  \label{fig:block}
+				\end{figure}
+		\end{enumerate}
+		\setcounter{subsubsection}{12}
+		\item
+			\begin{enumerate}[label=\alph*)]
+				\item BIBO stability is determined based on whether the input is bounded for a bounded output. In this example, if the bounded input \(x[n-1] = 0\), \(y[n+1]\) approaches infinity, and so the system is BIBO-unstable.
+				\item Adjusting the system to be in \textit{delay} form, 
+					\[
+						y[n] = \frac{x[n-1]}{x[n]},
+					\]
+					we can see clearly that the system relies on inputs prior to the present input at \(n=0\), and so the system is \textbf{not} memoryless.
+				\item Since the system does not depend on \textbf{future} values of \(x[n+1]\), the system can be considered \textbf{causal}.
+			\end{enumerate}
 \end{enumerate}
 \end{document}

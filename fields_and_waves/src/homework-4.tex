@@ -1,0 +1,81 @@
+\documentclass{article}
+\title{ECE 370 -- Homework 4}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 370}
+\fancyhead[R]{Homework 4}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\setcounter{section}{1}
+\begin{document}
+\begin{enumerate}
+	\item We may formulate the force from a constant magnetic field on a current carrying loop with constant current as 
+		\[
+			\vec{F_m} = I \oint_C d \vec{l} \times \vec{B} = I l \times B.
+		\]
+		Finding the force on each side of the triangle formed by the current carrying loop, beginning with the left side and proceeding clockwise, 
+		\begin{align*}
+			&\vec{F_1} = 10^\mathrm{A} (\hat{x}(0.1) + \hat{y}(0.2))^{\mathrm{m}}\sin{(-26.56 \degree)} = \hat{z} (6)^{\mathrm{mN}} \\
+			&\vec{F_2} = 10^\mathrm{A} (-\hat{x}(0.1) + \hat{y}(0.2))^{\mathrm{m}}\sin{(26.56 \degree)} = \hat{z}(6)^{\mathrm{mN}} \\
+			&\vec{F_3} = 10^\mathrm{A} (\hat{x}(0.2))^{\mathrm{m}} \sin{(90\degree)} = -\hat{z}(12)^{\mathrm{mN}}.
+		\end{align*}
+
+		Deriving the magnetic moment of the single loop of wire using the current and area of the loop,
+		\[
+			\vec{m} = \hat{n}IA = -\hat{z}[10^{\mathrm{A}}(0.2^{\mathrm{m}})]^{\mathrm{A \cdot m^2}}
+		\]
+		and the corresponding torque,
+		\[
+			\vec{T} = \vec{m} \times \vec{B} = 2(0.006)\sin{(90\degree)} = -\hat{x}(12)^{\mathrm{mN \cdot m}}.
+		\]
+	\item We may formulate the magnetic flux density \(\vec{B}\) from an infinitely long wire as 
+		\[
+		  \vec{B} = \hat{\phi}\frac{\mu_0 I}{2\pi r},
+		\]
+		with the direction of \(\hat{\phi}\) determined by the right-hand rule.
+
+		In this case, the magnetic flux density of the two current carrying wires being considered is
+		\begin{align*}
+			&\vec{B}_1 = \hat{\phi}\frac{\mu_0(10^{\mathrm{A}})}{2\pi(\sqrt{8})}^{\mathrm{T}} \\
+			&\vec{B}_2 = -\hat{\phi}\frac{\mu_0(10^{\mathrm{A}})}{2\pi(\sqrt{8})}^{\mathrm{T}}.
+		\end{align*}
+		Deriving force on the third wire as in the previous example, 
+		\[
+			\vec{F_3} = I \int_L d \vec{l} \times \vec{B} = 10^{\mathrm{A}} \int_L d \hat{z} \times (\vec{B_1} + \vec{B_2}).
+		\]	
+		Converting the magnetic flux densities to Cartesian coordinates, 
+		\begin{align*}
+			&\vec{B}_1 = [-\hat{x}(5\times 10^{-7}) + \hat{y}(5 \times 10^{-7})]\\
+			&\vec{B}_2 = [\hat{x}(-5\times 10^{-7}) - \hat{y}(5 \times 10^{-7})]\\
+		\end{align*}
+		so that 
+		\[
+			\vec{F_3} = 10^{\mathrm{A}}\int_L d \vec{z} \times \hat{x}(10^{-6}) = \hat{y}(10)^{\micro\mathrm{N}}
+		\]
+		\item
+			Using Ampere's Law,
+			\[
+			  \oint_C \vec{H} \cdot d \vec{l} = I,
+			\]
+			which states that the line integral of a magnetic field \(\vec{H}\) around a closed path is proportional to the current flowing through the surface area enclosed, we may express the relationship in this case, for \(0 < r < a\), (using the right-hand rule to find the direction of \(\vec{H}\)), as
+			\[
+				2\pi r H = \frac{J_0}{r}(\pi r^2) \Rightarrow \vec{H} = \hat{\phi}(\frac{J_0 r}{2}) \ \mathrm{\frac{A}{m}}.
+			\]
+			For \(r > a\),
+			\[
+				\vec{H} = \hat{\phi}(\frac{J_0a^2}{2r^2}) \ \mathrm{\frac{A}{m}}.
+			\]
+\end{enumerate}
+\end{document}
