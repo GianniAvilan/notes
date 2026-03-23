@@ -183,4 +183,71 @@ Recall the formula for motional emf,
 	V_{\mathrm{emf}}^m = \oint_C (\vec{u} \times \vec{B}) \cdot d \vec{l}.
 \]
 Since \(\vec{u} \times \vec{B}\) is along \(\hat{\alpha}_x\), voltages are induced across only the sides oriented along \(\hat{\alpha}_x\) (1 and 2, and 3 and 4).
+
+Reviewing a few more problems related to electromagnetic induction.
+
+The wire shown below carries a current of \(I=10^{\mathrm{A}}\). A \(30 \ \mathrm{cm}\) long metal rod moves with a constant velocity \(\vec{u} = \hat{z}5 \ \mathrm{\frac{m}{s}}\). Find \(V_{12}\). (The image shows a vertical wire and a horizontal rod, see Example 6-5 in the book). Since \(I\) is constant, the \(\vec{B}\) field is static.
+
+Using the formula for an infinitely long wire, as derived earlier using Ampere's Law, 
+\[
+  \vec{B} = \hat{\phi} \ \frac{\mu_0 I}{2\pi r}.
+\]
+Then, 
+\[
+	V_{\mathrm{emf}} = \int (\vec{u} \times \vec{B}) \cdot d \vec{l}.
+\]
+Using the given information, \(\vec{u} = \hat{z}5\) and \(d \vec{l} = \hat{r} \ dr\). 
+Therefore, 
+\[
+	V_{\mathrm{emf}} = \int_{0.4}^{0.1}(\hat{x}5 \times \hat{z}5 \ \frac{\mu_0 I}{2\pi r}) \cdot \hat{r} \ dr = 13.9 \times 10^{-6} \ \mathrm{V}
+\]
+
+\subsection{Moving Conductor in a Time-Varying Magnetic Field}
+
+Next, we'll examine the general case, where
+\[
+	V_{\mathrm{emf}} = V_{\mathrm{emf}}^{\mathrm{tr}} + V_{\mathrm{emf}}^{\mathrm{m}} = -\int\int \frac{\partial \vec{B}}{\partial t} \cdot d \vec{s} + \oint_C(\vec{u} \times \vec{B}) \cdot d \vec{l}.
+\]
+
+Given a sliding conductor with \(\vec{u} = \hat{x} u_0\) and length \(l\) in a magnetic field \(\vec{B} = -\hat{x} B_0 \cos{(\omega t)}\), forming a rectangular conducting loop, what is the induced voltage \(V_{\mathrm{emf}}\)?
+
+First, we will find \(d \vec{s}\) within the rectangular loop, \(d \vec{s} = \hat{z} \ dx \ dy\), and \(d \vec{l} = \hat{y} \ dy\). Then, 
+\[
+	\frac{\partial \vec{B}}{\partial t} = -\frac{\partial }{\partial t} \hat{z} \ B_0 \cos{(\omega t)} = -\hat{z} \ B_0 (-\sin{(\omega t)}) \cdot \omega = \hat{z} \ B_0 \omega \sin{(\omega t)}.
+\]
+
+Then, 
+\[
+	\vec{u} \times \vec{B} = \hat{x} \ u_0 \times (-\hat{z} \ B_0 \cos{(\omega t)}).
+\]
+Adding up all the components, 
+\[
+	V_{\mathrm{emf}} = -\int_{0}^{l}\int_{0}^{x}(\hat{z}B_0 \omega \sin{(\omega t)}) \cdot \hat{z} \ dx \ dy + \int_{0}^{l}(\hat{y} \ u_0 B_0 \cos{(\omega t)}) \cdot \hat{y} \ dy.
+\]
+
+Solving,
+\[
+	V_{\mathrm{emf}} = -\omega B_0 \sin{(\omega t)} x l + u_0 B_0 \cos{(\omega t)} l.
+\]
+
+Returning to Maxwell's Laws,
+\begin{align*}
+	&\nabla \cdot \vec{D} = \rho_v \\
+	&\nabla \cdot \vec{B} = 0 \\
+	&\nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t} \\
+	&\nabla \times \vec{H} = \vec{J} + \frac{\partial \vec{D}}{\partial t},
+\end{align*}
+now accounting for time-changing electric and magnetic fields being coupled.
+
+\subsection{Displacement Current}
+
+This alters Ampere's Law for time-varying fields to
+\[
+  \oint \vec{H} \cdot d \vec{l} = I_c + I_d,
+\]
+where \(I_c\) is the conduction current and \(I_d\) is the displacement current; a function of the change in the electric flux density over time, which induces a corresponding magnetic field. Conduction current \(I_c\) is simply \(I_c = \int \int \vec{J} \cdot d \vec{s}\). 
+
+As an example, consider the displacement current \(I_d\) in a capacitor connected to a circuit through a perfectly conducting wire. Show that the displacement current in the capacitor is the same as the conduction current in the wire. See example in textbook.
+
+Worked through Example 6.7 in textbook.
 \end{document}

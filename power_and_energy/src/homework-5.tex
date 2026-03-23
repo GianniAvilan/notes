@@ -1,0 +1,109 @@
+\documentclass{article}
+\title{ECE 311 -- Homework 5}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 311}
+\fancyhead[R]{Homework 5}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\setcounter{section}{1}
+\begin{document}
+\includepdf[pages=-]{homework-5_cover-page.pdf}
+\begin{enumerate}[label=\thesubsection]
+	\setcounter{section}{11}
+	\setcounter{subsection}{2}
+	\item The reference information allows us to assume that at full load (at maximum capacity), the given transformer will deliver \(S = 2^{\mathrm{kVA}}\) of apparent power, with a voltage ratio of \(\dfrac{E_1}{E_2}=\dfrac{240^{\mathrm{V}}}{120^{\mathrm{V}}} = 2\).
+		Assuming all values are given in RMS form,
+	\begin{enumerate}[label=\alph*)]
+		\item Using the formula for power factor, 
+			\[
+				\mathrm{P.F.} = \frac{P}{S},
+			\]
+			we may calculate real power \(P\) as 
+			\[
+				P = 0.8 \times 2^{\mathrm{kVA}} = 1.6^{\mathrm{kW}}.
+			\]
+		\item Using the formula for RMS current,
+			\[
+			  I = \frac{S}{E}, 
+			\]
+			we may calculate load current as 
+			\[
+				I_{\mathrm{load}} = \frac{2^{\mathrm{kVA}}}{120^{\mathrm{V}}} = 16.67^{\mathrm{A}}.
+			\]
+	\end{enumerate}
+	\setcounter{subsection}{5}
+	\item
+	\begin{enumerate}[label=\alph*)]
+			\item For three transformers rated at \(S = 10^{\mathrm{kVA}}\), we may find the total rated power of the transformer bank as
+				\[
+					S_{\mathrm{total}} = 10^{\mathrm{kVA}} \times 3 = 30^{\mathrm{kVA}}.
+				\]
+			\item For a wye configuration, the line-to-line voltage is \(\sqrt{3}\) times greater than the line-to-neutral voltage, so the voltage across \(N_1\) is
+				\[
+					V_{ab} = 400^{\mathrm{V}} \times \sqrt{3} = 692.82^{\mathrm{V}}.
+				\]
+				In the delta configuration, on the other hand, the voltage across \(N_2\) is the same as the line-to-line voltage. Therefore, the line-to-line voltage ratio is
+				\[
+					\frac{N_1}{N_2} = \frac{692.82^{\mathrm{V}}}{300^{\mathrm{V}}} = 2.31
+				\]
+		\end{enumerate}
+		\setcounter{subsection}{7}
+		\item
+			\begin{enumerate}[label=\alph*)]
+				\item To find the turns ratio, we may simply use the same assumptions stated in the previous question, such that the turns ratio is
+					\[
+						\frac{N_1}{N_2} = \frac{(120/\sqrt{3})^{\mathrm{kV}}}{13.8^{\mathrm{kV}}} = 5.02,
+					\]
+					assuming that this is a \textit{step-down} transformer bank.
+				\item Finding line current as a function of power on the load side, 
+					\[
+						I = \frac{12^{\mathrm{MVA}}}{(120 \times \sqrt{3})^{\mathrm{kV}}} = 57.74^{\mathrm{A}}. 
+					\]
+			\end{enumerate}
+			\setcounter{subsection}{11}
+			\item
+			\begin{enumerate}[label=\alph*)]
+				\item First, we may compute the voltage per turn on the primary side as
+					\[
+						V_{T} = \frac{E_1}{N_1} = \frac{120^{\mathrm{V}}}{10,000} = 12^{\mathrm{mV}},
+					\]
+					and then compute the voltage on the two secondary windings as 
+					\begin{align*}
+						&E_2 = V_T \times N_2 = 12^{\mathrm{mV}} \times 5,000 = 60^{\mathrm{V}} \\
+						&E_3 = V_T \times N_3 = 12^{\mathrm{mV}} \times 1,000 = 12^{\mathrm{V}}
+					\end{align*}
+				\item Computing the current in each winding as a function of the apparent power \(S\) and the winding voltage, 
+					\begin{align*}
+						&I_1 = \frac{678^{\mathrm{VA}}}{120^{\mathrm{V}}} = 5.64^{\mathrm{A}}\\
+						&I_2 = \frac{671^{\mathrm{VA}}}{60^{\mathrm{V}}} = 11.18^{\mathrm{A}}\\
+						&I_3 = \frac{43^{\mathrm{VA}}}{12^{\mathrm{V}}} = 3.61^{\mathrm{A}}\\
+					\end{align*}
+			\end{enumerate}
+			\setcounter{subsection}{12}
+		\item Using the equivalence
+			\[
+			  N_1 I_1 = N_2 I_2 + N_3 I_3,
+			\]
+			\begin{align*}
+			  &N_2 I_2 = 3000 \times 2^{\mathrm{A}} = 6000 \\
+				&N_3 I_3 = 6000 \times 1^{\mathrm{A}} = 6000,
+			\end{align*}
+			so that \(N_1 I_1 = 12,000\), and
+			\[
+			  N_1 = \frac{12,000}{I_1} = 1,200.
+			\]
+\end{enumerate}
+\end{document}
