@@ -1,0 +1,31 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[skip=1em, indent=12pt]{parskip}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\begin{document}
+\setcounter{section}{9}
+\section{Chapter 10: Sequential Circuit Design} 
+\setcounter{subsection}{0}
+\subsection{Introduction}
+To review modeling of gate delay, we consider intrinsic factors, extrinsic factors, and operating conditions when estimating effective gate delay.
+
+In addition, gates will often be \textit{asymmetric}, meaning that the delay associated with different transistions will be different, and we may represent this effect using a timing arc table.
+
+Gates are normally not used in isolation, but chained together, so the challenge is to calculate total delay through a complex circuit. One method of doing this is to simplify the circuit and its delays to single numbers, and then finding the \textit{critical path}. This involves evaluating every path from input to output, and finding the worst case -- this worst case is the critical path. Obviously, the result is an oversimplification, and the critical path can be easily calculated using software tools.
+
+Critical path analysis can be simplified or complicated as needed, by including/excluding variables such as asymmetric rise/fall delays.
+
+In practice, we sample nodes in a CMOS circuit to determine whether they are high or low (1 or 0). The space between a 1 and a 0 is known as the "eye", and clock synchronization deteremines the sampling rate and accuracy of sampling. However, there are similar delay concerns regarding the clock that there are with any other CMOS circuits. The functionality of any sequential circuit is highly dependent on the delay considerations.
+
+Sequential circuits require "memory" components, like flip-flops and latches, to separate past, current, and future inputs. The clock frequency determines the speed at which this "pipeline" flows.
+
+Sequential circuits generally include clocks, combinational logic elements, and registers, with multiple clocking methodologies developed over the years. Getting the clock edge to every part of the circuit at the same time is not easy -- generally, an input clock will fan out to a number of repeaters, and these fan out to twice as many repeaters, etc, until all registers are covered; wire lengths, though, should be consistent, so an H-tree layout is a common approach.
+
+A clock can be defined as follows in a CMOS circuit, based on its properties: the clock will have a period and frequency that is based on threshold voltages and rise/fall times. All sequential circuits have maximum clock frequencies, above which they are not guaranteed to operate. Minimum clock frequency may be as low as zero, depending on whether the circuit has functionality that can be met without a clock signal; however, dynamic sequential circuits have minimum frequencies due to the natural discharging of capacitors used as memory (DRAM).
+
+Latches are level sensitive, where flip-flops (the components of registers) are edge triggered. Timing diagrams specify the operation of sequential circuits and their timing elements as a function of the clock period, and may include the associated propagation and contamination delays.
+\end{document}

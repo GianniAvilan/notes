@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+\section{Test Prep: Midterm 2}
+\subsection{Chapter 4:}
+Most important aspect of hydropower is the penstock formula:
+\[
+  KE = \frac{1}{2}mv^2,
+\]
+where \(m\) is the water mass in kg, and \(v\) is the water velocity in m/s.
+
+Penstock efficiency formula:
+\[
+  \eta_p = \frac{KE}{PE} = \frac{0.5mv^2}{mgh} = \frac{v^2}{2gh},
+\]
+where \(h\) is the water's \textit{effective} head, \(H_e\).
+
+The power of the water exiting the penstock is related to the water flow, which is the volume of water passing through a point in the penstock over time.
+
+Therefore the power in and out can be expressed as
+\begin{align*}
+	&P_{p-in} = f\delta gh \\
+	&P_{p-out} = \frac{1}{2}f\delta v^2 = \frac{1}{2}A\delta v^3,
+\end{align*}
+where the flow rate \(f = Av\), where \(A\) is the cross sectional area of the penstock and \(v\) is the velocity, and \(\delta\) is the density of water. Seems like there will be some questions on penstock power, maybe review HW questions.
+
+System efficiency will be covered, focus on the concept of multiplying the individual efficiency factors of the penstock, hydro, turbine, and generator together to find the total efficiency, which is the power out over the power in.
+
+For thermal power plants, we will work with the ideal case, where the energy source produces heat energy \(Q_1\) at a temperature \(T_1\). A heat sink held at a lower temperature causes thermal energy to flow from the high to low temperature, driving a turbine, which converts some thermal energy into mechanical energy \(W\).
+
+Assuming no losses of thermal energy, the efficiency of the heat engine is given by
+\[
+	\eta_{ \ \mathrm{ideal}} = \frac{T_1 - T_2}{T_1} = \frac{W}{Q_1} = \frac{Q_1 - Q_2}{Q_1}.
+\]
+Therefore, the difference between the two temperatures should be as large as possible.
+\subsection{Chapter 11:}
+\textbf{Note:} for some godforsaken reason this textbook uses \(E\) for voltage, fml
+
+We will work with ideal transformers. Apparent power \(\overline{S}\) is equal on the primary and secondary sides. Therefore, voltage and current ratios are defined in terms of the turns ratio between the two sides.
+
+We may reflect load impedance from secondary to the primary side as
+\[
+	Z'_{\mathrm{load}} = Z_{\mathrm{load}}(\frac{N_1}{N_2})^2 = \frac{E_2}{I_2}(\frac{N_1}{N_2})^2.
+\]
+
+Multi-winding transformers use more than one secondary winding. Voltage per turn remains constant, since all windings share the same flux \(\frac{d\phi}{dt}\), multiplied by the number of turns for that winding. This gives the voltage per turn. 
+
+\textbf{Important:} Gotta look at the stupid dots to figure out which direction current goes.
+
+Voltage per turn is constant as
+\[
+  V_T = \frac{E}{N}
+\]
+for each winding.
+
+Three-phase transfomer is just a three-phase voltage source, basically, pay attention to wye or delta configurations. \textbf{Important: Review these configurations in the textbook, this is confusing.}
+
+The equivalent circuit of a transformer includes resistance and inductance to account for leakage resistance and leakage flux (leakage reactance). Review this in the textbook too.
+
+\setcounter{section}{10}
+\setcounter{subsection}{2}
+\section{Review Questions}
+\begin{enumerate}[label=\thesubsection]
+	\item
+\end{enumerate}
+
+\end{document}

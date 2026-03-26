@@ -1,0 +1,74 @@
+\documentclass{article}
+\title{ECE 311 -- Midterm 2 Extra Review}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{xcolor}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 311}
+\fancyhead[R]{Homework 5}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\setcounter{section}{1}
+\begin{document}
+\begin{enumerate}[label=\thesubsection]
+	\setcounter{section}{11}
+	\setcounter{subsection}{1}
+	\item A single phase, \(240/120\) V transformer has the following parameters:
+		\begin{align*}
+		 &R_1 = 1\ohm \\
+		 &R_2 = 0.5\ohm \\
+		 &X_1 = 6\ohm \\
+		 &X_2 = 2\ohm \\
+		 &R_o = 500\ohm \\
+		 &X_o = 1.5 \mathrm{k}\ohm.
+		\end{align*}
+		A load of \(10\ohm\) at 0.8 power factor lagging is connected across the low-voltage terminal of the transformer. The voltage across the primary side is \(240^{\mathrm{V}}\). Compute:
+		\begin{enumerate}[label=\alph*)]
+			\item The current at the secondary side.
+
+				\textcolor{red}{First, referencing the schematic in the midterm review lecture slides (page 22), we'll need to find the value of the secondary-side impedances when reflected to the primary side; in other words, how much impedance is the primary side "seeing" from \(R_2\), \(X_2\), and the load impedance? Using the formula \(Z'_{\mathrm{load}} = Z_{\mathrm{load}}\left(\frac{N_1}{N_2}\right)^2\), we can find the reflected impedances. Starting with \(R_2 + jX_2,\) \((0.5+j2)\left(\frac{240}{120}\right)^2 = 2+j8\ohm\). Then, the load impedance may first be converted to complex form by finding the phase angle as a function of the power factor, where \(\theta = \cos^{-1}{(0.8)} = 38.87\degree\), and so \(Z_{\mathrm{load}} = 10\cos{(38.87\degree)} + j10\sin{(38.87\degree)} = 8 + j6 \ohm\), and reflecting this impedance using the previous formula, \(Z'_{\mathrm{load}} = 4(8+j6) = 32 + j24\ohm\).}
+
+			\textcolor{red}{Now that the impedance is properly reflected, we can add the primary side impedances to the mix, \(1 + j6\ohm\), for a total impedance "seen" by the primary side of \(Z_{\mathrm{total}} = 34 + j38 = 51\angle{48.18\degree} \ohm\). Finally, finding reflected current, \(I'_2 = \frac{V_1}{Z_{\mathrm{total}}} = \frac{240\angle{0\degree}}{51\angle{48.18\degree}} = 4.71\angle{-48.18\degree}\). Then, reflecting the current back to the secondary side, \(I_2 = I'_2 \left(\frac{240}{120}\right) = 9.42\angle{-48.18\degree}.\)}
+
+			\item The voltage at the secondary side.
+
+			\textcolor{red}{A little easier than the last one; knowing that voltage is current times impedance, we may take the secondary side current and multiply it by the load impedance to find the voltage as \(V_2 = I_2\cdot Z_{\mathrm{load}} = 9.42\angle{-48.18\degree} \cdot 10\angle{38.87\degree} = 94.2\angle{-9.31\degree}^{\mathrm{V}}\)}
+			\item V.R.
+
+				\textcolor{red}{At no load, the rated voltage is the same as the secondary-side induced voltage, \(120^{\mathrm{V}}\), and so the voltage regulation, that is, the change in the load voltage from no load to full load, is 
+				\[
+				  VR = \frac{120 - 94.2}{94.2} = 0.2739 = 27.39\%.
+			\]}
+			\item Load power.
+
+				\textcolor{red}{On the load side, apparent power can be calculated as voltage times current, \(S = 94.2 \times 9.42 = 887.36^{\mathrm{VA}}\), and real power, using the phase angle, is 
+				\[
+					P = S\cos{(\theta)} = 887.36 \times 0.8 = 709.89^{\mathrm{W}}.
+			  \]}
+			\item Efficiency.
+				
+				\textcolor{red}{Using provided formulas for copper and iron losses, 
+				\[
+					P_{cu} = I_2'^2(R_1 + R_2') = 4.77^2(3) = 68.26^{\mathrm{W}} 
+				\] (remember that \(R\) refers only to the real part of the impedance, and neglects reactance), and 
+				\[
+					P_{iron} = \frac{V_1^2}{R_0} = \frac{240^2}{500} = 115.2^{\mathrm{W}}. 
+				\]
+				Then efficiency is given by the total output power over the input power, as
+				\[
+				  \eta = \frac{709.89}{893.35} = 0.7946 = 79.46\%.
+			\]}
+		\end{enumerate}
+\end{enumerate}
+\end{document}

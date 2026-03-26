@@ -1,0 +1,81 @@
+\documentclass{article}
+\title{ECE 311 -- Homework 4}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 311}
+\fancyhead[R]{Homework 4}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\setcounter{section}{1}
+\begin{document}
+\begin{enumerate}[label=\thesubsection]
+	\setcounter{section}{4}
+	\setcounter{subsection}{16}
+	\item The potential energy (PE) of a hydroelectric dam is a direct function of the volume and height of its reservoir. We also refer to the height as the head, and, incorporating the acceleration of Earth's gravitational field, we can find the potential energy as 
+		\[
+			PE_{r} = MgH.
+		\]
+		We know that \(g\) is constant, and the average head is given as \(100\ \mathrm{m}\). To find the mass of water in the reservoir, we will use the average density \(\delta\) of water at temperatures up to \(20 \ \degree\mathrm{C}\), \(1000 \ \mathrm{\frac{kg}{m^3}} = 10^{12} \ \mathrm{\frac{kg}{km^3}},\) and so \(m = 10 \times 10^{12} = 10^{13} \ \mathrm{kg}\).
+
+		Then, 
+		\[
+			PE_{r} = 10^{13} \times 9.81 \times 100 = 9.81 \times 10^6 \ \mathrm{GJ}.
+		\]
+		\setcounter{subsection}{17}
+		\item To compute the power of the water exiting the penstock , which then passes through the turbine, we may use the formula 
+		\[
+			P_{p-out} = f\delta gh, 
+		\]
+		where \(f\) is the flow rate \(f = \frac{vol}{t}\), \(\delta\) is the density of the water, \(g\) is the gravitational constant, and \(h\) is the effective head (different from the physical head \(H\), used in the previous problem). Using \(\delta = 1000 \ \mathrm{\frac{kg}{m^3}}\), 
+		\[
+			P_{p-out} = 50 \times 1000 \times 9.81 \times 60 = 29.43 \ \mathrm{MW}.
+		\]
+		\setcounter{subsection}{18}
+	\item Rearranging the prior formula for \(P_{p-out}\), we may find the water's flow rate as 
+		\[
+			f = \frac{P_{p-out}}{\delta gh} = \frac{10\times 10^6}{1000 \times 9.81 \times 60} = 16.99 \ \mathrm{\frac{m^3}{s}}.
+		\]
+		To extract velocity from the flow rate, we can simply divide by the cross-sectional area of the penstock,
+		\[
+			v_i = \frac{f}{A} = \frac{16.99}{4\pi} = 1.35 \ \mathrm{\frac{m}{s}}.
+		\]
+		\setcounter{subsection}{19}
+	\item
+		\begin{enumerate}[label=\alph*)]
+			\item Finding flow rate \(f\) from the given mass flow rate, we may divide by the water density \(\delta = 1000 \ \mathrm{\frac{kg}{m^3}}\) as
+				\[
+					f = \frac{10^5}{1000} = 100 \ \mathrm{\frac{m^3}{s}}.
+				\]
+			\item To find the power of the water entering the turbine (equivalent to the power of the water exiting the penstock), we may use the previously referenced formula as
+				\[
+					P_{p-out} = f\delta gh = 100 \times 1000 \times 9.81 \times 80 = 78.48 \ \mathrm{MW}.
+				\]
+				\textbf{Note:} I'm assuming that here \(H \approx h = 80 \ \mathrm{m}\), since I can't find a way to derive the effective head \(h\) from the physical head \(H\) using just the mass flow rate at the output of the penstock and the physical head; I believe we would need cross-sectional area as well. Alternately, it's possible that the textbook is referring to effective head \(h\) when it says "head of the dam", but it's not entirely clear.
+			\item Neglecting power losses in the penstock, we can find the total power output by multiplying each given efficiency by \(P_{p-out}\),
+				\[
+					P_{out} = P_{p-out}\eta_{h}\eta_{t}\eta_{g} = 78.48 \times 0.95 \times 0.9 \times 0.92 = 61.73 \ \mathrm{MW}.
+				\]
+		\end{enumerate}
+		\setcounter{subsection}{20}
+	\item Using Table 4.3 in the textbook, we see that natural gas has a thermal energy constant of \(48,000 \ \mathrm{\frac{BTU}{kg}}\). Any energy not being extracted by the condensor is ideally converted to mechanical energy in the turbine, and so
+		\[
+			W_{\mathrm{turbine}} = 48,000 - 28,000 = 20,000 \ \mathrm{\frac{BTU}{kg}} = 21.096 \times 10^3 \ \mathrm{\frac{kJ}{kg}}.
+		\]
+		To compute the overall system efficiency, we simply find what percentage of input energy is converted to mechanical energy, under otherwise ideal conditions:
+		\[
+			\eta_{\mathrm{ideal}} = \frac{20,000}{48,000} = 0.4167 = 41.67\%.
+		\]
+\end{enumerate}
+\end{document}
