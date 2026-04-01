@@ -1,0 +1,67 @@
+\documentclass{article}
+\title{ECE 496 -- Homework 4}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage[margin=1in]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 496}
+\fancyhead[R]{Homework 4}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\begin{document}
+\setcounter{section}{6}
+\setcounter{subsection}{1}
+\begin{enumerate}[label=\thesubsection]
+	\item Using the formula for time required to form a monolayer on the surface of a wafer,
+		\[
+			t=\frac{N_s}{\Phi} = \frac{N_s \sqrt{2\pi mkT}}{P} = \frac{N_s \sqrt{MT}}{P \ 2.63 \times 10^{20}},
+		\]
+		and subsituting the molecular weight \(M=32\) for oxygen, as well as assuming approximately \(N_s = 2.63 \times 10^{14}\) molcules per square centimeter on the surface, the time required to form a monolayer of oxygen on the surface of a wafer under the given conditions would be approximately
+		\[
+			t=\frac{2.2\times10^{14}\sqrt{32 \times 300}}{101325 \times 2.63 \times 10^{20}} = 8.09 \times 10^{-10} \ \mathrm{s} = 0.817 \ \mathrm{ns}.
+		\]
+\setcounter{subsection}{3}
+\item The impingement rate, \(\Phi\), given the provided parameters, would be
+	\[
+		\Phi = \frac{2.63 \times 10^{20} \times 10^{-4}}{\sqrt{32 \times 300}} = 2.68 \times 10^{14} \ \mathrm{\frac{molecules}{cm^2 \cdot s}}.
+	\]
+	The mean free path, that is, the average distance traveled by a molecule before colliding with another molecule, is given by 
+	\[
+	  \lambda = \frac{kT}{\sqrt{2}\pi P d^2},
+	\]
+	where \(d\) is the diameter of the molecule (7.2\AA \ for O2). Solving for O2 with the given parameters,
+	\[
+		\lambda = \frac{1.38 \times 10^{-23} \times 300}{\sqrt{2} \times \pi 10^{-4} \times (7.2 \times 10^{-10})^2} = 17.98 \ \mathrm{m}.
+	\]
+	Finally, converting pressure to torr,
+	\[
+		\frac{10^{-4}}{133.3} = 7.5 \times 10^{-7} \ \mathrm{torr}.
+	\]
+	\setcounter{subsection}{5}
+\item Converting residual concentration to molecules per meter, \(1000 \ \mathrm{\frac{molecules}{cm^2}} = 10^{7} \mathrm{\frac{molecules}{m^2}}\). Then, finding pressure using the ideal gas law,
+	\[
+		P = nkT = 10^7 \times 4.14 \times 10^{-21} = 4.14 \times 10^{-14} \ \mathrm{Pa}.
+	\]
+	\setcounter{subsection}{6}
+\item Assuming close packing of spheres, we may assume that a single layer of atoms will translate to 
+	\[
+		N_s=\frac{0.01^2}{4\times10^{-10}} = 6.25 \times 10^{14} \ \mathrm{\frac{molecules}{m^2}} = 6.25 \times 10^{10} \ \mathrm{\frac{molecules}{cm^2}}.
+	\]
+	At a rate of \(100\) nanometers per minute, or \(1.67\) nanometers per second, the rate of formation \(\Phi=6.25 \times 10^{10} \times \frac{1.67 \times 10^{-9}}{4 \times 10^{-10}} = 26.1 \times 10^{10}\), we may solve for pressure as 
+	\[
+		26.1 \times 10^{10} = \frac{2.63 \times 10^{20} P }{\sqrt{MT}} \Rightarrow P = \frac{26.1 \times 10^{10} \times \sqrt{27 \times 300}}{2.63 \times 10^{20}} = 8.9 \times 10^{-8} \ \mathrm{Pa}.
+	\]
+	\setcounter{subsection}{13}
+\item Evaporation is fast and low-cost, but produces weak film adhesion; sputtering produces a denser film with better adhesion, but is slower and more expensive; chemical vapor deposition produces an extremely conformal structure, but requires the highest temperatures of the three.
+\end{enumerate}
+\end{document}

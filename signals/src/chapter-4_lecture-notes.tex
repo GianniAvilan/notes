@@ -348,4 +348,33 @@ Since \(E(s)\) represents the sum of our feedback and the input signal \(X(s)\) 
 
 MATLAB example (see slides/textbook).
 
+\subsection{System Realization}
+
+Given a transfer function, we may develop a method to \textit{realize} the system described. In its most general form, a transfer function may be represented as
+\[
+	H(s) = \frac{b_0s^N + b_1s^{N-1} + ... + b_{N-1}s+b_N}{s^N + a_1s^{N-1} + ... + a_{N-1}s+a_N} = \frac{Y(s)}{X(s)}.
+\]
+Though there is no unique way of realizing a system, we may use integrators, adders, and multipliers to realize any arbitrarily chosen system with the form given above. Recall that in the s-domain,
+\begin{align*}
+	&\frac{d}{dt} \Leftrightarrow s \\
+  &\int \Leftrightarrow \frac{1}{s}.
+\end{align*}
+Given an arbitrary transfer function, we could choose to split it into expressions that fit the above categories.
+Example 4.22:
+	Realize the transfer function \(H(s) = \frac{5}{s+7}\). Converting to the "canonical",  
+\[
+  H(s) = \frac{0s' + b_1}{s' + a_1},
+\]
+with 
+\begin{align*}
+ &b_0 = 0 \\
+ &b_1=5 \\
+ &a_1=7.
+\end{align*}
+
+Then, with this in mind, we may proceed to the block diagram realization, simplifying as needed. 
+
+Partial fraction expansion, as usual, never fails; very useful for realizing parallel systems. (Sometimes we \textit{want} to implement a system in cascade or parallel form for one reason or another).
+
+We'll talk about frequency response next time.
 \end{document}

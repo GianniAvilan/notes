@@ -1,0 +1,136 @@
+\documentclass{article}
+\title{ECE 478-- Homework 7}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 478}
+\fancyhead[R]{Homework 7}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\begin{document}
+\setcounter{section}{10}
+\setcounter{subsection}{1}
+\begin{enumerate}[label=\thesubsection]
+	\item
+\begin{enumerate}[label=\alph*)]
+	\item For a CMOS circuit using flip-flops, the maximum logic propagation delay \(t_{pd}\) is defined by the inequality 
+		\[
+			t_{pd} \leq T_c - (t_{\mathrm{setup}} + t_{pcq}),
+		\]
+		where \(T_c\) is the clock period, \(t_{\mathrm{setup}}\) is the setup time of the device(s), and \(t_{pcq}\) is the clk-to-\(Q\) delay of the device(s). 
+		For a single flip-flop, using the values given in Table 10.5, the maximum logic propagation delay \(t_pd\), with all values given in picoseconds, may be calculated as 
+		\[
+			t_{pd_{\mathrm{max}}} = T_c - (t_{\mathrm{setup}} + t_{pcq}) = 500 - (65 + 50) = 500 - 115 = 385 \ \mathrm{ps}.
+		\]
+	\item For a CMOS circuit consisting of a two-phase latch (two series connected transparent latches) with no overlap time \(t_{\mathrm{overlap}}\), the total maximum logic delay is the sum of the indiviudal maximum logic delays of each latch, which, similar to the above case, means the total maximum logic delay may be defined by the constraint
+		\[
+			t_{pd} \leq T_{c} - (2t_{pdq}),
+		\]
+		so that the maximum allowable logic delay may be calculated, using given latch parameters from Table 10.5, with all values given in picoseconds, as
+		\[
+			t_{pd_{\mathrm{max}}} = T_c - 2t_{pdq} = 500 - 2(40) = 500-80 = 420 \ \mathrm{ps}.
+		\]
+	\item Solving similarly for the maximum logic delay for two pulsed latches, since the pulse is wide enough to hide the setup time (\(80 \ \mathrm{ps} > 25 \ \mathrm{ps}\), given in picoseconds and referencing Table 10.5, is given by
+		\[
+			t_{pd_{\mathrm{max}}} = T_c - \mathrm{max}\left(t_{pdq}, t_{pcq} + t_{\mathrm{setup}}-t_{pw}\right) = 500 - 40 = 460 \ \mathrm{ps}.
+		\]
+\end{enumerate}
+\setcounter{subsection}{2}
+\item Accounting for clock skew of up to \(50 \mathrm{ps}\) in all cases, and using a similar methodology to the above, with all values given in picoseconds
+	\begin{enumerate}[label=\alph*)]
+		\item For a single flip-flop,
+			\[
+				t_{pd_{\mathrm{max}}} = T_c - (t_{pcq} + t_{\mathrm{setup}} + t_{\mathrm{skew}}) = 500 - (50 + 65 + 50) = 500 - 165 = 335 \ \mathrm{ps}.
+			\]
+		\item For two transparent latches, clock skew has no impact on performance, and so 
+			\[
+				t_{pd_{\mathrm{max}}} = 2t_{pdq} = 420 \ \mathrm{ps}.
+			\]
+		\item For pulsed latches, though they are similarly skew-tolerant, this only applies if the pulse is wide enough. In this case, \(t_{pdq}\) is less than the total sequencing overhead, the latches are not \textit{totally} skew-tolerant, and so
+			\[
+				t_{pd_{\mathrm{max}}} = T_C - (t_{pcq}+t_{\mathrm{setup}} - t_{pw}+t_{\mathrm{skew}}) = 500 - (50 + 25 - 80 + 50) = 500 - 45 = 455 \ \mathrm{ps}.
+			\]
+	\end{enumerate}
+	\setcounter{subsection}{3}
+	\item
+		\begin{enumerate}[label=\alph*)]
+			\item For a single flip-flop, the minimum contamination delay may be derived,with all values given in picoseconds, as
+				\[
+					t_{cd_{\mathrm{min}}} = t_{\mathrm{hold}} - t_{ccq} = 30-35 = -5 \mathrm{ps}
+				\]
+			\item For two phase-transparent latches with 50\% duty cycle clocks,
+				\[
+					t_{cd_{\mathrm{min}}} = t_{\mathrm{hold}} - t_{ccq} = -5 \ \mathrm{ps},
+				\]
+				for each latch.
+			\item For the same configuration with \(60 \ \mathrm{ps}\) of no overlap between phases,
+				\[
+					t_{cd_{\mathrm{min}}} = t_{\mathrm{hold}} - t_{ccq} - t_{\mathrm{nooverlap}} = 30-35-60 = -70 \ \mathrm{ps}.
+				\]
+			\item Finally, for pulsed latches with an \(80 \ \mathrm{ps}\) pulse width,
+				\[
+					t_{cd_{\mathrm{min}}} = t_{\mathrm{hold}} - t_{ccq} + t_{pw} = 30-35+80 = 75 \ \mathrm{ps}.
+				\]
+		\end{enumerate}
+		\setcounter{subsection}{4}
+	  \item 
+				Incorporating a maximum clock skew of \(50 \ \mathrm{ps}\),
+			\begin{enumerate}[label=\alph*)]
+				\item
+					\[
+						t_{cd_{\mathrm{min}}} = t_{\mathrm{hold}} - t_{ccq} + t_{\mathrm{skew}} = 30-35+50 = 45 \mathrm{ps}
+					\]
+				\item 
+				\[
+					t_{cd_{\mathrm{min}}} = t_{\mathrm{hold}} - t_{ccq} + t_{\mathrm{skew}} = 30-35+50 = 45 \ \mathrm{ps},
+				\]
+				for each latch.
+				\item 
+				\[
+					t_{cd_{\mathrm{min}}} = t_{\mathrm{hold}} - t_{ccq} = 30-35 = -5 \ \mathrm{ps},
+				\]
+				\item 
+				\[
+					t_{cd_{\mathrm{min}}} = t_{\mathrm{hold}} - t_{ccq} + t_{pw} + t_{\mathrm{skew}} = 30-35+80+50 = 95 \ \mathrm{ps}.
+				\]
+			\end{enumerate}
+			\item
+				\begin{enumerate}[label=\alph*)]
+					\item For a cycle time of \(T_C = 1200 \ \mathrm{ps}\) at a 50\% duty cycle, 
+						\begin{align*}
+						 &\Delta 1: 550<600 \ \mathrm{no \ borrowing} \\
+						 &\Delta 2: 580<600 \ \mathrm{no \ borrowing} \\
+						 &\Delta 3: 450<600 \ \mathrm{no \ borrowing} \\
+						 &\Delta 4: 200<600 \ \mathrm{no \ borrowing}
+						\end{align*}
+				\end{enumerate}
+				\begin{enumerate}[label=\alph*)]
+					For a cycle time of \(T_C = 1000 \ \mathrm{ps}\) at a 50\% duty cycle, 
+						\begin{align*}
+						 &\Delta 1: 550<500 \ \mathrm{borrowing} \ 50 \mathrm{ps} \\
+						 &\Delta 2: 580>450 \ \mathrm{borrowing} \ 130 \mathrm{ps} \\
+						 &\Delta 3: 450>370 \ \mathrm{borrowing} \ 80 \mathrm{ps}\\
+						 &\Delta 4: 200<420 \ \mathrm{no \ borrowing}
+						\end{align*}
+				\end{enumerate}
+				\begin{enumerate}[label=\alph*)]
+					For a cycle time of \(T_C = 800 \ \mathrm{ps}\) at a 50\% duty cycle, 
+						\begin{align*}
+						 &\Delta 1: 550>400 \ \mathrm{borrowing} \ 50\mathrm{ps} \\
+						 &\Delta 2: 580<350 \ \mathrm{borrowing} \ 330\mathrm{ps}\\
+						 &\Delta 3: 450<70 \ \mathrm{violated \ time \ requirement} \ \\
+						 &\Delta 4: 200>400 \ \mathrm{does \ not \ execute}
+						\end{align*}
+				\end{enumerate}
+\end{enumerate}
+\end{document}
