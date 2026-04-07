@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{microtype}
 \usepackage{textcomp, gensymb}
+\usepackage{enumitem}
 \begin{document}
 \setcounter{section}{3}
 \section{Chapter 4: Continuous-Time System Analysis using the Laplace Transform} 
@@ -377,4 +378,24 @@ Then, with this in mind, we may proceed to the block diagram realization, simpli
 Partial fraction expansion, as usual, never fails; very useful for realizing parallel systems. (Sometimes we \textit{want} to implement a system in cascade or parallel form for one reason or another).
 
 We'll talk about frequency response next time.
+
+\setcounter{subsection}{7}
+\subsection{Frequency Response of an LTIC System}
+
+In the realm of analysis, the frequency response of a system (in most of our applications, a circuit) is a critical property of systems. As one might expect, converting a system to the frequency domain will make this sort of analysis much easier. Given a transfer function \(H(s)\), we may find the amplitude and phase response of a system by plotting \(H(s)\) as a function of \(j\omega\), as \(H(j\omega\) (essentially, limiting the independent variable of \(H(s)\) to the imaginary part of \(s\)). Both amplitude and phase as a function of frequency may be derived this way.
+
+Example 4.28: 
+
+Find and sketch the frequency response for \textbf{(a)} an ideal delay of \(T\) seconds, \textbf{(b)} an ideal differentiator, and \textbf{(c)} an ideal integrator.
+
+\begin{enumerate}[label=\alph*)]
+	\item By time shifting some input and converting to the frequency domain,
+		\[
+		  x(t) = 
+		\]
+	\item An ideal differentiator has a transfer function \(H(s) = s\), in the s-domain. Representing its frequency response, \(|H(j\omega)| = \omega\), representing a high-pass filter, and \(\angle{H(j\omega)} = \frac{\pi}{2}\), remaining constant.
+	\item For an ideal integrator, the process is similar, and yields \(|H(j\omega)| = \frac{1}{\omega}\), representing a low-pass filter, with a constant phase angle of \(\angle{H(j\omega)} = -\frac{\pi}{2}\).
+\end{enumerate}
+\setcounter{subsection}{8}
+\subsection{Bode Plots}
 \end{document}

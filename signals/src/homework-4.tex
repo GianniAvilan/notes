@@ -1,0 +1,165 @@
+\documentclass{article}
+\title{ECE 341 -- Homework 3}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{float}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Gianni Avilan-Losee}
+\fancyhead[C]{ECE 341}
+\fancyhead[R]{Homework 4}
+\fancyfoot[C]{\thepage}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\author{Gianni Avilan-Losee}
+\begin{document}
+\includepdf{homework-4_cover-page.pdf}
+\begin{enumerate}[label=\thesubsubsection]
+\setcounter{section}{4}
+\setcounter{subsection}{1}
+\setcounter{subsubsection}{1}
+\item 
+	\begin{enumerate}[label=\alph*)]
+		\item First, we may split the given function into two integrals, on the interval where the given unit functions resolve to non-zero values, as
+			\[
+				\int_{0}^{\infty}u(t)e^{-st} \ dt-\int_{1}^{\infty}u(t-1)e^{-st} \ dt = \int_{0}^{\infty}e^{-st} \ dt - \int_{1}^{\infty}e^{-st} \ dt.
+			\]
+			Then, evaluating the integrals,
+			\begin{align*}
+				=& \ \frac{-e^{-st}}{s} \ \Bigg\rvert_{0}^{\infty} + \frac{e^{-st}}{s} \ \Bigg\rvert_{1}^{\infty} \\ \\
+				=& \left[\frac{-e^{-s \infty}}{s} + \frac{1}{s}\right] + \left[\frac{e^{-s\infty}}{s}-\frac{e^{-s}}{s}\right] \\ \\
+				=& \ \frac{1-e^{-s}}{s}.
+			\end{align*}
+			\addtocounter{enumii}{2}
+		\item Again, splitting the given function into two integrals,
+			\[
+				\int_{0}^{\infty}e^{-2t}e^{-st}u(t) \ dt - 2 \int_{0}^{\infty}e^{-t}e^{-st}u(t) \ dt = \int_{0}^{\infty}-e^{-t(s+2)} \ dt + 2\int_{0}^{\infty}e^{-t(s+1)} \ dt. 
+			\]
+			Then, evaluating the integrals,
+			\begin{align*}
+				&= \ -\frac{e^{-2t}e^{-st}}{s+2} \ \Bigg\rvert_{0}^{\infty} + \frac{2e^{-t}e^{-st}}{s+1} \ \Bigg\rvert_{0}^{\infty} \\ \\
+				&=\frac{1}{s+2} + \frac{2}{s+1}.
+			\end{align*}
+	\end{enumerate}
+	\setcounter{subsubsection}{4}
+	\item
+		\begin{enumerate}[label=\alph*)]
+			\item Using partial fraction decomposition, 
+				\begin{align*}
+				 &\frac{2s+5}{s^2+5s+6} = \frac{2s+5}{(s+2)(s+3)} = \frac{A}{(s+2)}+\frac{B}{(s+3)} \\ \\
+				 &2s+5 = A(s+3) + B(s+2) = sA + 3A +sB + 2B \\ \\
+				 &2s+5 = s(A+B) +3A + 2B.
+				\end{align*}
+				Solving for \(A\) and \(B\), \(A+B = 2\) and \(3A + 2B = 5\), so
+				\[
+					\begin{bmatrix}
+						1 & 1 & 2 \\ 3 & 2 & 5
+					\end{bmatrix} \to 
+					\begin{bmatrix}
+						1 & 0 & 1 \\ 0 & 1 & 1
+					\end{bmatrix},
+				\]
+				and so \(A = 1\) and \(B=1\).
+				\\[10pt]
+				Therefore, 
+		\[
+		  \frac{2s+5}{s^2+5s+6} = \frac{1}{(s+2)} + \frac{1}{(s+3)},
+		\]
+		and the inverse Laplace transform of the function may be found using Table 4.1, specifically the unilateral transform pair \(1/(s-\lambda) \Leftrightarrow e^{\lambda t}u(t)\),
+		\begin{align*}
+			&\mathcal{L}^{-1}\left\{\frac{1}{s+2} + \frac{2}{s+1}\right\} = \mathcal{L}^{-1}\left\{\frac{1}{s+2}\right\} + \mathcal{L}^{-1}\left\{\frac{1}{s+3}\right\} \\ \\
+			=& \ e^{-2t} + e^{-3t}.
+		\end{align*}
+  \end{enumerate}
+	\setcounter{subsection}{2}
+	\setcounter{subsubsection}{2}
+	\item
+		\begin{enumerate}[label=\alph*)]
+			\item Using the Laplace transform pair \(u(t) \Leftrightarrow 1/s\) and the time-shifting property of the Laplace transform, \(x(t-t_0) \Leftrightarrow X(s)e^{-st_0}\),
+				\begin{align*}
+					&\mathcal{L}\left\{u(t) - u(t-1)\right\} = \mathcal{L}\left\{u(t)\right\} - \mathcal{L}\left\{u(t-1)\right\} \\
+					=& \frac{1}{s} - \frac{e^{-s}}{s} = \frac{1-e^{-s}}{s}.\\
+				\end{align*}
+			\item Likewise, using the time-shifting property of the Laplace transform along with the Laplace transform pair \(e^{\lambda t}u(t) \Leftrightarrow 1/(s-\lambda)\),
+				\[
+					\mathcal{L}\left\{e^{-(t-\tau)}u(t-\tau)\right\} = \frac{e^{-s\tau}}{s-t}.
+				\]
+		\end{enumerate}
+		\setcounter{subsection}{3}
+		\setcounter{subsubsection}{1}
+		\item
+			\begin{enumerate}[label=\alph*)]
+			  \addtocounter{enumii}{1}	
+				\item Converting to differential form, 
+					\[
+						\ddot{y}(t) + 4\dot{y}(t) + 4y(t) = \frac{d}{dt}e^{-t}u(t) + e^{-t}u(t)
+					\]
+					with initial conditions
+					\[
+						y(0^-) = \dot{y}(0^-) = 0,
+					\]
+					the time differentiation property of the Laplace transform may be used along with the transform pair \(e^{\lambda t}u(t) \Leftrightarrow 1/(s-\lambda)\) to find
+					\begin{align*}
+					&\mathcal{L}\left\{\ddot{y}(t) + 4\dot{y}(t) + 4y(t)\right\} = \mathcal{L}\left\{\frac{d}{dt}e^{-t}u(t) + e^{-t}u(t)\right\} \\
+						=&\left[s^2Y(s) - sy(0^-) - \dot{y}(0^-)\right] + 4\left[sY(s) - y(0^-)\right] + 4Y(s) = sX(s) - x(0^-) + \frac{1}{s+1}\\
+						=& \ s^2Y(s) + 4sY(s) + 4Y(s) = \frac{s+1}{s+1} = 1\\
+						=& \ Y(s)\left[s^2+4s+4\right] = 1.
+					\end{align*}
+					Solving algebraically for \(Y(s)\),
+					\[
+					  Y(s) = \frac{1}{s^2 + 4s + 4} = \frac{1}{(s+2)^2},
+					\]
+					which may be solved directly using the Laplace transform pair \(te^{\lambda t}u(t) \Leftrightarrow 1/(s-\lambda)^2\), as
+					\[
+						\mathcal{L}^-1\left\{\frac{1}{(s+2)^2}\right\} = te^{-2t}u(t).
+					\]
+			\end{enumerate}
+			\setcounter{subsection}{4}
+			\setcounter{subsubsection}{7}
+		\item At \(t<0\), before the switch has opened, we may derive the initial conditions of the circuit as 
+			\begin{align*}
+				&v_s(0^-) = 0^{\mathrm{V}} \\
+				&y(0^-) = 10^{\mathrm{A}} \\
+				&y_2(0^-) = 0^{\mathrm{A}}.
+			\end{align*}
+			After the switch opens, at \(t > 0\), we may derive the voltage across each component using the voltage equations for inductors, resistors, and capacitors, 
+			\begin{align*}
+				&v_R(t) = Ri(t) \\
+				&v_L(t) = L \frac{di_L(t)}{dt} \\
+				&v_C(t) = \frac{1}{C}\int i(t) + v_0,
+			\end{align*}
+			along with the unilateral Laplace transform pairs 
+			\begin{align*}
+				&a \Leftrightarrow \frac{a}{s} \\
+				&x(t) = X(s) \\
+				&\frac{dx(t)}{dt} \Leftrightarrow sX(s) + x(0^-) \\
+				&\int_{0^-}^{t}x(\tau)d\tau \Leftrightarrow \frac{1}{s}X(s) \\
+			\end{align*}
+			to derive the loop equation for the circuit at \(t > 0\),
+			\begin{align*}
+				\frac{10}{s} &= \left[2sY(s) - 10\right] + sY(s) + \frac{1}{s}Y(s) + Y(s) \\
+										 &=Y(s) \left[3s + \frac{1}{s} + 1\right] - 10, 
+			\end{align*}
+			so that 
+			\begin{align*}
+				Y(s) &= \frac{10}{s} \left[\frac{1}{3s+\frac{1}{s} + 1}\right] + 10 \\
+						 &=\frac{10}{3s^2 + s + 1} + 10.
+			\end{align*}
+			Before converting back to the time domain, we may solve for \(V_s(s)\) using Ohm's Law, as
+			\[
+				V_s(t) = Y(s)\left[s + \frac{1}{s}\right] = Y(s)s + \frac{Y(s)}{s}.
+			\]
+			Transforming \(Y(s)\) back to the time domain by factoring and using partial fraction decomposition,
+			\begin{align*}
+				Y(s) &= \frac{10}{3s^2+s+1} + 10 \\
+						 &= \frac{10}{(s+1)(s^2+1)}\\
+						 &=\frac{As+B}{}
+			\end{align*}
+\end{enumerate}
+\end{document}

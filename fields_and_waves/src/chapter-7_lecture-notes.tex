@@ -1,0 +1,178 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{microtype}
+\usepackage{textcomp, gensymb}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{parskip}
+\begin{document}
+\setcounter{section}{6}
+\section{Chapter 7: Plane-Wave Propagation}
+\setcounter{subsection}{-1}
+\subsection{Introduction/Preliminaries}
+For the next two weeks, we will discuss the electromagnetic waves. First, we'll cover how they propagate in lossless (ideal) media, and then in lossy media. What is an electromagnetic (EM) wave? As covered in previous chapters, time-variant (moving) electric charges generate a magnetic field perpendicular to the direction of their motion. In turn, time-varying magnetic fields induce an electric field perpendicular to the direction of \textit{their} motion, which then induces another magnetic field, and so on. As a result of the oscillation of these two, coupled forces, EM waves can propagate indefinitely through effectively lossless media such as air or, more specifically, a vaccum. What do we mean by lossless and lossy media? When an EM wave propagates through a medium, the \textit{conductivity} of the medium is responsible for any loss, which will ultimately be generated in the form of heat energy produced when electrons are set in motion by the induced electric field. In a medium with a conductivity of zero, though, no excess energy would be lost, and the EM wave would never attenuate as it propagates. 
+
+Before moving on, we'll briefly review a few mathematical preliminaries:
+
+\subsubsection{Sinusoids in Space and Time, and Their Relationship to Phasors}
+\subsubsection{Gradient, Divergence, and Curl (Maxwell's Equations)}
+
+
+\setcounter{subsection}{0}
+\subsection{Time-Harmonic Fields}
+To begin our analysis of EM waves in lossless media, we will define \textbf{wave equations} for \(\vec{E}\) and \(\vec{H}\), the electric and magnetic field intensity induced by an EM wave. We'll begin with the simplest case; that is, a uniform sinusoidal EM wave traveling in one direction, assuming some angular frequency \(\omega\). To define these types of waves, we'll focus on just two parameters: time and space. Given a perfectly sinusoidal wave, we can even express an EM wave as a phasor, with its associated electric and magnetic fields defined as \(\vec{E}(x,y,z)\) and \(\vec{H}(x,y,z)\); or, in the time domain, as \(\vec{E}(x,y,z;t)\) and \(\vec{H}(x,y,z;t)\) (See the introduction for notes on converting between phasor and time domain).
+
+We'll begin by deriving the wave equation for the electric field intensity, \(\vec{E}\). Per Maxwell's third equation, a time-varying magnetic flux density \(\vec{B}\) induces a similarly time-varying, circulating electric field \(\vec{E}\). Mathematically,
+\[
+  \nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}.
+\]
+This is a useful fact, but recall that what we're looking for is a wave equation; that is, an expression describing the electric field induced by a sinusoidal EM wave with some angular frequency \(\omega\). However, if we assume that the \(\vec{B}\) field is, likewise, sinusoidal, with an angular frequency \(\omega\), we may take its time derivative as
+\[
+	\frac{\partial}{\partial t} B\sin{(kx - \omega t + \phi)} = -\omega B\cos{(kx-\omega t + \phi)}.
+\]
+The, converting to the phasor domain using Table 1.5, we may represent the sinusoidally varying magnetic flux density \(\vec{B}\) as
+\[
+	-\omega B e^{j(kx+\phi)} = -\omega B \left[\cos{(kx+\phi) + j\sin{(kx+\phi)}}\right]
+\]
+Utilizing the relationship \(\vec{B} = \mu \vec{H}\), this may also expressed as
+\begin{align}
+	&\nabla \times \vec{E} = -j\omega\mu \vec{H} \\
+	&\nabla \times \vec{H} = \vec{J}+j\omega\varepsilon \vec{E} = j\omega\varepsilon \vec{E} \\
+	&\nabla \cdot \vec{E} = \frac{\rho_v}{\varepsilon} = 0 \\
+	&\nabla \cdot \vec{H} = 0.
+\end{align}
+Taking the curl of each side of (1), 
+\begin{align*}
+	&\nabla \times (\nabla \times \vec{E}) = -j\omega\mu(\nabla \times \vec{H}) \\
+	&\nabla(\nabla \cdot \vec{E}) - \nabla^2 \vec{E} = \omega^2 \mu \varepsilon E \\
+	&\nabla^2E + \omega^2\mu\varepsilon E = 0,
+\end{align*}
+the wave equation for \(\vec{E}\).
+
+Similarly, the wave equation for \(\vec{H}\) may be derived as 
+\[
+  \nabla^2H + \omega^2\mu\varepsilon H = 0.
+\]
+
+These two equations define the \textit{behavior} of electromagnetic waves, and both may be used to derive the electric and magnetic field intensity as a function of the wave's frequency and the properties of the relevant media through which the wave propagates.
+
+Since the two equations are identical apart from the use of \(E\) versus \(H\), we may simplify the constants in the equation to the wavenumber, \(k\), as
+\[
+  k^2 = \omega^2 \mu \varepsilon \Rightarrow k = \omega \sqrt{\mu \varepsilon},
+\]
+and may also be derived as a function of the wavelength, as
+\[
+  k = \frac{2\pi}{\lambda},
+\]
+and the wavenumber is given in \(\frac{\mathrm{rad}}{\mathrm{m}}\).
+
+There are several important properties of plane waves. To begin with, \(\vec{E}\) and \(\vec{H}\) lie in a plane perpendicular to the direction of the associated wave's propagation, and \(\vec{E}\) and \(\vec{H}\) are also perpendicular to each other, with the wave's direction of propagation given by \(\hat{k}\). In other words,
+\[
+  \vec{E} \perp \vec{H} \perp \hat{k}.
+\]
+
+As an example, we'll derive the magnitude of the electric field intensity, \(E\), as a function of \(z\),
+\[
+	E(z) = E_0^+e^{-jkz} + E^-_0e^{jkz},
+\]
+where \(E_0^\pm\) is the amplitude of the wave traveling in the positive or negative z direction, respectively. \textbf{NOTE:} Why does the positive j travel in the negative direction, and vice versa? Does z here refer to the direction of the EM wave, or the electric field?) Note that this formula is given in \textit{phasor} form, where \(e^{jkz} = \cos{kz} + j\sin{kz}\)  per Euler's formula.
+
+As another example, assuming \(E\) is traveling in the \(\hat{x}\) direction, 
+\[
+	\vec{E}(z) = \hat{x}E_0^+e^{-jkz}.
+\]
+Since we know that \(\vec{H}\) is perpendicular to both the direction of propagation \(\hat{k}\) and the direction of the electric field intensity \(\vec{E}\), we may assume that in this case
+\[
+	\vec{H}(z) = \hat{y}\frac{E_0^+}{\eta}e^{-jkz}.
+\]
+Again, we see that the direction contained in the exponential is identical, but the direction of \(\vec{H}\) is perpendicular to both \(\hat{x}\) and \(\hat{z}\), where \(\eta\) is the intrinsic impedance of the medium of propagation, given by 
+\[
+  \eta = \sqrt{\frac{\mu}{\varepsilon}}.
+\]
+
+To give a simple example, we may calculate the intrinsic impedance of air as
+\[
+	\eta_{\mathrm{air}} = \sqrt{\frac{\mu_0 \cdot \mu_r}{\varepsilon_0 \cdot \varepsilon_r}} = \sqrt{\frac{\mu_0}{\varepsilon_0}} = \sqrt{\frac{4\pi \times 10^{-7}}{8.85\times 10^{-12}}} = 120\pi = 377 \ \ohm,
+\]
+which should be memorized rather than recalculated each time.
+
+On the topic of phasor and time domain conversions, we may give an example where we convert the phasor form of an electric field induced by an EM plane wave to the time domain, as
+\begin{align*}
+	&\vec{E}(z) = \hat{x}|E_0^+|e^{j\phi}e^{-jkz} \\
+	= \ &\vec{E}(z,t) = \mathcal{R}[E(z)e^{j\omega t}] \\
+	= \ &\vec{E}(z,t) = \hat{x}|E_0^+|\cos{(\omega t - kz + \phi)}.
+\end{align*}
+
+As discussed previously, a complete description of \(\vec{E}\) will provide us with the solution to \(\vec{H}\). Helpful mathematical relations may be defined between the two as
+\begin{align}
+	&\vec{H} = \frac{1}{\eta} \hat{k} \times \vec{E} \\
+	&\vec{E} = -\eta \hat{k} \times \vec{H} \\
+	&\hat{k} = \hat{\alpha_E} \times \hat{\alpha_H}.
+\end{align}
+
+Another important facet of EM waves is their speed, or velocity of propagation, represented as \(v_p\), defined as 
+\[
+  v_p = \frac{w}{k} = \frac{1}{\sqrt{\mu\varepsilon}},
+\]
+given in \(\mathrm{\frac{m}{s}}\).
+
+As a general rule, EM waves in air propagate close to the speed of light, \(c = 3\times10^8 \ \mathrm{\frac{m}{s}}\). Deriving this manually,
+\[
+	v_{p_{\mathrm{air}}} = \frac{1}{\sqrt{\mu_0\varepsilon_0}} = 3 \times 10^8 \ \mathrm{\frac{m}{s}} = c.
+\]
+This fact also provides us with the helpful identity
+\[
+  \sqrt{\mu_0\varepsilon_0} = \frac{1}{c}.
+\]
+
+Similarly, the wavelength of an EM wave may be derived as
+\[
+	\lambda = \frac{v_p}{f} = \frac{2\pi}{k} \ \mathrm{m}.
+\]
+
+\textbf{Example 7.1}:
+
+A plane wave with \(\vec{E} = \hat{x}E_x\) propagates in a lossless medium where \(\varepsilon_r = 4\), \(\mu_r = 1\), and \(\sigma = 0\), in the \(\hat{z}\) direction. Assume that \(E_x\) is sinusoidal with a frequency of \(100 \ \mathrm{MHz}\) and has a maximum value of \(10^{-4} \ \mathrm{\frac{V}{m}}\) at \(t=0\) and \(z=\frac{1}{8} \ \mathrm{m}\). Given all the above, 
+\begin{enumerate}[label=\alph*)]
+	\item Write the instantaneous expression for \(\vec{E}\) for any \(t\) and \(z\). 
+
+	First, note that \textit{instantaneous expression} refers to the \textit{time-}, not phasor-domain expression. In other words, we are looking for \(\vec{E}(z,t).\)
+
+	Starting from the expression derived earlier,
+	\[
+		E(z,t) = \hat{x}|E_0^+|\cos{(\omega t - kz + \phi)},
+	\]
+	we may proceed by filling in the relevant quantities. The maximum value is given as \(|E_0^+| = 10^{-4} \ \mathrm{\frac{V}{m}}\). Finding \(\omega\), we may use the formula
+	\[
+		\omega = 2\pi f = 2\pi 100 \times 10^6 = 2\pi \times 10^8 \ \mathrm{\frac{rad}{s}}.
+	\]
+	Then, finding \(k\),
+	\[
+		k = \omega \sqrt{\mu \varepsilon} = 2\pi \times 10^8 \sqrt{\mu_0 \cdot \mu_r \cdot \varepsilon_0 \cdot \varepsilon_r} = \frac{2(2\pi \times 10^8)}{3\times10^8} = \frac{4\pi}{3} \ \mathrm{\frac{rad}{m}}.
+	\]
+	Finally, we move on to finding the phase shift, \(\phi\). As we know, \(\cos{(x)}\) reaches its maximum value when \(x = 0\), and so reasoning from the fact that \(E(z,t)\) reaches its maximum value at \(t=0 \ \mathrm{s}\) and \(z=\frac{1}{8} \ \mathrm{m}\), we may find \(\phi\) by setting the argument to our cosine as \(0\) and solving for \(\phi\),
+	\begin{align*}
+		&2\pi \times 10^8(0) - \frac{4\pi}{3}\left(\frac{1}{8}\right) + \phi = 0 \\
+		&\phi = \frac{4\pi}{3} \cdot \frac{1}{8} = \frac{\pi}{6}. 
+	\end{align*}
+	Therefore, 
+	\[
+		E(z,t) = \hat{x}10^{-4}\cos{(2\pi 10^8t-\frac{4\pi}{3}z+\frac{\pi}{6})}.
+	\]
+	\item Write the instantaneous expression for \(\vec{H}\) for any \(t\) and \(z\).
+		Deriving \(\vec{H}\) is much simpler, since we can make certain assumptions based on \(\vec{E}\), using the formula
+		\[
+		  \vec{H} = \frac{1}{\eta}(\hat{k} \times \vec{t}).
+		\]
+		Finding \(\eta\) for our medium,
+		\[
+		\eta = \sqrt{\frac{\mu_0}{\varepsilon_0 \cdot 4}} = \frac{120\pi}{2} = 60\pi \ \ohm,
+		\]
+		and so 
+		\[
+			\vec{H} = \hat{y}\frac{10^{-4}}{60\pi}\cos{(2\pi 10^8t - \frac{4\pi}{3}z + \frac{\pi}{6})}.
+		\]
+\end{enumerate}
+\end{document}
