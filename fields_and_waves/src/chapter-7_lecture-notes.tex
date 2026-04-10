@@ -175,4 +175,104 @@ A plane wave with \(\vec{E} = \hat{x}E_x\) propagates in a lossless medium where
 			\vec{H} = \hat{y}\frac{10^{-4}}{60\pi}\cos{(2\pi 10^8t - \frac{4\pi}{3}z + \frac{\pi}{6})}.
 		\]
 \end{enumerate}
+		We'll do one example to review plane waves in lossless environments, before moving on to lossy environments.
+
+		\textbf{Example:}
+		The phasor electric field of a 1 GHz EM wave propagating through a losless medium with \(\mu_r=4\) is \[
+			\vec{E} = \hat{z} 5 j e^{-j120x} \ \mathrm{\frac{V}{m}}.
+		\]
+		Given that, determine:
+		\begin{enumerate}[label=\alph*)]
+			\item The direction of propagation.
+
+				By simply looking at the argument of the exponential, \(-j120x\), we may assume that the given wave is propagating in the positive \(x\) direction. Therefore, \(\hat{k} = \hat{x}\).
+			\item The \(\varepsilon_r\) of the medium.
+
+				\(\varepsilon\) refers to the relative permittivity, given the relative permeability. How do we find relative permittivity/dielectric constant of the material? Using the wavenumber, \(k\), taken from the function defining the wave, \(k = 120\), and the frequency \(\omega = 2\pi f = 2 \pi \times 10^9\), we may solve for \(\varepsilon_r\) as
+				\[
+				  k = \omega \sqrt{\mu\varepsilon} \Leftrightarrow \varepsilon_r = \left(\frac{9}{\pi}\right)^2 \approx 8.21.
+				\]
+			\item The velocity of propagation.
+
+				The defined formula for \(v_p\) may be used to solve, as
+				\[
+					v_p = \frac{\omega}{k} = \frac{2\pi 10^9}{120} = 5.24 \times 10^7 \ \mathrm{\frac{m}{s}}.
+				\]
+				Alternately, we may also use
+				\[
+					v_p = \frac{1}{\\sqrt{\mu \varepsilon}} = \frac{3 \times 10^8}{\sqrt{4 \times 8.21}} = 5.24 \times 10^7 \ \mathrm{\frac{m}{s}}.
+				\]
+			\item The wavelength.
+				
+				Using the formula for wavelength,
+				\[
+					\lambda = \frac{v_p}{f} = \frac{5.24 \times 10^7}{10^9} = 5.24 \ \mathrm{cm}.
+				\]
+				Alternately, we may also use 
+				\[
+					\lambda = \frac{2\pi}{k} = \frac{2\pi}{120} = 5.24 \ \mathrm{cm}.
+				\]
+			\item The intrinsic impedance. 
+
+				The impedance of a lossless medium may be defined using the formula
+				\[
+				  \eta = \sqrt{\frac{\mu}{\varepsilon}} = 120\pi\sqrt{\frac{4}{8.21}} \approx 263 \ \ohm.
+				\]
+				\item The instantaneous magnetic field.
+
+					In other words, find the time-domain description of the magnetic field, \(\vec{H}\). We may use the related formula
+					\[
+					  \vec{H} = \frac{1}{\eta}\left(\hat{k} \times \vec{E}\right).
+					\]
+					It's easiest to start in phasor form and convert to time domain at the end, so
+					\[
+						\frac{1}{263}\left(\hat{x}\times \hat{z}\right)5je^{-j120x} = \hat{y}\frac{5j}{263}e^{-j120x} \ \mathrm{\frac{A}{m}}.
+					\]
+					Converting to the time domain,
+					\[
+						\vec{H}(x,t) = \mathcal{R}e\left[\hat{y}\frac{5j}{263}e^{-j120x}e^{j\omega t}\right] = \hat{y}0.019\cos{\left(2\pi 10^4 t - 120x + \frac{\pi}{2}\right)} \ \mathrm{\frac{A}{m}}
+					\]
+		\end{enumerate}
+		\setcounter{subsection}{3}
+		\subsection{Plane-Wave Propagation in Lossy Media}
+		As covered previously, EM waves \textit{attenuate} in lossy mediums, with the loss itself determined by the conductivity of the medium, \(\sigma\). Revisiting Maxwell's equation for coupled electromagnetic fields, \(\vec{J}\) will now reappear (since in lossless media, \(\sigma = 0\)), as
+		\[
+		  \nabla \times \vec{H} = \vec{J} = j\omega\varepsilon \vec{E} = (\sigma + j\omega\varepsilon) \vec{E} = j\omega\left(\varepsilon - j \frac{\sigma}{\omega}\right)\vec{E},
+		\]
+		with \(\left(\varepsilon - j \frac{\sigma}{\omega}\right)\) representinv the \textbf{complex permittivity} of the medium. Obviously, when \(\sigma = 0\), the complex permittivity reduces to a purely real value, \(\varepsilon\). We may also represent this quantity as
+		\[
+		  \varepsilon_c = \varepsilon ' - j\varepsilon '',
+		\]
+		where \(\varepsilon ''  = \frac{\sigma}{\omega}\). In those terms, we may define a \textbf{loss tangent}, defined as
+		\[
+		  \frac{\varepsilon ''}{\varepsilon '} = \frac{\sigma}{\omega \varepsilon}.
+		\]
+		As a result, good conductors have a high loss tangent, whereas good insulators have a low loss tangent. 
+
+		Moving on to the attenuation effected by the conductivity of the material, we may use the wave equation we covered previously, 
+		\[
+		  \nabla^2 \vec{E} + k \vec{E} = 0,
+		\]
+		and use the identity
+		\[
+		  \gamma = \alpha + j\beta = -\omega \sqrt{\mu(\varepsilon ' - j\varepsilon '')}
+		\]
+		to express the given wave equation, where \(\gamma\) is the \textbf{propagation constant}, as 
+		\[
+		  \nabla^2 \vec{E} - \gamma^2 \vec{E} = 0.
+		\]
+		Then, we may express the propagation constant as
+		\[
+		  \gamma = \alpha + j\beta,
+		\]
+		where \(\alpha\) is the \textbf{attenuation constant} and \(\beta\) is the \textbf{phase constant}, given in Napiers per meter and radians per meter, respectively. These quantities give us a good way of quantifiying the degree of attenuation in a propagating EM wave, given the parameters of the medium (specifically its conductivity \(\sigma\)).
+
+		\textbf{Example:} The electric field of a plane wave propagating in the positive \(z\) direction in seawater is \(\vec{E} = \hat{x}100\cos{(10^7\pi t)} \ \mathrm{\frac{V}{m}}\) at \(z=0\). The constitutive parameters of seawater are \(\varepsilon_r = 72,\) \(\mu_r = 1\), and \(\sigma = 4 \ \mathrm{\frac{S}{m}}\).
+
+		\begin{enumerate}[label=\alph*)]
+			\item Find the attenuation constant, phase constant, intrinsic impedance, phase velocity, wavelength, and skin depth.
+			\item Find the distance at which the amplitude of \(\vec{E}\) is 1\% of its value at \(z=0\).
+			\item Write the expression for \(\vec{E}(z)\) and \(\vec{E}(z,t)\).
+		\end{enumerate}
+
 \end{document}

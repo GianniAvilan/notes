@@ -36,6 +36,7 @@
 				=& \left[\frac{-e^{-s \infty}}{s} + \frac{1}{s}\right] + \left[\frac{e^{-s\infty}}{s}-\frac{e^{-s}}{s}\right] \\ \\
 				=& \ \frac{1-e^{-s}}{s}.
 			\end{align*}
+			The given function converges only when \(\sigma > 0\), as the imaginary part of \(s\) will continue to oscillate indefinitely (an everlasting sinusoid). Therefore, we may assume that the ROC for this function is \(\Re{(s)} > 0\).
 			\addtocounter{enumii}{2}
 		\item Again, splitting the given function into two integrals,
 			\[
@@ -46,6 +47,7 @@
 				&= \ -\frac{e^{-2t}e^{-st}}{s+2} \ \Bigg\rvert_{0}^{\infty} + \frac{2e^{-t}e^{-st}}{s+1} \ \Bigg\rvert_{0}^{\infty} \\ \\
 				&=\frac{1}{s+2} + \frac{2}{s+1}.
 			\end{align*}
+			The region of convergence for this function depends on both \(\sigma\) and \(j\omega\), the real and imaginary parts of \(s\). Under the condition where \(\sigma = -2\) and \(\omega = 0\), the function will \textit{not} converge, as well as under the condition where \(\sigma = -1\) and \(\omega = 0\). Therefore, the function will converge as long as \(s \neq -2\) and \(s \neq -1\) (implying an imaginary part of \(0\) in both cases).
 	\end{enumerate}
 	\setcounter{subsubsection}{4}
 	\item
@@ -74,7 +76,7 @@
 		and the inverse Laplace transform of the function may be found using Table 4.1, specifically the unilateral transform pair \(1/(s-\lambda) \Leftrightarrow e^{\lambda t}u(t)\),
 		\begin{align*}
 			&\mathcal{L}^{-1}\left\{\frac{1}{s+2} + \frac{2}{s+1}\right\} = \mathcal{L}^{-1}\left\{\frac{1}{s+2}\right\} + \mathcal{L}^{-1}\left\{\frac{1}{s+3}\right\} \\ \\
-			=& \ e^{-2t} + e^{-3t}.
+			=& \ [e^{-2t} + e^{-3t}]u(t).
 		\end{align*}
   \end{enumerate}
 	\setcounter{subsection}{2}
@@ -88,7 +90,7 @@
 				\end{align*}
 			\item Likewise, using the time-shifting property of the Laplace transform along with the Laplace transform pair \(e^{\lambda t}u(t) \Leftrightarrow 1/(s-\lambda)\),
 				\[
-					\mathcal{L}\left\{e^{-(t-\tau)}u(t-\tau)\right\} = \frac{e^{-s\tau}}{s-t}.
+					\mathcal{L}\left\{e^{-(t-\tau)}u(t-\tau)\right\} = \frac{e^{-s\tau}}{s+t}.
 				\]
 		\end{enumerate}
 		\setcounter{subsection}{3}
@@ -159,7 +161,48 @@
 			\begin{align*}
 				Y(s) &= \frac{10}{3s^2+s+1} + 10 \\
 						 &= \frac{10}{(s+1)(s^2+1)}\\
-						 &=\frac{As+B}{}
+						 &=\frac{As+B}{a}
 			\end{align*}
+			\setcounter{subsection}{8}
+			\setcounter{subsubsection}{2}
+		\item Note that for the given transfer function \(H(s)\), we may assume the system beign described is causal, since \(H(s)\) is \textit{proper}, and so the system response \(Y(s)\) may also be assumed to be causal, applying only under the condition \(t > 0\).
+			\begin{enumerate}[label=\alph*)]
+				\item Converting the input \(x(t) = 5\cos{(2t+30\degree)}\) to the s-domain using a unilateral Laplace transform, based on the transform pair
+					\[
+						re^{-at}\cos{(bt+\theta)}u(t) \Leftrightarrow \frac{(r\cos{\theta})s + (ar\cos{\theta}-br\sin{\theta})}{s^2 + 2as +(a^2+b^2)},
+					\]
+					we find
+					\[
+						X(s) = \frac{5s\cos{30\degree - 10\sin{30\degree}}}{s^2  + 2^2} = \frac{5s \sqrt{3}/2 - 5}{s^2 + 4}.
+					\]
+					Multiplying the transfer function by the input in the s-domain (equivalent to convolution in the time domain), and expressing both \(H(s)\) and \(X(s)\) in root and pole form for simplicity,
+					\[
+						Y(s) = \left[\frac{(s+2)}{(s+1)(s+4)}\right]\left[\frac{5(s\frac{\sqrt{3}}{2} - 1)}{(s+j2)(s-j2)}\right] = 5\left[\frac{0.866s^2+0.7321s - 2}{(s+1)(s+4)(s+j2)(s-j2)}\right]. 
+					\]
+				\item Once again, we will convert the input \(x(t) = 10\sin{(2t+45\degree)}\) to the s-domain by first using the identity
+					\[
+						\sin{x} = \cos{x-90\degree}
+					\]
+					to avoid using a different transform pair than in part a), so that 
+					\[
+						x(t) = 10\cos{(2t - 45\degree)}.
+					\]
+					Converting to the s-domain, 
+					\[
+						X(s) = \frac{10s\cos{-45\degree} - 20\sin{-45\degree}}{s^2 + 2^2} = \frac{10s/\sqrt{2} + 20/\sqrt{2}}{s^2+4}.
+					\]
+					Multiplying by the transfer function to find \(Y(s)\),
+					\[
+						Y(s) = \left[\frac{(s+2)}{(s+1)(s+4)}\right]\left[\frac{10(s+2)}{\sqrt{2}(s+j2)(s-j2)}\right] = 7.07\left[\frac{s^2+4s+16}{(s+1)(s+4)(s+j2)(s-j2)}\right].
+					\]
+				\item Finally, we will convert the input \(x(t) = 10\cos{(3t+40\degree)}\) to the s-domain using the same Laplace transform pair as before, as
+					\[
+						X(s) = \frac{10s\cos{40\degree} - 30\sin{40\degree}}{s^2 + 9} = \frac{7.66s-19.28}{(s^2+9)}.
+					\]
+					Then, multiplying by \(H(s)\) to find \(Y(s)\),
+					\[
+						Y(s) = \left[\frac{(s+2)}{(s+1)(s+4)}\right]\left[\frac{7.66s - 19.28}{(s+j2)(s-j2)}\right] = 7.66\left[\frac{s^2-0.52s+5.03}{(s+1)(s+4)(s+j2)(s-j2)}\right].
+					\]
+			\end{enumerate}
 \end{enumerate}
 \end{document}
