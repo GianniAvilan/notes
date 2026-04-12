@@ -12,91 +12,191 @@
 \section{Chapter 7: Plane-Wave Propagation}
 \setcounter{subsection}{-1}
 \subsection{Introduction/Preliminaries}
-For the next two weeks, we will discuss the electromagnetic waves. First, we'll cover how they propagate in lossless (ideal) media, and then in lossy media. What is an electromagnetic (EM) wave? As covered in previous chapters, time-variant (moving) electric charges generate a magnetic field perpendicular to the direction of their motion. In turn, time-varying magnetic fields induce an electric field perpendicular to the direction of \textit{their} motion, which then induces another magnetic field, and so on. As a result of the oscillation of these two, coupled forces, EM waves can propagate indefinitely through effectively lossless media such as air or, more specifically, a vaccum. What do we mean by lossless and lossy media? When an EM wave propagates through a medium, the \textit{conductivity} of the medium is responsible for any loss, which will ultimately be generated in the form of heat energy produced when electrons are set in motion by the induced electric field. In a medium with a conductivity of zero, though, no excess energy would be lost, and the EM wave would never attenuate as it propagates. 
+For the next two weeks, we will be discussing electromagnetic (EM) waves, specifically \textbf{plane waves}, a physical simplification that allows us to study electromagnetic waves as infinite planes on the axis perpendicular to their direction of motion. 
+
+First, we'll cover how they propagate in \textbf{lossless} mediums, and then in \textbf{lossy} mediums. First, though, what \textit{is} an EM wave? Recall that as covered in previous chapters, time-varying electric fields generate a magnetic field perpendicular to the direction of the electric field; in turn, time-varying magnetic fields induce an electric field perpendicular to the direction of the magnetic field. Under the right conditions, this effect can cause an electric and magnetic field to alternate endlessly, forming an EM wave that propagates in a direction perpendicular to both the associated magnetic and electric field. technically loop forever. 
+
+In other words,
+\[
+  \vec{E} \perp \vec{H} \perp \hat{k},
+\]
+where \(\hat{k}\) represents the direction of propagation of the EM wave itself.
+
+When an EM wave like this propagates through some medium, the \textbf{conductivity} (expressed using the symbol \(\sigma\)) of the medium will determine whether the wave attenuates over time, and, if so, how quickly. Mediums with non-zero conductivity are referred to as "lossy" mediums, and EM waves which propagate through them attenuate over time as some of their energy is converted into heat energy, as free electrons in the given medium are set in motion by the induced fields. On the other hand, mediums with a conductivity of zero are known as "lossless" mediums, and an EM wave propagating in such a medium would not attenuate over time.
 
 Before moving on, we'll briefly review a few mathematical preliminaries:
 
-\subsubsection{Sinusoids in Space and Time, and Their Relationship to Phasors}
-\subsubsection{Gradient, Divergence, and Curl (Maxwell's Equations)}
+\subsubsection{Traveling Waves, and their Mathematical Representations}
 
+In most contexts, we're accustomed to seeing waves represented as time-dependent sinusoids, in the form \(y(t) = A\cos{(\omega t + \theta})\), with the only independent variable being time. Though this sort of notation is convenient and applicable to many electrical signals, such as alternating current, the study of electromagnetism requires the use of sinusoidal functions that depend on both time \textit{and} space. 
+
+As traveling waves, such as EM waves, propagate through time and space, we'll find it convenient to be able to express the wave's magnitude in terms of both quantities. The standard equation for representing a wave in time and space is
+\[
+	y(x,t) = A\cos{\left(\frac{2\pi t}{T} \pm \frac{2\pi x}{\lambda} + \phi_0\right) \mathrm{m}},
+\]
+where \(A\) is the wave's \textbf{amplitude}, \(T\) is its \textbf{period}, \(\lambda\) is its \textbf{wavelength}, and \(\phi_0\) its \textbf{reference phase}. As shown, the argument of the cosine term in the given formula has a time-dependent and space-dependent part, where the spatial equivalent of the period (how much time passes between each cycle of the wave) is the wavelength (the physical distance between cycles of the wave).
+
+As we've seen in the past, we may also express a time-dependent wave in terms of its frequency rather than its period, as \(y(t) = A\cos{(\omega t + \theta)}\). Similarly, there is a physical correlate to a wave's frequency, known as its \textbf{wavenumber}, given by 
+\[
+  k = \frac{2\pi}{\lambda}.
+\]
+
+Finally, reference phase \(\phi_0\) simply defines a shift in the wave's position relative to the origin.
+
+Of some importance is determining the direction in which a wave is propagating based on its mathematical description. One simple way to do so is to note that the time-dependent and space-dependent parts of the argument inside the cosine function may be represented as one quantity, called the wave's \textbf{phase}, \(\phi\) (note that this is different from the reference phase, \(\phi_0\)), given by
+\[
+  \phi(x,t) = \omega t \pm kx + \phi_0. 
+\]
+Visualizing the function \(\cos{(\phi)}\) in terms of the unit circle, we can see that an increasing value of \(\phi\) will rotate in the positive, clockwise direction around the unit circle, while a decreasing value of \(\phi\) will rotate in the counter-clockwise, or negative direction.
+
+Determining the direction of propagation is simple: assuming that time \(t\) advances in the positive direction, \(\omega t - kx\) will result in a clockwise, or \textit{positive} propagation in the \(x\) direction; on the other hand, \(\omega t + kx\) will propagate in the negative \(x\) direction. Generally speaking, opposite signs of \(\omega t\) and \(kx\) will result in propagation in the positive \(x\) direction, while matching signs will result in propagation in the negative direction.
+
+\textbf{Note: This explanation for direction of wave propagation is half-baked, still trying to get my head around it.}
+
+Like any sinusoidal quantity, waves may also be represented as \textbf{phasors}, and so a brief review of phasors and their properties will be helpful. 
+
+First, though, we'll review complex numbers, which may be expressed in \textbf{rectangular} and \textbf{polar} form, as \(z = x + jy\) and \(z = |z|e^{j\theta} = |z|\angle{\theta}\), respectively. (Conversion between the two forms isn't too difficult, but most calculators can do it automatically). In rectangular form, \(x\) refers to the real part of the number and \(y\) to its imaginary part. Symbolically, this relationship may also be denoted as
+\begin{align*}
+	&x = \Re{(z)} &y = \Im{(z)}.
+\end{align*}
+
+An extension of complex numbers is the use of phasors, a mathematical tool that allows for easier solutions of equations involving periodic time functions, such as the EM waves that we'll be discussing in this chapter. Like Fourier and Laplace transforms, phasors have a dedicated \textit{domain}, known as the phasor domain, and phasor math involves conversions between the time and phasor domains, naturally.
+
+Any time-varying, sinusoidal function \(y(t)\) may be expressed in the phasor domain as 
+\[
+	y(t) = A\cos{(\omega t + \phi)} \Leftrightarrow \widetilde{Y} = Ae^{j\phi}.
+\]
+Put simply, the phasor form of some time-varying sinusoid ignores the time-dependent portion of the equation, \(\omega t\). In the case of the time- and space-dependent sinusoids we've discussed in relation to EM waves, we may express their phasor form in the general case as
+\[
+	y(x,t) = A\cos{(\omega t - kx + \phi_0)} \Leftrightarrow \widetilde{Y} = Ae^{-j(kx + \phi_0)} = Ae^{-jkx}e^{j\phi_0}.
+\]
+
+Converting back to the time domain from the phasor domain, on the other hand, may be performed as
+\[
+	y(x,t) = \Re{\left[\widetilde{Y}e^{j\omega t}\right]}.
+\]
+
+Finally, there are a few critical properties of phasors which will be useful, at least as a reference, going forward. First, differentiation with phasor quantities, based on the above identities, may be expressed as
+\[
+	\frac{d}{dt}y(x,t) = \frac{d}{dt}\Re{\left[\widetilde{Y}e^{j\omega t}\right]} = \Re{\left[j\omega\widetilde{Y}e^{j\omega t}\right]} 
+\]
+and second, integration, as
+\[
+	\int y(x,t) \ dt = \int \Re{\left[\widetilde{Y}e^{j\omega t}\right]} dt = \Re{\left[\frac{\widetilde{Y}}{j\omega}e^{j \omega t}\right]}.
+\]
+
+In other words, the phasor equivalent to differentiation and integration of time-domain sinusoids may be expressed as
+\begin{align*}
+	&\frac{d}{dt}y(t) \Leftrightarrow j\omega\widetilde{Y} &\int y(t) \ dt \Leftrightarrow \frac{1}{j\omega}\widetilde{Y}.
+\end{align*}
 
 \setcounter{subsection}{0}
 \subsection{Time-Harmonic Fields}
-To begin our analysis of EM waves in lossless media, we will define \textbf{wave equations} for \(\vec{E}\) and \(\vec{H}\), the electric and magnetic field intensity induced by an EM wave. We'll begin with the simplest case; that is, a uniform sinusoidal EM wave traveling in one direction, assuming some angular frequency \(\omega\). To define these types of waves, we'll focus on just two parameters: time and space. Given a perfectly sinusoidal wave, we can even express an EM wave as a phasor, with its associated electric and magnetic fields defined as \(\vec{E}(x,y,z)\) and \(\vec{H}(x,y,z)\); or, in the time domain, as \(\vec{E}(x,y,z;t)\) and \(\vec{H}(x,y,z;t)\) (See the introduction for notes on converting between phasor and time domain).
+To begin our analysis of EM waves in lossless media, we will define \textbf{wave equations} for \(\vec{E}\) and \(\vec{H}\), the electric and magnetic field intensity induced by a given EM wave. Since \(\vec{E}\) and \(\vec{H}\) are both time- and space-dependent sinusoids, with a \textit{constant} frequency \(\omega\), we refer to these as \textbf{time-harmonic fields}, and may be more succinctly represented in the phasor domain. 
 
-We'll begin by deriving the wave equation for the electric field intensity, \(\vec{E}\). Per Maxwell's third equation, a time-varying magnetic flux density \(\vec{B}\) induces a similarly time-varying, circulating electric field \(\vec{E}\). Mathematically,
+We'll begin with the simplest case; that is, a uniform sinusoidal EM wave traveling in one direction with some angular frequency \(\omega\) and some wavenumber \(k\). Since we will be working with three-dimensional space, the notation \(\vec{E}(x,y,z)\) and \(\vec{H}(x,y,z)\) will be most useful, though most often we will be dealing with waves that propagate in the \(x\), \(y\), or \(z\) directions alone (though the direction may be positive or negative). 
+
+We'll begin by deriving the wave equation for the electric field intensity, \(\widetilde{E}\), from which \(\widetilde{H}\) follows naturally. Doing so requires a brief detour back to Maxwell's equations, specifically the relationship between a magnetic flux density \(\widetilde{B}\) and the circulating electric field it induces, \(\widetilde{E}\). Mathematically,
 \[
   \nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}.
 \]
-This is a useful fact, but recall that what we're looking for is a wave equation; that is, an expression describing the electric field induced by a sinusoidal EM wave with some angular frequency \(\omega\). However, if we assume that the \(\vec{B}\) field is, likewise, sinusoidal, with an angular frequency \(\omega\), we may take its time derivative as
-\[
-	\frac{\partial}{\partial t} B\sin{(kx - \omega t + \phi)} = -\omega B\cos{(kx-\omega t + \phi)}.
-\]
-The, converting to the phasor domain using Table 1.5, we may represent the sinusoidally varying magnetic flux density \(\vec{B}\) as
-\[
-	-\omega B e^{j(kx+\phi)} = -\omega B \left[\cos{(kx+\phi) + j\sin{(kx+\phi)}}\right]
-\]
-Utilizing the relationship \(\vec{B} = \mu \vec{H}\), this may also expressed as
-\begin{align}
-	&\nabla \times \vec{E} = -j\omega\mu \vec{H} \\
-	&\nabla \times \vec{H} = \vec{J}+j\omega\varepsilon \vec{E} = j\omega\varepsilon \vec{E} \\
-	&\nabla \cdot \vec{E} = \frac{\rho_v}{\varepsilon} = 0 \\
-	&\nabla \cdot \vec{H} = 0.
-\end{align}
-Taking the curl of each side of (1), 
-\begin{align*}
-	&\nabla \times (\nabla \times \vec{E}) = -j\omega\mu(\nabla \times \vec{H}) \\
-	&\nabla(\nabla \cdot \vec{E}) - \nabla^2 \vec{E} = \omega^2 \mu \varepsilon E \\
-	&\nabla^2E + \omega^2\mu\varepsilon E = 0,
-\end{align*}
-the wave equation for \(\vec{E}\).
 
-Similarly, the wave equation for \(\vec{H}\) may be derived as 
+In other words, the \textbf{curl} (and thus, intensity) of the electric field is directly proportional to the time rate of change of a linked magnetic field. Naturally, if the relevant magnetic field is \textit{not} time-variant, its time derivative is zero, and thus no proportional electric field is induced. In this case, however, as we've seen, we will work with sinusoidal electric and magnetic fields, which have similarly sinusoidal time-derivatives, and thus the induced electric field in this case will be non-zero.
+
+This is a useful fact, but recall that what we're looking for is a wave equation; that is, an expression, preferably in phasor form, describing the electric field induced by a sinusoidal magnetic field with some angular frequency \(\omega\) and some wavenumber \(k\). Ignoring, momentarily, the directional component of \(\vec{B}\), we may express the magnitude of magnetic flux density as a time- dependent and space-dependent function
 \[
-  \nabla^2H + \omega^2\mu\varepsilon H = 0.
+	B(x,t) = B_0\cos{(\omega t - kx + \phi_0)}.
+\]
+Converting \(\vec{B}\) to the phasor domain,
+\[
+	B\cos{(\omega t - kx + \phi_0)}\hat{x} = Be^{j(-kx+\phi_0)} = \widetilde{B}.
+\]
+Using the associated properties of phasor differentiation, we may express the time derivative of \(B\) as
+\[
+	\frac{\partial B}{\partial t} = j\omega\widetilde{B}.
+\]
+Therefore, still in phasor domain, 
+\[
+	-\frac{\partial B}{\partial t} = -j\omega\widetilde{B} = -j\omega\mu\widetilde{H}. 
+\]
+As a result, we may reformulate Maxwell's third equation in the phasor domain as
+\[
+	\nabla \times \widetilde{E} = -j\omega\mu \widetilde{H}.
+\]
+Ideally, though, we'd like to find an expression for an electric field in terms of just its own parameters; that is, without relying on \(\widetilde{H}\). The derivation of the following may be found in the textbook, but to summarize, we may transform the given equation as follows:
+\begin{align}
+	&\nabla \times (\nabla \times \widetilde{E}) = -j\omega\mu(\nabla \times \widetilde{H}) \\
+	&\nabla \times (\nabla \times \widetilde{E}) = \omega^2\mu\varepsilon_c\widetilde{E} \\
+	&\nabla^2 \widetilde{E} = \omega^2\mu\varepsilon_c\widetilde{E}.
+\end{align}
+Expressing the above as a homogenous equation,
+\[
+	\nabla^2 \widetilde{E} + \omega^2\mu\varepsilon_c\widetilde{E} = 0.
+\]
+It's worth noting that, as a result of our transformation into the phasor domain, we'll now see the value \(\varepsilon_c\), the \textbf{complex permittivity}, defined as
+\[
+  \varepsilon_c = \varepsilon - j \frac{\sigma}{\omega},
+\]\
+where \(\sigma\) is the conductivity of the medium.
+
+We may further simplify our notation by defining \(\gamma\) as the \textbf{propagation constant}, such that 
+\[
+  \gamma^2 = -\omega^2\mu\varepsilon_c. 
+\]
+Finally, we may express the homogenous wave equation for \(\widetilde{E}\) as 
+\[
+	\nabla^2 \widetilde{E} - \gamma^2\widetilde{E} = 0.
+\]
+
+Similarly, the wave equation for \(\widetilde{H}\) may be derived as 
+\[
+	\nabla^2\widetilde{H} + \gamma^2\widetilde{H} = 0.
 \]
 
 These two equations define the \textit{behavior} of electromagnetic waves, and both may be used to derive the electric and magnetic field intensity as a function of the wave's frequency and the properties of the relevant media through which the wave propagates.
 
-Since the two equations are identical apart from the use of \(E\) versus \(H\), we may simplify the constants in the equation to the wavenumber, \(k\), as
-\[
-  k^2 = \omega^2 \mu \varepsilon \Rightarrow k = \omega \sqrt{\mu \varepsilon},
-\]
-and may also be derived as a function of the wavelength, as
-\[
-  k = \frac{2\pi}{\lambda},
-\]
-and the wavenumber is given in \(\frac{\mathrm{rad}}{\mathrm{m}}\).
+Now, we have two, identical equations that we may use to solve for the specifics of plane-wave propagation in lossless and lossy mediums; we'll begin with the lossless case. 
 
-There are several important properties of plane waves. To begin with, \(\vec{E}\) and \(\vec{H}\) lie in a plane perpendicular to the direction of the associated wave's propagation, and \(\vec{E}\) and \(\vec{H}\) are also perpendicular to each other, with the wave's direction of propagation given by \(\hat{k}\). In other words,
+Recall that the imaginary part of the complex permittivity \(\Im{(\varepsilon_0)} = \frac{\sigma}{\omega}\); therefore, for lossless mediums in which \(\sigma = 0\), the complex permittivity reduces to its real part, so that \(\varepsilon_c = \varepsilon\) and \(\gamma^2 = -\omega^2\mu\varepsilon\).
+
+Similarly, the wavenumer \(k\) can be reduced to a purely real quantity in lossless mediums, as
 \[
-  \vec{E} \perp \vec{H} \perp \hat{k}.
+  k = \omega \sqrt{\mu\varepsilon}.
+\]
+Combining these two equations, we see that \(\gamma^2 = -k^2\), and so we may define the homeogenous wave equation in lossless mediums as
+\[
+	\nabla^2 \widetilde{E} + k^2\widetilde{E} = 0.
 \]
 
-As an example, we'll derive the magnitude of the electric field intensity, \(E\), as a function of \(z\),
-\[
-	E(z) = E_0^+e^{-jkz} + E^-_0e^{jkz},
-\]
-where \(E_0^\pm\) is the amplitude of the wave traveling in the positive or negative z direction, respectively. \textbf{NOTE:} Why does the positive j travel in the negative direction, and vice versa? Does z here refer to the direction of the EM wave, or the electric field?) Note that this formula is given in \textit{phasor} form, where \(e^{jkz} = \cos{kz} + j\sin{kz}\)  per Euler's formula.
+How can we use the wave equation to derive useful information? We'll now work through a few examples to demonstrate this.
 
-As another example, assuming \(E\) is traveling in the \(\hat{x}\) direction, 
+First, we'll derive the magnitude a time-harmonic electric field, \(\widetilde{E}\), as a function of \(z\). Mathematically,
 \[
-	\vec{E}(z) = \hat{x}E_0^+e^{-jkz}.
+	\widetilde{E}(z) = \widetilde{E}_0^+e^{-jkz} + \widetilde{E}^-_0e^{jkz}.
 \]
-Since we know that \(\vec{H}\) is perpendicular to both the direction of propagation \(\hat{k}\) and the direction of the electric field intensity \(\vec{E}\), we may assume that in this case
+where \(E_0^\pm\) represents the amplitude of the wave traveling in the positive or negative z direction, respectively. Note that, as seen earlier when discussing traveling waves, a positive value of \(j\) indicates an EM wave that travels in the negative direction, and a negative value one that travles in the positive direction, and the variable found in the exponent always refers to this direction, \textit{not} the direction of travel of \(\widetilde{E}\).
+
+\textbf{Note: the above is the solution to a differential equation that arises from the homogenous wave equation for \(\widetilde{E}\). I don't believe the derivation was covered in lecture, and likely won't be important.}
+
+For example, assuming \(\widetilde{E}\) is traveling in the \(\hat{x}\) direction, 
 \[
-	\vec{H}(z) = \hat{y}\frac{E_0^+}{\eta}e^{-jkz}.
+	\vec{E}(z) = \hat{x}\widetilde{E}_0^+e^{-jkz}
 \]
-Again, we see that the direction contained in the exponential is identical, but the direction of \(\vec{H}\) is perpendicular to both \(\hat{x}\) and \(\hat{z}\), where \(\eta\) is the intrinsic impedance of the medium of propagation, given by 
+describes its motion.
+
+Using this information, we may also derive the equation of \(\widetilde{H}\). Since we know that \(\widetilde{H}\) is perpendicular to both the direction of propagation \(\hat{k}\) (in this case, \(\hat{z}\)) and the direction of the electric field intensity \(\widetilde{E}\), we may infer that
+\[
+	\widetilde{H}(z) = \hat{y}\frac{E_0^+}{\eta}e^{-jkz}.
+\]
+Again, we see that the direction contained in the exponential is identical, but the direction of \(\widetilde{H}\) is perpendicular to both \(\hat{x}\) and \(\hat{z}\). Additionally \(\eta\) refers the intrinsic impedance of the medium of propagation, given by 
 \[
   \eta = \sqrt{\frac{\mu}{\varepsilon}}.
 \]
 
-To give a simple example, we may calculate the intrinsic impedance of air as
+An important quantity, likely worth memorizing, is the intrinsic impedance of air, given by
 \[
-	\eta_{\mathrm{air}} = \sqrt{\frac{\mu_0 \cdot \mu_r}{\varepsilon_0 \cdot \varepsilon_r}} = \sqrt{\frac{\mu_0}{\varepsilon_0}} = \sqrt{\frac{4\pi \times 10^{-7}}{8.85\times 10^{-12}}} = 120\pi = 377 \ \ohm,
+	\eta_{\mathrm{air}} = \sqrt{\frac{\mu_0 \cdot \mu_r}{\varepsilon_0 \cdot \varepsilon_r}} = \sqrt{\frac{\mu_0}{\varepsilon_0}} = \sqrt{\frac{4\pi \times 10^{-7}}{8.85\times 10^{-12}}} = 120\pi \ \ohm = 377 \ \ohm.
 \]
-which should be memorized rather than recalculated each time.
 
 On the topic of phasor and time domain conversions, we may give an example where we convert the phasor form of an electric field induced by an EM plane wave to the time domain, as
 \begin{align*}
